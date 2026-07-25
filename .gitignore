@@ -8,6 +8,8 @@
 !/.agents/**
 !/.config/
 !/.config/**
+!/Scripts/
+!/Scripts/**
 
 # Keep Raycast's generated configuration and extensions local.
 /.config/raycast/
