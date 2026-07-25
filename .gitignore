@@ -3,6 +3,7 @@
 
 # Track only the selected dotfiles and their contents.
 !/.gitignore
+!/README.md
 !/.zshrc
 !/.agents/
 !/.agents/**
