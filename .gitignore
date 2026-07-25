@@ -25,6 +25,7 @@
 /.config/herdr/session*.json
 /.config/nowplaying/env
 /.config/openclicky/secrets.env
+/.config/fish/conf.d/secrets.fish
 # Keep all environment files local, even when they contain only non-secret values.
 **/*.env
 
