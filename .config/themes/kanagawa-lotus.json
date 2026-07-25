@@ -1,0 +1,32 @@
+{
+  "name": "kanagawa-lotus",
+  "palette": {
+    "accent": "#4d699b",
+    "panel_bg": "#f2ecbc",
+    "surface0": "#dcd5ac",
+    "active_space_bg": "#d5cea3",
+    "surface1": "#c9cbd1",
+    "surface_dim": "#d5cea3",
+    "separator": "#d5cea3",
+    "overlay0": "#a09cac",
+    "overlay1": "#8a8980",
+    "text": "#545464",
+    "subtext0": "#43436c",
+    "mauve": "#624c83",
+    "green": "#6f894e",
+    "yellow": "#77713f",
+    "red": "#c84053",
+    "blue": "#4d699b",
+    "teal": "#4e8ca2",
+    "peach": "#cc6d00"
+  },
+  "targets": {
+    "herdr": "kanagawa-lotus",
+    "pi": "kanagawa-lotus",
+    "zed": "Kanagawa Lotus",
+    "tmux_flavour": null,
+    "ghostty_background": "#f4edd9",
+    "opencode": "kanagawa-lotus",
+    "hacktui": "kanagawa"
+  }
+}

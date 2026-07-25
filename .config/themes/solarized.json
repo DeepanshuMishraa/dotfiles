@@ -1,0 +1,32 @@
+{
+  "name": "solarized",
+  "palette": {
+    "accent": "#268bd2",
+    "panel_bg": "#002b36",
+    "surface0": "#073642",
+    "active_space_bg": "#002b36",
+    "surface1": "#586e75",
+    "surface_dim": "#002b36",
+    "separator": "#073642",
+    "overlay0": "#586e75",
+    "overlay1": "#657b83",
+    "text": "#93a1a1",
+    "subtext0": "#839496",
+    "mauve": "#d33682",
+    "green": "#859900",
+    "yellow": "#b58900",
+    "red": "#dc322f",
+    "blue": "#268bd2",
+    "teal": "#2aa198",
+    "peach": "#cb4b16"
+  },
+  "targets": {
+    "herdr": "solarized",
+    "pi": "solarized",
+    "zed": "Solarized Dark",
+    "tmux_flavour": null,
+    "ghostty_background": "#002b36",
+    "opencode": "solarized",
+    "hacktui": "solarized"
+  }
+}

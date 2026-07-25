@@ -1,0 +1,42 @@
+{
+  "theme": "kanagawa",
+  "applied_at": "2026-07-20T17:48:42.170710Z",
+  "tools": {
+    "herdr": {
+      "status": "updated",
+      "config": "/Users/dipxsy/.config/herdr/config.toml"
+    },
+    "pi-agent": {
+      "status": "updated",
+      "config": "/Users/dipxsy/.pi/agent/settings.json"
+    },
+    "neovim": {
+      "status": "updated",
+      "config": "/Users/dipxsy/.config/nvim/lua/plugins/color-scheme.lua"
+    },
+    "zed": {
+      "status": "updated",
+      "config": "/Users/dipxsy/.config/zed/settings.json"
+    },
+    "tmux": {
+      "status": "skipped",
+      "config": "not Catppuccin-based; existing tmux plugin has no matching flavour"
+    },
+    "ghostty": {
+      "status": "updated",
+      "config": "/Users/dipxsy/.config/ghostty/config"
+    },
+    "opencode": {
+      "status": "updated",
+      "config": "/Users/dipxsy/.config/opencode/tui.json"
+    },
+    "termy": {
+      "status": "updated",
+      "config": "/Users/dipxsy/.config/termy/config.txt"
+    },
+    "hacktui": {
+      "status": "updated",
+      "config": "/var/folders/ym/xy_zjmq96wx7_qlqjk_5jq3c0000gn/T/hacktui/query-cache.json"
+    }
+  }
+}

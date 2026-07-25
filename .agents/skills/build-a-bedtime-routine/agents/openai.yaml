@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build a Bedtime Routine"
+  short_description: "Practical guidance to build a bedtime routine"
+  default_prompt: "Use $build-a-bedtime-routine to help me: I keep scrolling long after I meant to sleep."

@@ -1,0 +1,32 @@
+{
+  "name": "terminal",
+  "palette": {
+    "accent": "#0000ff",
+    "panel_bg": "default",
+    "surface0": "default",
+    "active_space_bg": "#404040",
+    "surface1": "#404040",
+    "surface_dim": "#404040",
+    "separator": "#404040",
+    "overlay0": "#808080",
+    "overlay1": "#ffffff",
+    "text": "default",
+    "subtext0": "#808080",
+    "mauve": "#808080",
+    "green": "#00ff00",
+    "yellow": "#ffff00",
+    "red": "#ff8080",
+    "blue": "#0000ff",
+    "teal": "#00ffff",
+    "peach": "#ffff00"
+  },
+  "targets": {
+    "herdr": "terminal",
+    "pi": "herdr-global",
+    "zed": "herdr dark",
+    "tmux_flavour": null,
+    "ghostty_background": "#000000",
+    "opencode": "herdr",
+    "hacktui": "default"
+  }
+}

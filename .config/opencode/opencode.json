@@ -1,0 +1,181 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": true,
+  "mcp": {
+    "apple-music": {
+      "command": [
+        "node",
+        "/Users/dipxsy/Code/projects/effect-apple-music/build/index.js"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "backstage": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://backstage.mcp.cfdata.org/mcp"
+    },
+    "cloudflare-docs": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://docs.mcp.cloudflare.com/mcp"
+    },
+    "computer-use-standalone": {
+      "command": [
+        "node",
+        "$HOME/.local/share/macos-computer-use-mcp/dist/cli.js"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "context7": {
+      "enabled": true,
+      "headers": {
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+      },
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "elasticsearch": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://elasticsearch.mcp.cfdata.org/mcp"
+    },
+    "gitlab": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://gitlab.mcp.cfdata.org/mcp"
+    },
+    "grep_app": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.grep.app"
+    },
+    "jira": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://jira.mcp.cfdata.org/mcp"
+    },
+    "job-search-mcp": {
+      "command": [
+        "node",
+        "/Users/dipxsy/Code/projects/job-mcp/build/index.js"
+      ],
+      "enabled": true,
+      "env": {
+        "API_KEY": "{env:JOB_SEARCH_API_KEY}",
+        "GITHUB_TOKEN": "{env:JOB_SEARCH_GITHUB_TOKEN}"
+      },
+      "type": "local"
+    },
+    "opensrc": {
+      "command": [
+        "npx",
+        "-y",
+        "opensrc-mcp"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "overseer": {
+      "command": [
+        "npx",
+        "-y",
+        "@dmmulroy/overseer",
+        "mcp"
+      ],
+      "enabled": false,
+      "type": "local"
+    },
+    "railway": {
+      "command": [
+        "railway",
+        "mcp"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "townlake": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://mcp.townlake.cfdata.org/mcp"
+    },
+    "wiki": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://wiki.mcp.cfdata.org/mcp"
+    }
+  },
+  "permission": {
+    "bash": {
+      "*": "allow",
+      "cat **/.aws/**": "deny",
+      "cat **/.dev.vars": "deny",
+      "cat **/.env": "deny",
+      "cat **/.env.*": "deny",
+      "cat **/.envrc": "deny",
+      "cat **/.ssh/**": "deny",
+      "cat *.env": "deny",
+      "cat *.env.*": "deny",
+      "cat *.envrc": "deny",
+      "cat *.key": "deny",
+      "cat *.pem": "deny",
+      "cat .dev.vars": "deny",
+      "env": "deny",
+      "env *": "deny",
+      "export *": "deny",
+      "gh auth *": "deny",
+      "printenv *": "deny"
+    },
+    "codesearch": "allow",
+    "edit": "allow",
+    "external_directory": {
+      "*": "allow",
+      "**/.aws/**": "deny",
+      "**/.ssh/**": "deny",
+      "~/.local/share/opencode/mcp-auth.json": "deny"
+    },
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "question": "allow",
+    "read": {
+      "*": "allow",
+      "**/.aws/**": "deny",
+      "**/.dev.vars": "deny",
+      "**/.env": "deny",
+      "**/.env.*": "deny",
+      "**/.envrc": "deny",
+      "**/.ssh/**": "deny",
+      "**/secrets/**": "deny",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.envrc": "deny",
+      "*.key": "deny",
+      "*.pem": "deny",
+      ".dev.vars": "deny",
+      "secrets/*": "deny",
+      "~/.local/share/opencode/mcp-auth.json": "deny"
+    },
+    "skill": "allow",
+    "task": "allow",
+    "todoread": "allow",
+    "todowrite": "allow",
+    "webfetch": "allow",
+    "websearch": "allow"
+  },
+  "plugin": [
+    "@plannotator/opencode@latest",
+    "@slkiser/opencode-quota",
+    "@mohak34/opencode-notifier@latest"
+  ],
+  "references": {
+    "better-auth": "https://github.com/better-auth/better-auth.git",
+    "effect": "https://github.com/effect-TS/effect-smol",
+    "ghostty": "https://github.com/ghostty-org/ghostty",
+    "herdr": "https://github.com/ogulcancelik/herdr.git",
+    "opencode": "https://github.com/anomalyco/opencode"
+  },
+  "theme": "vesper"
+}

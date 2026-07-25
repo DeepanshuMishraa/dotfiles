@@ -1,0 +1,50 @@
+onboarding = false
+
+[theme]
+name = "kanagawa"
+auto_switch = false
+
+[ui]
+sidebar_width = 32
+sidebar_min_width = 18
+sidebar_max_width = 36
+mouse_capture = true
+right_click_passthrough_modifier = "ctrl"
+mouse_scroll_lines = 3
+confirm_close = false
+prompt_new_tab_name = true
+pane_gaps = false
+show_agent_labels_on_pane_borders = true
+sidebar_collapsed_mode = "hidden"
+agent_panel_sort = "spaces"
+[experimental]
+pane_history = true
+switch_ascii_input_source_in_prefix = true
+allow_nested = false
+kitty_graphics = true
+
+[advanced]
+scrollback_limit_bytes = 52428800
+
+[keys]
+prefix = "option+space"
+new_tab = "prefix+n"
+split_horizontal = "prefix+/"
+new_workspace = "prefix+o"
+switch_workspace = "prefix+ctrl+1..9"
+close_workspace = "prefix+d"
+rename_workspace = "prefix+r"
+previous_workspace = "prefix+j"
+next_workspace = "prefix+k"
+close_tab = "prefix+w"
+workspace_picker = "prefix+shift+w"
+next_tab = ""
+focus_pane_down = ""
+focus_pane_up = ""
+open_notification_target = ""
+rename_tab = "prefix+shift+r"
+reload_config = "prefix+."
+resize_mode = ""
+toggle_sidebar = "prefix+b"
+[ui.toast]
+delivery = "herdr"

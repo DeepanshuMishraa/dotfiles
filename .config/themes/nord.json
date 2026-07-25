@@ -1,0 +1,32 @@
+{
+  "name": "nord",
+  "palette": {
+    "accent": "#88c0d0",
+    "panel_bg": "#2e3440",
+    "surface0": "#3b4252",
+    "active_space_bg": "#2e3440",
+    "surface1": "#434c5e",
+    "surface_dim": "#2e3440",
+    "separator": "#3b4252",
+    "overlay0": "#4c566a",
+    "overlay1": "#646e82",
+    "text": "#eceff4",
+    "subtext0": "#d8dee9",
+    "mauve": "#b48ead",
+    "green": "#a3be8c",
+    "yellow": "#ebcb8b",
+    "red": "#bf616a",
+    "blue": "#81a1c1",
+    "teal": "#8fbcbb",
+    "peach": "#d08770"
+  },
+  "targets": {
+    "herdr": "nord",
+    "pi": "nord",
+    "zed": "Nord",
+    "tmux_flavour": null,
+    "ghostty_background": "#2e3440",
+    "opencode": "nord",
+    "hacktui": "nord"
+  }
+}

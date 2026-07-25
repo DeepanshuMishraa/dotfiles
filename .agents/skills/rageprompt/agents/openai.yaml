@@ -1,0 +1,5 @@
+interface:
+  display_name: "Rageprompt"
+  short_description: "Find your angriest local AI-agent prompt"
+  brand_color: "#D97757"
+  default_prompt: "Use $rageprompt to find my angriest message to an AI agent."

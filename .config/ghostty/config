@@ -1,0 +1,26 @@
+macos-option-as-alt = left
+window-width = 117
+window-height = 32
+window-save-state = never
+font-family = MonoLisa
+font-style = Regular
+font-style-italic = Regular Italic
+font-style-bold = Bold
+font-style-bold-italic = Bold Italic
+font-size = 18
+
+# Background fallback; `theme set` also regenerates the full Ghostty palette.
+background = #1f1f28
+
+# Show working directory in subtitle area
+window-subtitle = working-directory
+
+# Pass Cmd+S/A/C/X through to Neovim as Alt+key escape sequences
+keybind = super+s=text:\x1bs
+keybind = super+a=text:\x1ba
+keybind = super+c=text:\x1bc
+keybind = super+x=text:\x1bx
+
+# Pass Ctrl+Tab through to herdr (Ghostty defaults to tab switching)
+keybind = ctrl+tab=ignore
+keybind = ctrl+shift+tab=ignore

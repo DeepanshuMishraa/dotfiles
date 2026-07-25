@@ -1,0 +1,32 @@
+{
+  "name": "tokyo-night",
+  "palette": {
+    "accent": "#7aa2f7",
+    "panel_bg": "#1a1b26",
+    "surface0": "#24283b",
+    "active_space_bg": "#1a1b26",
+    "surface1": "#414868",
+    "surface_dim": "#1a1b26",
+    "separator": "#24283b",
+    "overlay0": "#565f89",
+    "overlay1": "#697196",
+    "text": "#c0caf5",
+    "subtext0": "#a9b1d6",
+    "mauve": "#bb9af7",
+    "green": "#9ece6a",
+    "yellow": "#e0af68",
+    "red": "#f7768e",
+    "blue": "#7aa2f7",
+    "teal": "#7dcfff",
+    "peach": "#ff9e64"
+  },
+  "targets": {
+    "herdr": "tokyo-night",
+    "pi": "tokyo-night",
+    "zed": "Tokyo Night",
+    "tmux_flavour": null,
+    "ghostty_background": "#1a1b26",
+    "opencode": "tokyo-night",
+    "hacktui": "tokyo-night"
+  }
+}

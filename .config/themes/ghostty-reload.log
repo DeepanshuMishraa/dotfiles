@@ -1,0 +1,2 @@
+command=/usr/bin/killall -31 ghostty
+exit_status=0

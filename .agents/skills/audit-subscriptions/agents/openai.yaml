@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit and Cancel Subscriptions"
+  short_description: "Practical guidance to audit and cancel subscriptions"
+  default_prompt: "Use $audit-subscriptions to help me: Help me audit these recurring charges."

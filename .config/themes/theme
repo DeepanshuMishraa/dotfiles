@@ -1,0 +1,539 @@
+#!/usr/bin/env python3
+"""Apply one palette across Herdr and the local development tools."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import shlex
+import shutil
+import subprocess
+import sys
+import tempfile
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Callable
+
+HOME = Path.home()
+CONFIG = Path(os.environ.get("XDG_CONFIG_HOME", HOME / ".config"))
+THEMES = CONFIG / "themes"
+STATE = THEMES / "settings.json"
+REQUIRED_COLORS = {
+    "accent", "panel_bg", "surface0", "active_space_bg", "surface1",
+    "surface_dim", "separator", "overlay0", "overlay1", "text", "subtext0",
+    "mauve", "green", "yellow", "red", "blue", "teal", "peach",
+}
+
+
+class ThemeError(Exception):
+    pass
+
+
+def atomic_write(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    mode = path.stat().st_mode if path.exists() else 0o644
+    fd, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8", newline="") as handle:
+            handle.write(content)
+        os.chmod(temporary, mode)
+        os.replace(temporary, path)
+    except Exception:
+        try:
+            os.unlink(temporary)
+        except FileNotFoundError:
+            pass
+        raise
+
+
+def read_json(path: Path) -> Any:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise ThemeError(f"cannot read {path}: {error}") from error
+
+
+def write_json(path: Path, value: Any) -> None:
+    atomic_write(path, json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+
+
+def available() -> dict[str, Path]:
+    found: dict[str, Path] = {}
+    if not THEMES.is_dir():
+        return found
+    for path in sorted(THEMES.glob("*.json")):
+        if path == STATE:
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if isinstance(data, dict) and isinstance(data.get("name"), str) and isinstance(data.get("palette"), dict):
+            found[data["name"]] = path
+    return found
+
+
+def load_theme(name: str) -> dict[str, Any]:
+    normalized = name.lower().replace("_", "-").replace(" ", "-")
+    aliases = {
+        "mocha": "catppuccin-mocha", "macchiato": "catppuccin-macchiato",
+        "latte": "catppuccin-latte", "light": "catppuccin-latte",
+        "tokyonight": "tokyo-night", "tokyo-day": "tokyo-night-day",
+        "gruvbox-dark": "gruvbox", "onedark": "one-dark", "onelight": "one-light",
+        "solarized-dark": "solarized", "lotus": "kanagawa-lotus",
+        "rosepine": "rose-pine", "rosepine-dawn": "rose-pine-dawn", "dawn": "rose-pine-dawn",
+    }
+    normalized = aliases.get(normalized, normalized)
+    path = available().get(normalized)
+    if path is None:
+        raise ThemeError(f"unknown theme: {name} (run `theme list`)")
+    data = read_json(path)
+    missing = REQUIRED_COLORS.difference(data["palette"])
+    if missing:
+        raise ThemeError(f"{path.name} is missing palette colors: {', '.join(sorted(missing))}")
+    if not isinstance(data.get("targets"), dict):
+        raise ThemeError(f"{path.name} has no targets object")
+    return data
+
+
+def color(palette: dict[str, str], key: str, fallback: str) -> str:
+    value = palette.get(key, fallback)
+    return fallback if value == "default" else value
+
+
+def replace_setting(content: str, key: str, value: str) -> str:
+    pattern = re.compile(rf"^(\s*{re.escape(key)}\s*=\s*).*$", re.MULTILINE)
+    if pattern.search(content):
+        return pattern.sub(lambda m: m.group(1) + value, content, count=1)
+    suffix = "" if not content or content.endswith("\n") else "\n"
+    return content + suffix + f"{key} = {value}\n"
+
+
+def set_herdr(theme: dict[str, Any], dry: bool) -> Path:
+    path = CONFIG / "herdr" / "config.toml"
+    content = path.read_text(encoding="utf-8") if path.exists() else ""
+    name = theme["targets"].get("herdr", theme["name"])
+    lines = content.splitlines()
+    section = next((i for i, line in enumerate(lines) if line.strip() == "[theme]"), None)
+    quoted = json.dumps(name)
+    if section is None:
+        if lines and lines[-1].strip():
+            lines.append("")
+        lines.extend(["[theme]", f"name = {quoted}"])
+    else:
+        end = next((i for i in range(section + 1, len(lines)) if re.match(r"^\s*\[", lines[i])), len(lines))
+        key_line = next((i for i in range(section + 1, end) if re.match(r"^\s*name\s*=", lines[i])), None)
+        if key_line is None:
+            lines.insert(section + 1, f"name = {quoted}")
+        else:
+            indent = lines[key_line][:-len(lines[key_line].lstrip())]
+            lines[key_line] = f"{indent}name = {quoted}"
+    if not dry:
+        atomic_write(path, "\n".join(lines) + "\n")
+        herdr = shutil.which("herdr")
+        if herdr:
+            subprocess.run([herdr, "server", "reload-config"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return path
+
+
+PI_COLORS = {
+    "accent": "blue", "border": "surface0", "borderAccent": "surface1", "borderMuted": "surface2",
+    "success": "green", "error": "red", "warning": "yellow", "muted": "subtext1", "dim": "overlay1",
+    "text": "text", "thinkingText": "overlay2", "selectedBg": "surface1", "userMessageBg": "mantle",
+    "userMessageText": "text", "customMessageBg": "crust", "customMessageText": "text",
+    "customMessageLabel": "pink", "toolPendingBg": "base", "toolSuccessBg": "mantle",
+    "toolErrorBg": "toolErrorBg", "toolTitle": "blue", "toolOutput": "subtext1", "mdHeading": "mauve",
+    "mdLink": "blue", "mdLinkUrl": "sky", "mdCode": "green", "mdCodeBlock": "text",
+    "mdCodeBlockBorder": "surface2", "mdQuote": "yellow", "mdQuoteBorder": "yellow", "mdHr": "subtext0",
+    "mdListBullet": "blue", "toolDiffAdded": "green", "toolDiffRemoved": "red", "toolDiffContext": "overlay2",
+    "syntaxComment": "overlay2", "syntaxKeyword": "mauve", "syntaxFunction": "blue", "syntaxVariable": "red",
+    "syntaxString": "green", "syntaxNumber": "peach", "syntaxType": "yellow", "syntaxOperator": "sky",
+    "syntaxPunctuation": "text", "thinkingOff": "surface2", "thinkingMinimal": "surface1",
+    "thinkingLow": "blue", "thinkingMedium": "teal", "thinkingHigh": "mauve", "thinkingXhigh": "pink",
+    "bashMode": "peach",
+}
+
+
+def pi_theme(theme: dict[str, Any], name: str) -> dict[str, Any]:
+    p = theme["palette"]
+    vars_ = {k: color(p, k, "#000000") for k in REQUIRED_COLORS if k not in {"accent", "active_space_bg"}}
+    vars_.update({
+        "surface2": color(p, "separator", "#404040"), "base": color(p, "panel_bg", "#000000"),
+        "mantle": color(p, "active_space_bg", "#000000"), "crust": color(p, "surface_dim", "#000000"),
+        "subtext1": color(p, "overlay1", "#808080"), "overlay2": color(p, "overlay0", "#808080"),
+        "rosewater": color(p, "text", "#ffffff"), "flamingo": color(p, "peach", "#ffff00"),
+        "pink": color(p, "mauve", "#ff00ff"), "maroon": color(p, "red", "#ff0000"),
+        "sky": color(p, "blue", "#0000ff"), "sapphire": color(p, "teal", "#00ffff"),
+        "lavender": color(p, "accent", "#0000ff"), "toolErrorBg": color(p, "surface1", "#404040"),
+    })
+    return {"name": name, "vars": vars_, "colors": PI_COLORS, "export": {
+        "pageBg": color(p, "active_space_bg", "#000000"), "cardBg": color(p, "panel_bg", "#000000"),
+        "infoBg": color(p, "surface0", "#404040"),
+    }}
+
+
+def set_pi(theme: dict[str, Any], dry: bool) -> Path:
+    path = HOME / ".pi" / "agent" / "settings.json"
+    settings = read_json(path)
+    name = theme["targets"].get("pi") or theme["name"]
+    settings["theme"] = name
+    if not dry:
+        write_json(path, settings)
+        target = path.parent / "themes" / f"{name}.json"
+        if not target.exists() or name == "herdr-global":
+            write_json(target, pi_theme(theme, name))
+    return path
+
+
+def nvim_lua(theme: dict[str, Any]) -> str:
+    p = theme["palette"]
+    c = lambda key, fallback: color(p, key, fallback)
+    groups = {
+        "Normal": (c("text", "#ffffff"), c("panel_bg", "#000000")),
+        "NormalFloat": (c("text", "#ffffff"), c("panel_bg", "#000000")),
+        "CursorLine": (None, c("surface0", "#404040")), "LineNr": (c("overlay0", "#808080"), None),
+        "CursorLineNr": (c("overlay1", "#ffffff"), None), "Visual": (None, c("surface1", "#404040")),
+        "Search": (c("text", "#ffffff"), c("surface1", "#404040")),
+        "IncSearch": (c("surface_dim", "#000000"), c("accent", "#0000ff")),
+        "StatusLine": (c("text", "#ffffff"), c("active_space_bg", "#000000")),
+        "StatusLineNC": (c("overlay0", "#808080"), c("surface_dim", "#000000")),
+        "WinSeparator": (c("separator", "#404040"), None), "Pmenu": (c("text", "#ffffff"), c("surface0", "#404040")),
+        "PmenuSel": (c("text", "#ffffff"), c("surface1", "#404040")), "Comment": (c("overlay0", "#808080"), None),
+        "String": (c("green", "#00ff00"), None), "Number": (c("peach", "#ffff00"), None),
+        "Function": (c("blue", "#0000ff"), None), "Identifier": (c("blue", "#0000ff"), None),
+        "Keyword": (c("mauve", "#ff00ff"), None), "Type": (c("teal", "#00ffff"), None),
+        "Operator": (c("teal", "#00ffff"), None), "DiagnosticError": (c("red", "#ff0000"), None),
+        "DiagnosticWarn": (c("yellow", "#ffff00"), None), "DiagnosticInfo": (c("blue", "#0000ff"), None),
+        "DiagnosticHint": (c("teal", "#00ffff"), None), "DiffAdd": (c("green", "#00ff00"), c("surface_dim", "#000000")),
+        "DiffChange": (c("yellow", "#ffff00"), c("surface_dim", "#000000")),
+        "DiffDelete": (c("red", "#ff0000"), c("surface_dim", "#000000")),
+    }
+    lines = ["-- Generated by `theme set` — do not edit manually", 'vim.g.colors_name = "herdr-sync"', "", "local h = vim.api.nvim_set_hl"]
+    for group, (fg, bg) in groups.items():
+        attrs = []
+        if fg: attrs.append(f'fg = "{fg}"')
+        if bg: attrs.append(f'bg = "{bg}"')
+        if group == "Comment": attrs.append("italic = true")
+        lines.append(f'h(0, "{group}", {{ {", ".join(attrs)} }})')
+    return "\n".join(lines) + "\n"
+
+
+def set_neovim(theme: dict[str, Any], dry: bool) -> Path:
+    candidates = [CONFIG / "nvim/lua/plugins/color-scheme.lua", CONFIG / "nvim/lua/dipxsy/plugins/color-scheme.lua", CONFIG / "nvim/init.lua"]
+    path = next(path for path in candidates if path.exists())
+    content = path.read_text(encoding="utf-8")
+    if 'require("herdr-sync")' not in content and not re.search(r"(?:vim\.cmd\.)?colorscheme", content):
+        raise ThemeError("no Neovim colorscheme hook found")
+    if not dry:
+        atomic_write(CONFIG / "nvim/lua/herdr-sync.lua", nvim_lua(theme))
+    return path
+
+
+def zed_theme(theme: dict[str, Any]) -> dict[str, Any]:
+    p = theme["palette"]
+    c = lambda key, fallback: color(p, key, fallback)
+    bg, fg = c("panel_bg", "#000000"), c("text", "#ffffff")
+    s0, s1, dim = c("surface0", "#404040"), c("surface1", "#404040"), c("surface_dim", "#000000")
+    acc, sep, muted = c("accent", "#0000ff"), c("separator", "#404040"), c("overlay0", "#808080")
+    style = {
+        "background": bg, "foreground": fg, "text": fg, "text.muted": c("subtext0", "#808080"),
+        "text.accent": acc, "border": sep, "border.variant": s0, "border.selected": acc,
+        "surface.background": s0, "elevated_surface.background": s1, "element.background": s1,
+        "element.hover": s1, "element.selected": s0, "panel.background": c("active_space_bg", "#000000"),
+        "tab_bar.background": dim, "tab.active_background": s0, "tab.inactive_background": dim,
+        "title_bar.background": dim, "status_bar.background": c("active_space_bg", "#000000"),
+        "editor.background": bg, "editor.foreground": fg, "editor.active_line.background": s0,
+        "editor.line_number": muted, "editor.active_line_number": c("overlay1", "#ffffff"),
+        "editor.gutter.background": bg, "editor.indent_guide": s0, "pane.focused_border": acc,
+        "scrollbar.track.background": bg, "scrollbar.thumb.background": s0, "search.match_background": s1,
+        "error": c("red", "#ff0000"), "warning": c("yellow", "#ffff00"), "info": c("blue", "#0000ff"),
+        "hint": c("teal", "#00ffff"), "success": c("green", "#00ff00"), "conflict": c("peach", "#ffff00"),
+        "created": c("green", "#00ff00"), "deleted": c("red", "#ff0000"), "modified": c("yellow", "#ffff00"),
+        "terminal.background": bg, "terminal.foreground": fg, "terminal.ansi.black": dim,
+        "terminal.ansi.red": c("red", "#ff0000"), "terminal.ansi.green": c("green", "#00ff00"),
+        "terminal.ansi.yellow": c("yellow", "#ffff00"), "terminal.ansi.blue": c("blue", "#0000ff"),
+        "terminal.ansi.magenta": c("mauve", "#ff00ff"), "terminal.ansi.cyan": c("teal", "#00ffff"),
+        "terminal.ansi.white": fg, "terminal.ansi.bright_black": muted, "terminal.ansi.bright_white": fg,
+        "syntax": {
+            "comment": {"color": muted, "font_style": "italic"}, "string": {"color": c("green", "#00ff00")},
+            "number": {"color": c("peach", "#ffff00")}, "function": {"color": c("blue", "#0000ff")},
+            "type": {"color": c("teal", "#00ffff")}, "keyword": {"color": c("mauve", "#ff00ff"), "font_style": "italic"},
+            "operator": {"color": c("teal", "#00ffff")}, "variable": {"color": fg}, "punctuation": {"color": fg},
+        },
+    }
+    variants = [{"name": "herdr dark", "appearance": "dark", "style": style}, {"name": "herdr light", "appearance": "light", "style": style}]
+    return {"name": "herdr", "author": "global theme sync", "themes": variants}
+
+
+def set_zed(theme: dict[str, Any], dry: bool) -> Path:
+    path = CONFIG / "zed/settings.json"
+    settings = read_json(path)
+    settings["theme"] = {"mode": "system", "light": "herdr light", "dark": "herdr dark"}
+    if not dry:
+        write_json(CONFIG / "zed/themes/herdr.json", zed_theme(theme))
+        write_json(path, settings)
+    return path
+
+
+def set_tmux(theme: dict[str, Any], dry: bool) -> Path:
+    path = CONFIG / "tmux/tmux.conf"
+    flavour = theme["targets"].get("tmux_flavour")
+    if not flavour:
+        raise ThemeError("not Catppuccin-based; existing tmux plugin has no matching flavour")
+    content = path.read_text(encoding="utf-8")
+    pattern = re.compile(r"^(\s*set(?:-option)?\s+-g\s+@catppuccin_flavour\s+)(['\"]?)[^'\"\s]+\2(.*)$", re.MULTILINE)
+    if not pattern.search(content):
+        raise ThemeError("@catppuccin_flavour is not configured")
+    updated = pattern.sub(lambda m: f"{m.group(1)}'{flavour}'{m.group(3)}", content, count=1)
+    if not dry:
+        atomic_write(path, updated)
+        if os.environ.get("TMUX") and shutil.which("tmux"):
+            subprocess.run(["tmux", "source-file", str(path)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return path
+
+
+def set_ghostty(theme: dict[str, Any], dry: bool) -> Path:
+    path = CONFIG / "ghostty/config"
+    content = path.read_text(encoding="utf-8")
+    updated = replace_setting(content, "background", theme["targets"]["ghostty_background"])
+    if not dry:
+        generated = CONFIG / "ghostty/themes/herdr-global"
+        atomic_write(generated, ghostty_theme(theme))
+        atomic_write(path, updated)
+        if sys.platform == "darwin":
+            mac_config = HOME / "Library/Application Support/com.mitchellh.ghostty/config"
+            if mac_config.exists():
+                mac_content = mac_config.read_text(encoding="utf-8")
+                mac_updated = replace_setting(mac_content, "theme", str(generated))
+                atomic_write(mac_config, mac_updated)
+    return path
+
+
+def ghostty_theme(theme: dict[str, Any]) -> str:
+    """Render a complete Ghostty color theme from a global palette."""
+    p = theme["palette"]
+    c = lambda key, fallback: color(p, key, fallback)
+    ansi = [
+        c("active_space_bg", "#000000"), c("red", "#ff0000"),
+        c("green", "#00ff00"), c("yellow", "#ffff00"),
+        c("blue", "#0000ff"), c("mauve", "#ff00ff"),
+        c("teal", "#00ffff"), c("text", "#ffffff"),
+        c("surface0", "#404040"), c("red", "#ff8080"),
+        c("green", "#80ff80"), c("yellow", "#ffff80"),
+        c("blue", "#8080ff"), c("mauve", "#ff80ff"),
+        c("teal", "#80ffff"), c("subtext0", "#ffffff"),
+    ]
+    lines = [
+        "# Generated by `theme set` — do not edit manually",
+        f"foreground = {c('text', '#ffffff')}",
+        f"background = {theme['targets']['ghostty_background']}",
+        f"cursor-color = {c('text', '#ffffff')}",
+        f"cursor-text = {c('panel_bg', '#000000')}",
+        f"selection-foreground = {c('text', '#ffffff')}",
+        f"selection-background = {c('surface1', '#404040')}",
+    ]
+    lines.extend(f"palette = {index}={value}" for index, value in enumerate(ansi))
+    return "\n".join(lines) + "\n"
+
+
+def reload_ghostty() -> None:
+    """Schedule Ghostty's reload after this theme process has exited."""
+    killall = Path("/usr/bin/killall")
+    if not killall.exists():
+        raise ThemeError("Ghostty config updated, but /usr/bin/killall is unavailable")
+    log_path = THEMES / "ghostty-reload.log"
+    script = (
+        "sleep 0.5; "
+        "/usr/bin/killall -31 ghostty; "
+        "ghostty_reload_status=$?; "
+        f"printf 'command=/usr/bin/killall -31 ghostty\\nexit_status=%s\\n' "
+        f"\"$ghostty_reload_status\" > {shlex.quote(str(log_path))}; "
+        "exit \"$ghostty_reload_status\""
+    )
+    try:
+        subprocess.Popen(
+            ["/bin/sh", "-c", script],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            start_new_session=True,
+            close_fds=True,
+        )
+    except OSError as error:
+        raise ThemeError(f"could not schedule Ghostty reload: {error}") from error
+
+
+def opencode_theme(theme: dict[str, Any]) -> dict[str, Any]:
+    p = theme["palette"]
+    c = lambda key, fallback: color(p, key, fallback)
+    bg, fg, s0, dim = c("panel_bg", "#000000"), c("text", "#ffffff"), c("surface0", "#404040"), c("surface_dim", "#000000")
+    values = {
+        "primary": c("accent", "#0000ff"), "secondary": c("mauve", "#ff00ff"), "accent": c("accent", "#0000ff"),
+        "error": c("red", "#ff0000"), "warning": c("yellow", "#ffff00"), "success": c("green", "#00ff00"),
+        "info": c("teal", "#00ffff"), "text": fg, "textMuted": c("overlay0", "#808080"),
+        "selectedListItemText": bg, "background": bg, "backgroundPanel": dim, "backgroundElement": s0,
+        "backgroundMenu": s0, "border": c("separator", "#404040"), "borderActive": c("accent", "#0000ff"),
+        "borderSubtle": s0, "diffAdded": c("green", "#00ff00"), "diffRemoved": c("red", "#ff0000"),
+        "diffContext": c("overlay0", "#808080"), "markdownText": fg, "markdownHeading": c("accent", "#0000ff"),
+        "markdownLink": c("blue", "#0000ff"), "markdownCode": c("green", "#00ff00"),
+        "syntaxComment": c("overlay0", "#808080"), "syntaxKeyword": c("mauve", "#ff00ff"),
+        "syntaxFunction": c("blue", "#0000ff"), "syntaxVariable": fg, "syntaxString": c("green", "#00ff00"),
+        "syntaxNumber": c("peach", "#ffff00"), "syntaxType": c("teal", "#00ffff"),
+        "syntaxOperator": c("teal", "#00ffff"), "syntaxPunctuation": fg, "thinkingOpacity": "0.6",
+    }
+    return {"theme": values}
+
+
+def set_opencode(theme: dict[str, Any], dry: bool) -> Path:
+    path = CONFIG / "opencode/tui.json"
+    settings = read_json(path)
+    settings["theme"] = "herdr"
+    if not dry:
+        write_json(CONFIG / "opencode/themes/herdr.json", opencode_theme(theme))
+        write_json(path, settings)
+        if shutil.which("pkill"):
+            subprocess.run(["pkill", "-SIGUSR2", "opencode"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return path
+
+
+TERMY_KEYS = ["foreground", "background", "cursor", "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "bright_black", "bright_red", "bright_green", "bright_yellow", "bright_blue", "bright_magenta", "bright_cyan", "bright_white"]
+
+
+def termy_colors(theme: dict[str, Any]) -> dict[str, str]:
+    p = theme["palette"]
+    c = lambda key, fallback: color(p, key, fallback)
+    return {"foreground": c("text", "#ffffff"), "background": c("panel_bg", "#000000"), "cursor": c("text", "#ffffff"),
+            "black": c("active_space_bg", "#000000"), "red": c("red", "#ff0000"), "green": c("green", "#00ff00"),
+            "yellow": c("yellow", "#ffff00"), "blue": c("blue", "#0000ff"), "magenta": c("mauve", "#ff00ff"),
+            "cyan": c("teal", "#00ffff"), "white": c("text", "#ffffff"), "bright_black": c("surface0", "#404040"),
+            "bright_red": c("red", "#ff0000"), "bright_green": c("green", "#00ff00"), "bright_yellow": c("yellow", "#ffff00"),
+            "bright_blue": c("blue", "#0000ff"), "bright_magenta": c("mauve", "#ff00ff"),
+            "bright_cyan": c("teal", "#00ffff"), "bright_white": c("subtext0", "#808080")}
+
+
+def set_termy(theme: dict[str, Any], dry: bool) -> Path:
+    path = CONFIG / "termy/config.txt"
+    content = path.read_text(encoding="utf-8")
+    colors = termy_colors(theme)
+    content = replace_setting(content, "theme", "herdr")
+    content = replace_setting(content, "theme_mode", "manual")
+    lines = content.splitlines()
+    headers = [i for i, line in enumerate(lines) if line.strip() == "[colors]"]
+    if len(headers) > 1: raise ThemeError("multiple [colors] sections")
+    if headers:
+        start = headers[0] + 1
+        end = next((i for i in range(start, len(lines)) if lines[i].strip().startswith("[") and lines[i].strip().endswith("]")), len(lines))
+    else:
+        if lines and lines[-1].strip(): lines.append("")
+        lines.append("[colors]")
+        start = len(lines); end = len(lines)
+    found: set[str] = set()
+    for index in range(start, end):
+        match = re.match(r"^\s*([A-Za-z_]+)\s*=", lines[index])
+        if match and match.group(1) in colors:
+            key = match.group(1); lines[index] = f"{key} = {colors[key]}"; found.add(key)
+    lines[end:end] = [f"{key} = {colors[key]}" for key in TERMY_KEYS if key not in found]
+    if not dry:
+        write_json(CONFIG / "termy/themes/herdr.json", {"$schema": "../../../schemas/theme.schema.json", **colors})
+        atomic_write(path, "\n".join(lines) + "\n")
+    return path
+
+
+def set_hacktui(theme: dict[str, Any], dry: bool) -> Path:
+    path = Path(tempfile.gettempdir()) / "hacktui/query-cache.json"
+    cache = read_json(path) if path.exists() else {}
+    cache["hacktui-theme"] = theme["targets"].get("hacktui", theme["name"])
+    if not dry: write_json(path, cache)
+    return path
+
+
+def detected_adapters() -> list[tuple[str, Callable[[dict[str, Any], bool], Path]]]:
+    adapters: list[tuple[str, Callable[[dict[str, Any], bool], Path]]] = [("herdr", set_herdr)]
+    checks = [
+        ("pi-agent", HOME / ".pi/agent/settings.json", set_pi),
+        ("neovim", CONFIG / "nvim", set_neovim), ("zed", CONFIG / "zed/settings.json", set_zed),
+        ("tmux", CONFIG / "tmux/tmux.conf", set_tmux), ("ghostty", CONFIG / "ghostty/config", set_ghostty),
+        ("opencode", CONFIG / "opencode/tui.json", set_opencode), ("termy", CONFIG / "termy/config.txt", set_termy),
+    ]
+    adapters.extend((name, fn) for name, path, fn in checks if path.exists())
+    if (HOME / ".bun/bin/hacktui").exists() or Path("/usr/local/bin/hacktui").exists():
+        adapters.append(("hacktui", set_hacktui))
+    return adapters
+
+
+def command_list(_: argparse.Namespace) -> int:
+    themes = available()
+    current = None
+    if STATE.exists():
+        try: current = read_json(STATE).get("theme")
+        except ThemeError: pass
+    for name in themes:
+        print(f"{name}{' *' if name == current else ''}")
+    return 0
+
+
+def command_status(_: argparse.Namespace) -> int:
+    if not STATE.exists():
+        print("No global theme has been applied yet.")
+        return 1
+    state = read_json(STATE)
+    print(f"theme: {state.get('theme', 'unknown')}")
+    print(f"applied: {state.get('applied_at', 'unknown')}")
+    for name, entry in state.get("tools", {}).items():
+        print(f"{name}: {entry.get('status', 'updated')} ({entry.get('config')})")
+    return 0
+
+
+def command_set(args: argparse.Namespace) -> int:
+    theme = load_theme(args.name)
+    results: dict[str, dict[str, str]] = {}
+    errors = 0
+    for name, adapter in detected_adapters():
+        try:
+            path = adapter(theme, args.dry_run)
+            status = "would update" if args.dry_run else "updated"
+            results[name] = {"status": status, "config": str(path)}
+            print(f"{name:<10} {status:<12} {path}")
+        except (ThemeError, OSError, ValueError, TypeError) as error:
+            message = str(error)
+            skipped = name == "tmux" and "not Catppuccin" in message
+            status = "skipped" if skipped else "error"
+            errors += 0 if skipped else 1
+            results[name] = {"status": status, "config": message}
+            print(f"{name:<10} {status:<12} {message}")
+    if not args.dry_run:
+        write_json(STATE, {"theme": theme["name"], "applied_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"), "tools": results})
+        if results.get("ghostty", {}).get("status") == "updated":
+            try:
+                reload_ghostty()
+                print("ghostty    scheduled    /usr/bin/killall -31 ghostty (after command exit)")
+            except ThemeError as error:
+                errors += 1
+                results["ghostty"] = {"status": "error", "config": str(error)}
+                write_json(STATE, {"theme": theme["name"], "applied_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"), "tools": results})
+                print(f"ghostty    error        {error}")
+    return 1 if errors else 0
+
+
+def parser() -> argparse.ArgumentParser:
+    root = argparse.ArgumentParser(prog="theme", description="Synchronize a theme across development tools")
+    commands = root.add_subparsers(dest="command", required=True)
+    listing = commands.add_parser("list", help="list installed themes"); listing.set_defaults(func=command_list)
+    status = commands.add_parser("status", help="show the last applied theme"); status.set_defaults(func=command_status)
+    setting = commands.add_parser("set", help="apply a theme to all detected tools")
+    setting.add_argument("name"); setting.add_argument("--dry-run", action="store_true"); setting.set_defaults(func=command_set)
+    return root
+
+
+def main() -> int:
+    try:
+        args = parser().parse_args()
+        return args.func(args)
+    except ThemeError as error:
+        print(f"theme: {error}", file=sys.stderr); return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

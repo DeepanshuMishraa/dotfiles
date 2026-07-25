@@ -1,0 +1,111 @@
+# Mole Cleanup Preview - 2026-05-24 00:31:36
+#
+# How to protect files:
+# 1. Copy any path below to ~/.config/mole/whitelist
+# 2. Run: mo clean --whitelist
+#
+# Example:
+#   /Users/*/Library/Caches/com.example.app
+#
+
+
+=== User essentials ===
+/Users/dipxsy/Library/Caches  # 3.47GB, 36 items
+/Users/dipxsy/Library/Logs  # 5.6MB, 21 items
+
+=== App caches ===
+/Users/dipxsy/Library/Containers/com.apple.wallpaper.agent/Data/Library/Caches/com.apple.wallpaper.caches  # 276.0MB
+/Users/dipxsy/Library/Containers/com.apple.mediaanalysisd/Data/Library/Caches  # 284.3MB, 3 items
+/Users/dipxsy/Library/Containers/com.apple.mediaanalysisd/Data/tmp  # 7.6MB, 2 items
+/Users/dipxsy/Library/Containers/com.apple.AppStore/Data/Library/Caches  # 11.4MB, 2 items
+/Users/dipxsy/Library/Containers/com.apple.geod/Data/tmp  # 31.4MB, 86 items
+/Users/dipxsy/Library/Application Support/com.apple.wallpaper/aerials/thumbnails  # 8.0MB, 156 items
+/Users/dipxsy/Library/Caches/com.apple.helpd  # 28.9MB, 8 items
+/Users/dipxsy/Library/Caches/GeoServices  # 76.6MB, 7 items
+/Users/dipxsy/Library/Containers/com.apple.AMPArtworkAgent/Data/Library/Caches/com.apple.AMPArtworkAgent  # 4.0MB
+
+=== Browsers ===
+/Users/dipxsy/Library/Application Support/Google/GoogleUpdater/updater.log.old  # 1.0MB
+/Users/dipxsy/Library/Caches/company.thebrowser.dia  # 145.2MB, 5 items
+/Users/dipxsy/Library/Caches/net.imput.helium/Default  # 634.9MB
+/Users/dipxsy/Library/Application Support/net.imput.helium/Default/GPUCache  # 1.6MB, 5 items
+/Users/dipxsy/Library/Application Support/net.imput.helium/component_crx_cache  # 1.3MB, 2 items
+/Users/dipxsy/Library/Application Support/net.imput.helium/GrShaderCache  # 558KB, 5 items
+/Users/dipxsy/Library/Application Support/net.imput.helium/GraphiteDawnCache  # 6.1MB, 17 items
+/Users/dipxsy/Library/Application Support/net.imput.helium/ShaderCache  # 558KB, 5 items
+
+=== Cloud & Office ===
+
+=== Developer tools ===
+/Users/dipxsy/.npm/_cacache  # 1.24GB, 3 items
+/Users/dipxsy/.npm/_npx  # 704.8MB, 6 items
+/Users/dipxsy/.npm/_logs  # 27KB, 12 items
+/Users/dipxsy/.npm/_prebuilds/91b934-better-sqlite3-v12.10.0-node-v141-darwin-arm64.tar.gz  # 978KB
+/Users/dipxsy/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f  # 71.9MB
+/Users/dipxsy/.cargo/git  # 719.0MB, 3 items
+/Users/dipxsy/.gem/specs/rubygems.org%443  # 38.2MB
+/Users/dipxsy/.gem/ruby/2.6.0/cache  # 3.3MB, 38 items
+/Users/dipxsy/.bundle/cache/compact_index  # 27.3MB
+/Users/dipxsy/.oh-my-zsh/cache  # 222KB, 3 items
+/Users/dipxsy/Library/Caches/deno  # 166KB, 6 items
+/Users/dipxsy/Library/Caches/SentryCrash  # 29KB, 7 items
+/Users/dipxsy/Library/Application Support/Antigravity/Cache  # 7.8MB, 2 items
+/Users/dipxsy/Library/Application Support/Antigravity/Code Cache  # 7.8MB, 2 items
+/Users/dipxsy/Library/Application Support/Antigravity/GPUCache  # 5.8MB, 5 items
+/Users/dipxsy/Library/Application Support/Antigravity/DawnGraphiteCache  # 558KB, 5 items
+/Users/dipxsy/Library/Application Support/Antigravity/DawnWebGPUCache  # 558KB, 5 items
+/Users/dipxsy/.cache/opencode  # 301.9MB, 5 items
+/Users/dipxsy/.local/share/opencode/snapshot  # 467.0MB, 25 items
+/Users/dipxsy/.local/share/opencode/log  # 17.7MB, 10 items
+/Users/dipxsy/.cache/codex-runtimes/codex-primary-runtime  # 783.9MB
+/Users/dipxsy/Library/Logs/CoreSimulator/CoreSimulator.log  # 1KB
+/Users/dipxsy/Library/Logs/Zed/Zed.log  # 155KB
+/Users/dipxsy/Library/Caches/Homebrew  # 211.1MB, 22 items
+
+=== Applications ===
+/Users/dipxsy/Library/Application Support/legcord/Cache/Cache_Data  # 13.4MB
+/Users/dipxsy/Library/Caches/com.openai.chat  # 7.5MB, 3 items
+/Users/dipxsy/Library/Logs/com.openai.codex/2026  # 2.2MB
+/Users/dipxsy/Library/Application Support/Codex/Cache  # 19.7MB, 2 items
+/Users/dipxsy/Library/Application Support/Codex/Code Cache  # 16KB, 2 items
+/Users/dipxsy/Library/Application Support/Codex/GPUCache  # 558KB, 5 items
+/Users/dipxsy/Library/Application Support/Codex/DawnGraphiteCache  # 558KB, 5 items
+/Users/dipxsy/Library/Application Support/Codex/DawnWebGPUCache  # 558KB, 5 items
+/Users/dipxsy/Library/Caches/Adobe  # 3.1MB, 2 items
+/Users/dipxsy/Library/Caches/com.adobe.AfterEffects.application  # 124KB, 3 items
+/Users/dipxsy  # 170KB, 2 items
+/Users/dipxsy/Library/Caches/com.mitchellh.ghostty  # 169KB, 5 items
+/Users/dipxsy/Library/Caches/com.raycast.macos/urlcache  # 5.0MB, 3 items
+
+=== Virtualization ===
+
+=== Application Support ===
+
+=== App leftovers ===
+/Users/dipxsy/Library/HTTPStorages/com.dipxsy.prolexic.prolexic  # 565KB
+/Users/dipxsy/Library/HTTPStorages/com.dipxsy.prolexic.prolexic.binarycookies  # 1KB
+/Users/dipxsy/Library/HTTPStorages/com.dipxsy.tick.binarycookies  # 1KB
+/Users/dipxsy/Library/HTTPStorages/com.mysticalbits.lookaway  # 66KB
+/Users/dipxsy/Library/HTTPStorages/com.mysticalbits.lookaway.binarycookies  # 1KB
+/Users/dipxsy/Library/HTTPStorages/org.sparkle-project.DownloaderService  # 66KB
+/Users/dipxsy/Library/HTTPStorages/org.sparkle-project.DownloaderService.binarycookies  # 1KB
+/Users/dipxsy/Library/Preferences/com.android.Emulator.plist  # 1KB
+
+=== Apple Silicon updates ===
+
+=== Device backups & firmware ===
+
+=== Time Machine ===
+
+=== Large files ===
+
+=== System Data clues ===
+
+=== Project artifacts ===
+
+# ============================================
+# Summary
+# ============================================
+# Potential cleanup: 9.72GB
+# Items: 830
+# Categories: 71

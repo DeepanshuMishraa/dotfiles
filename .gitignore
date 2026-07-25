@@ -1,0 +1,30 @@
+# Ignore everything in the home directory by default.
+/*
+
+# Track only the selected dotfiles and their contents.
+!/.gitignore
+!/.zshrc
+!/.agents/
+!/.agents/**
+!/.config/
+!/.config/**
+
+# Keep Raycast's generated configuration and extensions local.
+/.config/raycast/
+/.config/raycast-x/
+/.config/nvim/.undodir
+
+# Keep local credentials and generated authentication state out of Git.
+/.config/dotfiles/secrets.env
+/.config/github-copilot/auth.db
+/.config/github-copilot/apps.json
+/.config/herdr/*.log
+/.config/herdr/session*.json
+/.config/nowplaying/env
+/.config/openclicky/secrets.env
+
+# Keep all environment files local, even when they contain only non-secret values.
+**/*.env
+
+# Ignore dependencies nested anywhere in tracked directories.
+**/node_modules/

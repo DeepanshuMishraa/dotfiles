@@ -1,0 +1,32 @@
+{
+  "name": "tokyo-night-day",
+  "palette": {
+    "accent": "#2e7de9",
+    "panel_bg": "#e1e2e7",
+    "surface0": "#c4c8da",
+    "active_space_bg": "#d2d3da",
+    "surface1": "#a8aecb",
+    "surface_dim": "#d2d3da",
+    "separator": "#d2d3da",
+    "overlay0": "#8990b3",
+    "overlay1": "#68709a",
+    "text": "#3760bf",
+    "subtext0": "#6172b0",
+    "mauve": "#7847bd",
+    "green": "#587539",
+    "yellow": "#8c6c3e",
+    "red": "#f52a65",
+    "blue": "#2e7de9",
+    "teal": "#118c74",
+    "peach": "#b15c00"
+  },
+  "targets": {
+    "herdr": "tokyo-night-day",
+    "pi": "tokyo-night",
+    "zed": "Tokyo Night Day",
+    "tmux_flavour": null,
+    "ghostty_background": "#e1e2e7",
+    "opencode": "tokyo-night-day",
+    "hacktui": "tokyo-night"
+  }
+}

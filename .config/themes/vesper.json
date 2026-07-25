@@ -1,0 +1,32 @@
+{
+  "name": "vesper",
+  "palette": {
+    "accent": "#ffc799",
+    "panel_bg": "#1a1a1a",
+    "surface0": "#232323",
+    "active_space_bg": "#101010",
+    "surface1": "#282828",
+    "surface_dim": "#101010",
+    "separator": "#101010",
+    "overlay0": "#5c5c5c",
+    "overlay1": "#7e7e7e",
+    "text": "#ffffff",
+    "subtext0": "#a0a0a0",
+    "mauve": "#ffd1a8",
+    "green": "#99ffe4",
+    "yellow": "#ffc799",
+    "red": "#ff8080",
+    "blue": "#b0b0b0",
+    "teal": "#66ddcc",
+    "peach": "#ffc799"
+  },
+  "targets": {
+    "herdr": "vesper",
+    "pi": "vesper",
+    "zed": "Vesper",
+    "tmux_flavour": null,
+    "ghostty_background": "#101010",
+    "opencode": "vesper",
+    "hacktui": "vesper"
+  }
+}

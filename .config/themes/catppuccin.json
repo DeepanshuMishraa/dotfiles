@@ -1,0 +1,32 @@
+{
+  "name": "catppuccin",
+  "palette": {
+    "accent": "#89b4fa",
+    "panel_bg": "#181825",
+    "surface0": "#313244",
+    "active_space_bg": "#1e1e2e",
+    "surface1": "#45475a",
+    "surface_dim": "#1e1e2e",
+    "separator": "#1e1e2e",
+    "overlay0": "#6c7086",
+    "overlay1": "#7f849c",
+    "text": "#cdd6f4",
+    "subtext0": "#a6adc8",
+    "mauve": "#cba6f7",
+    "green": "#a6e3a1",
+    "yellow": "#f9e2af",
+    "red": "#f38ba8",
+    "blue": "#89b4fa",
+    "teal": "#94e2d5",
+    "peach": "#fab387"
+  },
+  "targets": {
+    "herdr": "catppuccin",
+    "pi": "catppuccin-macchiato",
+    "zed": "Catppuccin Mocha",
+    "tmux_flavour": "macchiato",
+    "ghostty_background": "#1e1e2e",
+    "opencode": "catppuccin-macchiato",
+    "hacktui": "catppuccin-macchiato"
+  }
+}
