@@ -22,7 +22,6 @@
 /.config/herdr/session*.json
 /.config/nowplaying/env
 /.config/openclicky/secrets.env
-
 # Keep all environment files local, even when they contain only non-secret values.
 **/*.env
 
