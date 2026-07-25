@@ -1,0 +1,23 @@
+AGENTS.md
+  s_52b05b65b2c84e::t_9a02e69b5bf858 1-9,11,14-18,27-29,58-64,66-74,76-103
+  s_52b05b65b2c84e::t_b5ce8172415aa3 10,12-13,19-26,30-57,65,75
+.gitignore
+  s_52b05b65b2c84e::t_9a02e69b5bf858 6
+  s_52b05b65b2c84e::t_844faa5a582584 30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "2e8103242fa2aefb5bdf2e9bda0d8f0666ea6124",
+  "prompts": {},
+  "sessions": {
+    "s_52b05b65b2c84e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f98c6-cda8-7580-a4bd-66b10bfd2c8a",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
