@@ -1,9 +1,26 @@
+function __xrun_watch_snapshot --argument-names root
+    command find $root \
+        -type d \( -name .git -o -name .build -o -name build -o -name DerivedData \) -prune -o \
+        -type f \( \
+            -name '*.swift' -o -name '*.m' -o -name '*.mm' -o -name '*.h' -o \
+            -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.metal' -o \
+            -name '*.storyboard' -o -name '*.xib' -o -name '*.plist' -o \
+            -name '*.xcconfig' -o -name '*.entitlements' -o -name '*.strings' -o \
+            -name '*.stringsdict' -o -name '*.json' -o -name '*.png' -o \
+            -name '*.jpg' -o -name '*.jpeg' -o -name '*.pdf' -o -name '*.svg' -o \
+            -name '*.mlmodel' -o -path '*.xcassets/*' -o -path '*.xcdatamodeld/*' -o \
+            -name project.pbxproj -o -name Package.resolved \
+        \) -exec stat -f '%m:%z:%N' {} + 2>/dev/null |
+        command shasum |
+        string split -f1 ' '
+end
+
 function xrun --description "Build and run the current Swift or Xcode project"
     set -l original_argv $argv
 
     if contains -- -h $argv; or contains -- --help $argv
-        echo "Usage: xrun [--mac | --ios] [--scheme NAME] [SCHEME]"
-        echo "Build and open the current macOS or iPhone app."
+        echo "Usage: xrun [--mac | --ios] [--once] [--scheme NAME] [SCHEME]"
+        echo "Build, open, and rebuild the current macOS or iPhone app when files change."
         return
     end
 
@@ -40,7 +57,7 @@ function xrun --description "Build and run the current Swift or Xcode project"
         return 1
     end
 
-    argparse 'h/help' 'm/mac' 'i/ios' 's/scheme=' -- $argv
+    argparse 'h/help' 'm/mac' 'i/ios' 'o/once' 's/scheme=' -- $argv
     or return
 
     if set -q _flag_mac; and set -q _flag_ios
@@ -181,39 +198,70 @@ function xrun --description "Build and run the current Swift or Xcode project"
         set destination "platform=iOS Simulator,id=$simulator_id"
     end
 
-    echo "Building '$scheme' for $destination…"
-    command xcodebuild $container_args -scheme $scheme -configuration Debug -destination $destination build
-    or return
+    while true
+        echo "Building '$scheme' for $destination…"
+        command xcodebuild $container_args -scheme $scheme -configuration Debug -destination $destination build
+        set -l build_status $status
 
-    set settings (command xcodebuild $container_args -scheme $scheme -configuration Debug \
-        -destination $destination -showBuildSettings -json 2>/dev/null)
-    or begin
-        echo "xrun: build succeeded, but its app path could not be resolved" >&2
-        return 1
-    end
+        if test $build_status -eq 0
+            set settings (command xcodebuild $container_args -scheme $scheme -configuration Debug \
+                -destination $destination -showBuildSettings -json 2>/dev/null)
+            or begin
+                echo "xrun: build succeeded, but its app path could not be resolved" >&2
+                return 1
+            end
 
-    set -l app_path (printf '%s\n' $settings | command jq -r 'first(
-        .[] | select(.buildSettings.PRODUCT_TYPE == "com.apple.product-type.application")
-    ) | "\(.buildSettings.TARGET_BUILD_DIR)/\(.buildSettings.FULL_PRODUCT_NAME)" // empty')
-    set -l bundle_id (printf '%s\n' $settings | command jq -r 'first(
-        .[] | select(.buildSettings.PRODUCT_TYPE == "com.apple.product-type.application")
-    ) | .buildSettings.PRODUCT_BUNDLE_IDENTIFIER // empty')
+            set -l app_path (printf '%s\n' $settings | command jq -r 'first(
+                .[] | select(.buildSettings.PRODUCT_TYPE == "com.apple.product-type.application")
+            ) | "\(.buildSettings.TARGET_BUILD_DIR)/\(.buildSettings.FULL_PRODUCT_NAME)" // empty')
+            set -l bundle_id (printf '%s\n' $settings | command jq -r 'first(
+                .[] | select(.buildSettings.PRODUCT_TYPE == "com.apple.product-type.application")
+            ) | .buildSettings.PRODUCT_BUNDLE_IDENTIFIER // empty')
 
-    if test -z "$app_path"; or not test -d "$app_path"
-        echo "xrun: build succeeded, but no runnable .app product was found" >&2
-        return 1
-    end
+            if test -z "$app_path"; or not test -d "$app_path"
+                echo "xrun: build succeeded, but no runnable .app product was found" >&2
+                return 1
+            end
 
-    if test "$platform" = mac
-        command open $app_path
-    else
-        if test -z "$bundle_id"
-            echo "xrun: build succeeded, but the app bundle identifier could not be resolved" >&2
-            return 1
+            if test "$platform" = mac
+                if test -n "$bundle_id"
+                    command osascript -e "tell application id \"$bundle_id\" to quit" 2>/dev/null
+                    command sleep 0.2
+                end
+                command open $app_path
+                or return
+            else
+                if test -z "$bundle_id"
+                    echo "xrun: build succeeded, but the app bundle identifier could not be resolved" >&2
+                    return 1
+                end
+
+                command xcrun simctl install $simulator_id $app_path
+                or return
+                command xcrun simctl launch --terminate-running-process $simulator_id $bundle_id
+                or return
+            end
+        else
+            echo "xrun: build failed; waiting for another change…" >&2
         end
 
-        command xcrun simctl install $simulator_id $app_path
-        or return
-        command xcrun simctl launch --terminate-running-process $simulator_id $bundle_id
+        if set -q _flag_once
+            return $build_status
+        end
+
+        set -l snapshot (__xrun_watch_snapshot $project_dir)
+        echo "Watching $project_dir — press Ctrl-C to stop."
+
+        while true
+            command sleep 0.5
+            or return 130
+
+            set -l next_snapshot (__xrun_watch_snapshot $project_dir)
+            if test "$next_snapshot" != "$snapshot"
+                command sleep 0.2
+                echo "Change detected. Rebuilding…"
+                break
+            end
+        end
     end
 end
