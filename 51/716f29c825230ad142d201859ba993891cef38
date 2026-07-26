@@ -1,0 +1,61 @@
+.config/fish/functions/xcrun.fish
+  s_d9f5a663bd4fd7::t_8ae9c5f877d6ae 1-9,11,17-91,97,103-106
+  s_d9f5a663bd4fd7::t_986c45866203b2 10,12-16
+  s_d9f5a663bd4fd7::t_a7c6f5c6537aff 107
+.agents/.skill-lock.json
+  s_d9f5a663bd4fd7::t_f25a54c57f7c4e 1335,1338,1344,1347,1353,1356,1362,1365,1371,1374,1380,1383,1389,1392,1399-1417
+  s_d9f5a663bd4fd7::t_aa6e3f0fd56386 1336-1337,1339-1343,1345-1346,1348-1352,1354-1355,1357-1361,1363-1364,1366-1370,1372-1373,1375-1379,1381-1382,1384-1388,1390-1391,1393-1398
+.agents/skills/app-icon/SKILL.md
+  s_d9f5a663bd4fd7::t_f25a54c57f7c4e 1-140
+.config/dot
+  s_d9f5a663bd4fd7::t_2c1e503c1f19d7 842-846
+  s_d9f5a663bd4fd7::t_4f93c71b835d92 826-841,847-872,1086,1104-1107,2210-2212,2280,2308,2384-2387
+  s_d9f5a663bd4fd7::t_31f055b5086a09 810-825,1085,2207-2209,2279,2307,2382-2383
+.config/fish/completions/dot.fish
+  s_d9f5a663bd4fd7::t_525533fce3c2bd 11-12,30-32
+  s_d9f5a663bd4fd7::t_3982f7bc6480fa 33
+.agents/skills/speech-recognition/SKILL.md
+  s_d9f5a663bd4fd7::t_afa8281351bc33 1-356
+.agents/skills/speech-recognition/evals/evals.json
+  s_d9f5a663bd4fd7::t_a096cf0a228a1d 1-49
+.agents/skills/speech-recognition/references/speechanalyzer-patterns.md
+  s_d9f5a663bd4fd7::t_5770131fd0f195 1-171
+.agents/skills/swift-testing/SKILL.md
+  s_d9f5a663bd4fd7::t_b8146731e1dbe5 1-295
+.agents/skills/swift-testing/references/_index.md
+  s_d9f5a663bd4fd7::t_a5859b3b880ab2 1-65
+.agents/skills/swift-testing/references/async-testing.md
+  s_d9f5a663bd4fd7::t_8ce1b5e84eea89 1-245
+.agents/skills/swift-testing/references/dump-snapshot-testing.md
+  s_d9f5a663bd4fd7::t_5fb3fce6fb278f 1-265
+.agents/skills/swift-testing/references/fixtures.md
+  s_d9f5a663bd4fd7::t_7ea87e69a5309a 1-193
+.agents/skills/swift-testing/references/integration-testing.md
+  s_d9f5a663bd4fd7::t_c788ce5d80d82f 1-189
+.agents/skills/swift-testing/references/migration-xctest.md
+  s_d9f5a663bd4fd7::t_3c4e7eec8a92b7 1-301
+.agents/skills/swift-testing/references/parameterized-tests.md
+  s_d9f5a663bd4fd7::t_5d6123d28a8848 1-171
+.agents/skills/swift-testing/references/snapshot-testing.md
+  s_d9f5a663bd4fd7::t_4f6880a7145fb3 1-201
+.agents/skills/swift-testing/references/test-doubles.md
+  s_d9f5a663bd4fd7::t_176946429102c8 1-243
+.agents/skills/swift-testing/references/test-organization.md
+  s_d9f5a663bd4fd7::t_b2876c00b7b8f5 1-231
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "51716f29c825230ad142d201859ba993891cef38",
+  "prompts": {},
+  "sessions": {
+    "s_d9f5a663bd4fd7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9eca-9630-7210-b6c4-9eb938e2f1b6",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
