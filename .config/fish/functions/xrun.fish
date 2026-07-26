@@ -15,6 +15,46 @@ function __xrun_watch_snapshot --argument-names root
         string split -f1 ' '
 end
 
+function __xrun_stop_app --argument-names platform simulator_id bundle_id
+    if test -z "$bundle_id"
+        return
+    end
+
+    if test "$platform" = mac
+        command osascript -e "tell application id \"$bundle_id\" to quit" 2>/dev/null
+    else if test -n "$simulator_id"
+        command xcrun simctl terminate $simulator_id $bundle_id >/dev/null 2>&1
+    end
+end
+
+function __xrun_arm_interrupt --argument-names platform bundle_id simulator_id
+    functions -e __xrun_interrupt_handler
+    set -e -g __xrun_interrupted
+    set -g __xrun_interrupt_platform $platform
+    set -g __xrun_interrupt_bundle_id $bundle_id
+    set -g __xrun_interrupt_simulator_id $simulator_id
+    if test -z "$__xrun_interrupt_simulator_id"
+        set -g __xrun_interrupt_simulator_id -
+    end
+
+    function __xrun_interrupt_handler --on-signal INT
+        __xrun_stop_app \
+            $__xrun_interrupt_platform \
+            $__xrun_interrupt_simulator_id \
+            $__xrun_interrupt_bundle_id
+        set -g __xrun_interrupted 1
+        functions -e __xrun_interrupt_handler
+    end
+end
+
+function __xrun_disarm_interrupt
+    functions -e __xrun_interrupt_handler
+    set -e -g __xrun_interrupt_platform
+    set -e -g __xrun_interrupt_simulator_id
+    set -e -g __xrun_interrupt_bundle_id
+    set -e -g __xrun_interrupted
+end
+
 function xrun --description "Build and run the current Swift or Xcode project"
     set -l original_argv $argv
 
@@ -148,6 +188,7 @@ function xrun --description "Build and run the current Swift or Xcode project"
 
     set -l destination platform=macOS
     set -l simulator_id
+    set -l active_bundle_id
 
     if test "$platform" = ios
         set simulator_id (command xcrun simctl list devices available -j |
@@ -203,6 +244,11 @@ function xrun --description "Build and run the current Swift or Xcode project"
         command xcodebuild $container_args -scheme $scheme -configuration Debug -destination $destination build
         set -l build_status $status
 
+        if test $build_status -eq 130
+            __xrun_stop_app $platform $simulator_id $active_bundle_id
+            return 130
+        end
+
         if test $build_status -eq 0
             set settings (command xcodebuild $container_args -scheme $scheme -configuration Debug \
                 -destination $destination -showBuildSettings -json 2>/dev/null)
@@ -230,6 +276,7 @@ function xrun --description "Build and run the current Swift or Xcode project"
                 end
                 command open $app_path
                 or return
+                set active_bundle_id $bundle_id
             else
                 if test -z "$bundle_id"
                     echo "xrun: build succeeded, but the app bundle identifier could not be resolved" >&2
@@ -240,6 +287,7 @@ function xrun --description "Build and run the current Swift or Xcode project"
                 or return
                 command xcrun simctl launch --terminate-running-process $simulator_id $bundle_id
                 or return
+                set active_bundle_id $bundle_id
             end
         else
             echo "xrun: build failed; waiting for another change…" >&2
@@ -251,13 +299,24 @@ function xrun --description "Build and run the current Swift or Xcode project"
 
         set -l snapshot (__xrun_watch_snapshot $project_dir)
         echo "Watching $project_dir — press Ctrl-C to stop."
+        __xrun_arm_interrupt $platform $active_bundle_id $simulator_id
 
         while true
             command sleep 0.5
-            or return 130
+            set -l wait_status $status
+
+            if set -q __xrun_interrupted
+                __xrun_disarm_interrupt
+                return 130
+            else if test $wait_status -ne 0
+                __xrun_stop_app $platform $simulator_id $active_bundle_id
+                __xrun_disarm_interrupt
+                return 130
+            end
 
             set -l next_snapshot (__xrun_watch_snapshot $project_dir)
             if test "$next_snapshot" != "$snapshot"
+                __xrun_disarm_interrupt
                 command sleep 0.2
                 echo "Change detected. Rebuilding…"
                 break
