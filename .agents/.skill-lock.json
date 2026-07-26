@@ -1323,6 +1323,15 @@
       "pluginName": "core-skills",
       "installedAt": "2026-07-22T16:54:21.125Z",
       "updatedAt": "2026-07-22T16:54:21.125Z"
+    },
+    "accessibility-audit-ux": {
+      "source": "winbda/claude-skills-collection",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/winbda/claude-skills-collection.git",
+      "skillPath": "skills/accessibility-audit-ux/SKILL.md",
+      "skillFolderHash": "b5c055218dea3fb78d005b536701847d7a7359a03dd63cce673d1a3237a0c37a",
+      "installedAt": "2026-07-26T05:29:23.710Z",
+      "updatedAt": "2026-07-26T05:29:23.710Z"
     }
   },
   "dismissed": {
