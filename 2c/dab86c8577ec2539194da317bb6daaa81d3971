@@ -1,0 +1,20 @@
+.config/fish/functions/xrun.fish
+  s_f2e8a2af28d28a::t_25d83901653d67 1-8,13-17,22-23,60,201-204,206-212,214-219,221-224,226,231-245,248-265
+  s_f2e8a2af28d28a::t_18719464318f2e 9-12,227-230
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "2cdab86c8577ec2539194da317bb6daaa81d3971",
+  "prompts": {},
+  "sessions": {
+    "s_f2e8a2af28d28a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9e3d-4ddf-7ff0-b5bf-bebd028e0be9",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
