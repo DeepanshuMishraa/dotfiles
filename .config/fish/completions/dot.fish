@@ -8,6 +8,8 @@ complete -c dot -f
 complete -c dot -n "__fish_use_subcommand" -a "init" -d "Initialize and install dotfiles"
 complete -c dot -n "__fish_use_subcommand" -a "update" -d "Update dotfiles, packages, and pi"
 complete -c dot -n "__fish_use_subcommand" -a "push" -d "Commit and push dotfile changes"
+complete -c dot -n "__fish_use_subcommand" -a "status" -d "Show uncommitted dotfile changes"
+complete -c dot -n "__fish_use_subcommand" -a "skill" -d "Manage agent skills"
 complete -c dot -n "__fish_use_subcommand" -a "doctor" -d "Run diagnostics and check installation"
 complete -c dot -n "__fish_use_subcommand" -a "package" -d "Package management commands"
 complete -c dot -n "__fish_use_subcommand" -a "check-packages" -d "Check which packages are installed/missing"
@@ -24,6 +26,10 @@ complete -c dot -n "__fish_use_subcommand" -a "help" -d "Show help message"
 complete -c dot -n "__fish_seen_subcommand_from init" -l "skip-ssh" -d "Skip SSH key generation"
 complete -c dot -n "__fish_use_subcommand" -l "version" -d "Show version information"
 complete -c dot -n "__fish_use_subcommand" -s "h" -l "help" -d "Show help message"
+
+# Skill subcommands
+complete -c dot -n "__fish_seen_subcommand_from skill" -n "not __fish_seen_subcommand_from add help" -a "add" -d "Install a skill"
+complete -c dot -n "__fish_seen_subcommand_from skill" -n "not __fish_seen_subcommand_from add help" -a "help" -d "Show skill help"
 
 # Package subcommands
 complete -c dot -n "__fish_seen_subcommand_from package" -n "not __fish_seen_subcommand_from add remove update list help" -a "add" -d "Add package to bundle and install it"

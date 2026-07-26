@@ -1332,6 +1332,89 @@
       "skillFolderHash": "b5c055218dea3fb78d005b536701847d7a7359a03dd63cce673d1a3237a0c37a",
       "installedAt": "2026-07-26T05:29:23.710Z",
       "updatedAt": "2026-07-26T05:29:23.710Z"
+    },
+    "macos-auto-update": {
+      "source": "fayazara/macos-app-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/fayazara/macos-app-skills.git",
+      "skillPath": "auto-update/SKILL.md",
+      "skillFolderHash": "1b5b70439fb497e1aeb113ef14345fca67c61726",
+      "installedAt": "2026-07-26T14:18:12.381Z",
+      "updatedAt": "2026-07-26T14:18:12.381Z"
+    },
+    "macos-build": {
+      "source": "fayazara/macos-app-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/fayazara/macos-app-skills.git",
+      "skillPath": "build/SKILL.md",
+      "skillFolderHash": "642028670addbc263a9d19500452da4cf93eea48",
+      "installedAt": "2026-07-26T14:18:12.386Z",
+      "updatedAt": "2026-07-26T14:18:12.386Z"
+    },
+    "macos-notch-ui": {
+      "source": "fayazara/macos-app-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/fayazara/macos-app-skills.git",
+      "skillPath": "notch-ui/SKILL.md",
+      "skillFolderHash": "3ca7b83fcd7028bc4bae0b61c5c90d379de9f458",
+      "installedAt": "2026-07-26T14:18:12.387Z",
+      "updatedAt": "2026-07-26T14:18:12.387Z"
+    },
+    "macos-patterns": {
+      "source": "fayazara/macos-app-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/fayazara/macos-app-skills.git",
+      "skillPath": "macos-patterns/SKILL.md",
+      "skillFolderHash": "8d729c6b4616b233b7a3ed322d9a8bfc7d7ef269",
+      "installedAt": "2026-07-26T14:18:12.389Z",
+      "updatedAt": "2026-07-26T14:18:12.389Z"
+    },
+    "macos-release": {
+      "source": "fayazara/macos-app-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/fayazara/macos-app-skills.git",
+      "skillPath": "release/SKILL.md",
+      "skillFolderHash": "1d7e710fb1855cf223b9da5e506c0aac372833df",
+      "installedAt": "2026-07-26T14:18:12.390Z",
+      "updatedAt": "2026-07-26T14:18:12.390Z"
+    },
+    "macos-settings-ui": {
+      "source": "fayazara/macos-app-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/fayazara/macos-app-skills.git",
+      "skillPath": "settings-ui/SKILL.md",
+      "skillFolderHash": "3ecd3e9bef7b1860cbffa767d6d08e88300865dc",
+      "installedAt": "2026-07-26T14:18:12.391Z",
+      "updatedAt": "2026-07-26T14:18:12.391Z"
+    },
+    "swift-testing": {
+      "source": "bocato/swift-testing-agent-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/bocato/swift-testing-agent-skill.git",
+      "skillPath": "swift-testing/SKILL.md",
+      "skillFolderHash": "dd92e62aa930151098fb909c14c49b799d2a5252",
+      "pluginName": "swift-testing",
+      "installedAt": "2026-07-26T14:22:00.912Z",
+      "updatedAt": "2026-07-26T14:22:00.912Z"
+    },
+    "speech-recognition": {
+      "source": "dpearson2699/swift-ios-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dpearson2699/swift-ios-skills.git",
+      "skillPath": "skills/speech-recognition/SKILL.md",
+      "skillFolderHash": "e319f4828245e9c79b29e07b2165036c260ee517",
+      "pluginName": "all-ios-skills",
+      "installedAt": "2026-07-26T14:22:33.200Z",
+      "updatedAt": "2026-07-26T14:22:33.200Z"
+    },
+    "app-icon": {
+      "source": "melvynx/aiblueprint",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/melvynx/aiblueprint.git",
+      "skillPath": "skills/app-icon/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-07-26T14:43:12.139Z",
+      "updatedAt": "2026-07-26T14:43:12.139Z"
     }
   },
   "dismissed": {

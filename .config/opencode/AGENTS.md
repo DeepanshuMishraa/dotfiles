@@ -139,3 +139,74 @@ Do not use for: refactoring, writing scripts from scratch, debugging business lo
 3. `query-docs` with the selected library ID and the user's full question (not single words)
 4. Answer using the fetched docs
 <!-- context7 -->
+
+## Notifying the user 
+When done with the task/work use this webhook to notify the user.
+
+Configure an integration that sends notifications through this Hark webhook.
+
+Webhook endpoint: https://hark.ryan.ceo/hooks/whk_cCZchGtj6kGdx0zGfcI4M2xFCLtLIb97
+Method: POST
+Header: Content-Type: application/json
+
+Payload JSON Schema:
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "body"
+  ],
+  "properties": {
+    "body": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "description": "Notification message body."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "Optional sender title. Overrides the service default."
+    },
+    "imageUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "maxLength": 2048,
+      "description": "Optional avatar URL. Overrides the service default."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 2048,
+      "description": "Optional destination opened when the notification is tapped."
+    },
+    "deviceIds": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "dev_MOa6r-e1hd6CeIdo"
+        ]
+      },
+      "description": "Optional Hark Pro routing targets. Omit to notify every active registered device."
+    }
+  }
+}
+
+Minimal test request:
+curl -X POST https://hark.ryan.ceo/hooks/whk_cCZchGtj6kGdx0zGfcI4M2xFCLtLIb97 \
+  -H 'Content-Type: application/json' \
+  -H 'Idempotency-Key: unique-event-id' \
+  -d '{ "body": "Deploy finished ✅" }'
+
+Use body for the notification message. title, imageUrl, and url are optional per-request overrides of the service defaults.
+Omit deviceIds to deliver to all devices. Include one or more IDs to route only to those devices.
+
+Registered devices:
+- iPhone: dev_MOa6r-e1hd6CeIdo

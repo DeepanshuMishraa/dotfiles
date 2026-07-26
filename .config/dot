@@ -807,6 +807,69 @@ cmd_push() {
     fi
 }
 
+cmd_status() {
+    __require_no_args status "$@" || return 1
+    __print_header "Dotfiles status"
+
+    local status_output
+    if ! status_output=$(git -C "$DOTFILES_DIR" status --short --branch); then
+        __print_error "Failed to read dotfiles repository status"
+        return 1
+    fi
+
+    echo "$status_output"
+    if [[ -z "$(git -C "$DOTFILES_DIR" status --short)" ]]; then
+        __print_success "No uncommitted dotfile changes"
+    fi
+}
+
+cmd_skill_help() {
+    cat << EOF
+USAGE:
+    ${SCRIPT_NAME} skill add <skill>
+
+COMMANDS:
+    add <skill>    Install a skill with npx skills add
+EOF
+}
+
+cmd_skill() {
+    local subcommand="${1:-help}"
+    shift || true
+
+    case "$subcommand" in
+        add)
+            if [[ $# -eq 1 && ( "$1" == "-h" || "$1" == "--help" ) ]]; then
+                cmd_skill_help
+                return
+            fi
+
+            if [[ $# -ne 1 || -z "$1" || "$1" == -* ]]; then
+                __print_error "Expected one skill identifier"
+                __print_info "Usage: ${SCRIPT_NAME} skill add <skill>"
+                return 2
+            fi
+
+            if ! __command_exists npx; then
+                __print_error "npx is required to install skills"
+                __print_info "Install Node.js before running this command"
+                return 1
+            fi
+
+            __print_header "Installing skill $1"
+            npx skills add "$1"
+            ;;
+        help|-h|--help)
+            cmd_skill_help
+            ;;
+        *)
+            __print_error "Unknown skill command: $subcommand"
+            __print_info "Usage: ${SCRIPT_NAME} skill add <skill>"
+            return 2
+            ;;
+    esac
+}
+
 cmd_doctor() {
     __require_no_args doctor "$@" || return 1
     __print_header "Running diagnostics"
@@ -1019,6 +1082,8 @@ complete -c dot -f
 complete -c dot -n "__fish_use_subcommand" -a "init" -d "Initialize and install dotfiles"
 complete -c dot -n "__fish_use_subcommand" -a "update" -d "Update dotfiles, packages, and pi"
 complete -c dot -n "__fish_use_subcommand" -a "push" -d "Commit and push dotfile changes"
+complete -c dot -n "__fish_use_subcommand" -a "status" -d "Show uncommitted dotfile changes"
+complete -c dot -n "__fish_use_subcommand" -a "skill" -d "Manage agent skills"
 complete -c dot -n "__fish_use_subcommand" -a "doctor" -d "Run diagnostics and check installation"
 complete -c dot -n "__fish_use_subcommand" -a "package" -d "Package management commands"
 complete -c dot -n "__fish_use_subcommand" -a "check-packages" -d "Check which packages are installed/missing"
@@ -1035,6 +1100,10 @@ complete -c dot -n "__fish_use_subcommand" -a "help" -d "Show help message"
 complete -c dot -n "__fish_seen_subcommand_from init" -l "skip-ssh" -d "Skip SSH key generation"
 complete -c dot -n "__fish_use_subcommand" -l "version" -d "Show version information"
 complete -c dot -n "__fish_use_subcommand" -s "h" -l "help" -d "Show help message"
+
+# Skill subcommands
+complete -c dot -n "__fish_seen_subcommand_from skill" -n "not __fish_seen_subcommand_from add help" -a "add" -d "Install a skill"
+complete -c dot -n "__fish_seen_subcommand_from skill" -n "not __fish_seen_subcommand_from add help" -a "help" -d "Show skill help"
 
 # Package subcommands
 complete -c dot -n "__fish_seen_subcommand_from package" -n "not __fish_seen_subcommand_from add remove update list help" -a "add" -d "Add package to bundle and install it"
@@ -2135,6 +2204,12 @@ EOF
         push)
             echo -e "${BOLD}USAGE:${RESET}\n    ${SCRIPT_NAME} push <commit message>\n\nStage dotfiles, check for likely secrets, commit, and push the current branch."
             ;;
+        status)
+            echo -e "${BOLD}USAGE:${RESET}\n    ${SCRIPT_NAME} status\n\nShow the branch and uncommitted files in the dotfiles repository."
+            ;;
+        skill)
+            cmd_skill_help
+            ;;
         doctor)
             echo -e "${BOLD}USAGE:${RESET}\n    ${SCRIPT_NAME} doctor\n\nRun environment diagnostics."
             ;;
@@ -2201,6 +2276,8 @@ cmd_help() {
     echo "    init                Initialize and install dotfiles"
     echo "    update              Update dotfiles, packages, and pi"
     echo "    push MESSAGE        Commit and push dotfile changes"
+    echo "    status              Show uncommitted dotfile changes"
+    echo "    skill               Manage agent skills"
     echo "    doctor              Run diagnostics and check installation"
     echo "    package             Package management commands (add, remove, list)"
     echo "    check-packages      Check which packages are installed/missing"
@@ -2227,6 +2304,8 @@ cmd_help() {
     echo "    ${SCRIPT_NAME} init --skip-ssh           # Initialize without SSH setup"
     echo "    ${SCRIPT_NAME} update                    # Update everything"
     echo "    ${SCRIPT_NAME} push \"Update Fish config\" # Commit and push dotfile changes"
+    echo "    ${SCRIPT_NAME} status                    # Show uncommitted dotfile changes"
+    echo "    ${SCRIPT_NAME} skill add owner/repo@name # Install an agent skill"
     echo "    ${SCRIPT_NAME} doctor                    # Check installation health"
     echo "    ${SCRIPT_NAME} package list              # List all packages"
     echo "    ${SCRIPT_NAME} package add git           # Add git package to base bundle"
@@ -2299,6 +2378,12 @@ main() {
             ;;
         push)
             cmd_push "$@"
+            ;;
+        status)
+            cmd_status "$@"
+            ;;
+        skill)
+            cmd_skill "$@"
             ;;
         doctor)
             cmd_doctor "$@"

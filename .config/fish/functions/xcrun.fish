@@ -1,12 +1,108 @@
-function xcrun --description "Run Apple developer tools or scaffold a SwiftUI app"
+function __xcrun_rebuild
+    set -l rebuild_argv $argv
+
+    if contains -- -h $rebuild_argv; or contains -- --help $rebuild_argv
+        echo "Usage: xcrun rebuild [--scheme NAME] [--configuration NAME] [SCHEME]"
+        echo "Clean and build the current Xcode project without launching it."
+        return
+    end
+
+    argparse 'h/help' 's/scheme=' 'c/configuration=' -- $rebuild_argv
+    or return
+
+    if not command -q xcodebuild; or not command -q jq
+        echo "xcrun rebuild: xcodebuild and jq must be installed and available on PATH" >&2
+        return 1
+    end
+
+    if test (count $rebuild_argv) -gt 1
+        echo "xcrun rebuild: expected at most one scheme name" >&2
+        return 2
+    end
+
+    set -l project_dir $PWD
+    set -l container_args
+    set -l container_name
+
+    while test "$project_dir" != /
+        set -l workspaces $project_dir/*.xcworkspace
+        set -l projects $project_dir/*.xcodeproj
+
+        if test (count $workspaces) -gt 0
+            set container_args -workspace $workspaces[1]
+            set container_name (path change-extension '' (path basename $workspaces[1]))
+            break
+        end
+
+        if test (count $projects) -gt 0
+            set container_args -project $projects[1]
+            set container_name (path change-extension '' (path basename $projects[1]))
+            break
+        end
+
+        set project_dir (path dirname $project_dir)
+    end
+
+    if test (count $container_args) -eq 0
+        echo "xcrun rebuild: no .xcworkspace or .xcodeproj found in this directory or its parents" >&2
+        return 1
+    end
+
+    set -l scheme
+    if set -q _flag_scheme
+        set scheme $_flag_scheme
+    else if test (count $rebuild_argv) -eq 1
+        set scheme $rebuild_argv[1]
+    else
+        set -l schemes (command xcodebuild $container_args -list -json 2>/dev/null |
+            command jq -r '(.workspace.schemes // .project.schemes // [])[]')
+
+        if test (count $schemes) -eq 0
+            echo "xcrun rebuild: no shared schemes found in "(string join ' ' $container_args) >&2
+            return 1
+        end
+
+        if contains -- $container_name $schemes
+            set scheme $container_name
+        else if test (count $schemes) -eq 1
+            set scheme $schemes[1]
+        else if command -q fzf
+            set scheme (printf '%s\n' $schemes | fzf --prompt='Scheme › ' --height=~40% --reverse)
+            or return 130
+        else
+            echo "xcrun rebuild: multiple schemes found; pass one with --scheme NAME" >&2
+            printf '  %s\n' $schemes >&2
+            return 1
+        end
+    end
+
+    set -l configuration Debug
+    if set -q _flag_configuration
+        set configuration $_flag_configuration
+    end
+
+    echo "Cleaning and building '$scheme' ($configuration)…"
+    command xcodebuild $container_args \
+        -scheme $scheme \
+        -configuration $configuration \
+        clean build
+end
+
+function xcrun --description "Run Apple developer tools or manage a SwiftUI app"
     if test (count $argv) -eq 0; or contains -- $argv[1] help -h --help
         echo "Usage: xcrun <command>"
         echo
         echo "Commands:"
         echo "  new [NAME | .]  Scaffold a SwiftUI app"
+        echo "  rebuild [OPTIONS] Clean and build without launching"
         echo "  watch [OPTIONS] Build, launch, and rebuild on changes"
         echo "  help            Show this help"
         return
+    end
+
+    if test "$argv[1]" = rebuild
+        __xcrun_rebuild $argv[2..]
+        return $status
     end
 
     if test "$argv[1]" = watch
