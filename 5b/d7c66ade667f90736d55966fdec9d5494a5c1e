@@ -1,0 +1,43 @@
+.config/fish/functions/xrun.fish
+  s_f2e8a2af28d28a::t_a978219a4211ae 3-9
+  s_f2e8a2af28d28a::t_15f5d7598ec237 1-2,10-136,138-140,142-195,197-198,200-219
+  s_f2e8a2af28d28a::t_fd3e918198ca10 137,141,196,199
+.agents/research/software-engineering-job-market-2026.md
+  s_9a71856de0b4b7::t_38b49022fb4722 1-135
+.agents/.skill-lock.json
+  s_c88bfbf298e735::t_098cbb579ecd82 1326-1334
+.agents/skills/accessibility-audit-ux/SKILL.md
+  s_c88bfbf298e735::t_d5e94ab272bc91 1-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "5bd7c66ade667f90736d55966fdec9d5494a5c1e",
+  "prompts": {},
+  "sessions": {
+    "s_9a71856de0b4b7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9a72-f84f-7fd0-8b54-2a6e3406a56c",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    },
+    "s_c88bfbf298e735": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9ce4-3f60-7480-8d98-95c80cfb3d1c",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    },
+    "s_f2e8a2af28d28a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9e3d-4ddf-7ff0-b5bf-bebd028e0be9",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
