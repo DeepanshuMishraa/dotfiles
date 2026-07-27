@@ -1,0 +1,76 @@
+.agents/skills/golang-tui/references/keymaps.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-333
+.agents/skills/golang-tui/references/view-styling.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-323
+.agents/skills/golang-tui/references/libraries/steep.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-319
+.agents/skills/golang-tui/references/libraries/bubbletea-v2-examples.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-257
+.agents/skills/golang-tui/references/libraries/go-nf.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-230
+.agents/skills/golang-tui/references/model-update.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-353
+.config/dot
+  s_8cdd575b1ffa3b::t_ca7cdd12f6bd94 1594-1598,1600-1604,1613,1615-1624,1626,1629-1631,1635-1647,2137,2139-2140,2176,2184,2194
+  s_8cdd575b1ffa3b::t_0d9e147e62e3f2 1605-1612,1614
+.agents/skills/golang-tui/references/libraries/bubbletint-v2.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-95
+.agents/skills/golang-tui/SKILL.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-169
+.agents/skills/golang-tui/references/images.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-237
+.agents/skills/golang-tui/references/libraries/lipgloss-v2.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-390
+.agents/skills/golang-tui/references/clipboard.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-121
+.agents/skills/golang-tui/references/libraries/bubbles-v2.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-372
+.agents/skills/golang-tui/references/elm-architecture.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-164
+.agents/skills/golang-tui/references/performance.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-252
+.agents/.skill-lock.json
+  s_1d63fd7f0968be::t_a0d9fed684144e 1418-1426
+.agents/skills/golang-tui/references/project-structure.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-156
+.agents/skills/golang-tui/references/configuration.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-71
+.agents/skills/golang-tui/references/exec-external.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-75
+.agents/skills/golang-tui/references/libraries/beeep.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-195
+.agents/skills/golang-tui/references/child-model-composition.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-333
+.agents/skills/golang-tui/references/libraries/bubbletea-v2.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-375
+.agents/skills/golang-tui/references/terminal-standards.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-196
+.agents/skills/golang-tui/references/libraries/chroma-v2.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-105
+.agents/skills/golang-tui/references/troubleshooting.md
+  s_1d63fd7f0968be::t_a0d9fed684144e 1-162
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "d4afc9cf44b466fe144d1c368ab39ca6b68b575a",
+  "prompts": {},
+  "sessions": {
+    "s_1d63fd7f0968be": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fa48e-fb93-7550-bb1e-57ffac5b2d77",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    },
+    "s_8cdd575b1ffa3b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fa4a8-8904-7de2-a34f-508c9bec05b4",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
