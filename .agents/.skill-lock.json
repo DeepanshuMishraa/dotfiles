@@ -1415,6 +1415,15 @@
       "skillFolderHash": "",
       "installedAt": "2026-07-26T14:43:12.139Z",
       "updatedAt": "2026-07-26T14:43:12.139Z"
+    },
+    "golang-tui": {
+      "source": "lrstanley/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/lrstanley/skills.git",
+      "skillPath": "golang-tui/SKILL.md",
+      "skillFolderHash": "dde5f159e2372c4d8d665f44331c5f7de25bedbd9ea0d978207c4c0b3c1eafb5",
+      "installedAt": "2026-07-27T17:15:10.324Z",
+      "updatedAt": "2026-07-27T17:15:10.324Z"
     }
   },
   "dismissed": {

@@ -1591,28 +1591,64 @@ cmd_package() {
 }
 
 cmd_package_add() {
-    local package_name="${1:-}"
-    local package_type="${2:-auto}"
-    local bundle_file="${3:-base}"
-
-    if [[ -z "$package_name" ]]; then
+    if [[ $# -eq 0 ]]; then
         __print_error "Package name required"
-        __print_info "Usage: ${SCRIPT_NAME} package add <package-name> [brew|cask] [base|work]"
+        __print_info "Usage: ${SCRIPT_NAME} package add <package-name>... [brew|cask] [base|work]"
         return 1
     fi
-    if [[ $# -gt 3 ]]; then
-        __print_error "Too many arguments for package add"
+
+    local arguments=("$@")
+    local package_type="auto"
+    local bundle_file="base"
+    local last_index=$((${#arguments[@]} - 1))
+
+    if [[ ${#arguments[@]} -gt 1 ]]; then
+        case "${arguments[$last_index]}" in
+            base|work)
+                bundle_file="${arguments[$last_index]}"
+                unset 'arguments[last_index]'
+                ;;
+        esac
+    fi
+
+    if [[ ${#arguments[@]} -gt 1 ]]; then
+        last_index=$((${#arguments[@]} - 1))
+        case "${arguments[$last_index]}" in
+            brew|cask)
+                package_type="${arguments[$last_index]}"
+                unset 'arguments[last_index]'
+                ;;
+        esac
+    fi
+
+    if [[ ${#arguments[@]} -eq 0 ]]; then
+        __print_error "Package name required"
+        __print_info "Usage: ${SCRIPT_NAME} package add <package-name>... [brew|cask] [base|work]"
         return 1
     fi
+
+    if [[ "$package_type" == "cask" && "$bundle_file" == "work" ]]; then
+        __print_error "Casks must be added to the base bundle"
+        return 1
+    fi
+
+    local status=0
+    local package_name
+    for package_name in "${arguments[@]}"; do
+        cmd_package_add_one "$package_name" "$package_type" "$bundle_file" || status=1
+    done
+    return "$status"
+}
+
+cmd_package_add_one() {
+    local package_name="$1"
+    local package_type="$2"
+    local bundle_file="$3"
 
     local target_bundle
     case "$bundle_file" in
         base) target_bundle="${PACKAGES_DIR}/bundle" ;;
         work) target_bundle="${PACKAGES_DIR}/bundle.work" ;;
-        *)
-            __print_error "Bundle must be 'base' or 'work'"
-            return 1
-            ;;
     esac
     
     # Auto-detect package type if not specified
@@ -1630,16 +1666,6 @@ cmd_package_add() {
         fi
     fi
     
-    # Validate package type and bundle policy
-    if [[ "$package_type" != "brew" && "$package_type" != "cask" ]]; then
-        __print_error "Package type must be 'brew' or 'cask'"
-        return 1
-    fi
-    if [[ "$package_type" == "cask" && "$bundle_file" == "work" ]]; then
-        __print_error "Casks must be added to the base bundle"
-        return 1
-    fi
-
     # Check if package already exists in bundle
     local package_line="${package_type} \"${package_name}\""
     if grep -Fqx -- "$package_line" "$target_bundle" 2>/dev/null; then
@@ -2108,9 +2134,10 @@ __print_package_subcommand_help() {
 
     case "$subcommand" in
         add)
-            echo -e "${BOLD}USAGE:${RESET}\n    ${SCRIPT_NAME} package add NAME [brew|cask] [base|work]"
+            echo -e "${BOLD}USAGE:${RESET}\n    ${SCRIPT_NAME} package add NAME... [brew|cask] [base|work]"
             echo ""
-            echo "Add and install a package. Work bundles accept formulas only."
+            echo "Add and install one or more packages. Type and bundle apply to every package."
+            echo "Work bundles accept formulas only."
             ;;
         remove)
             echo -e "${BOLD}USAGE:${RESET}\n    ${SCRIPT_NAME} package remove NAME [base|work|auto]"
@@ -2146,7 +2173,7 @@ cmd_package_help() {
     echo ""
     
     echo -e "${BOLD}SUBCOMMANDS:${RESET}"
-    echo "    add NAME [TYPE] [BUNDLE]   Add package to bundle and install it"
+    echo "    add NAME... [TYPE] [BUNDLE] Add packages to bundle and install them"
     echo "    remove NAME [BUNDLE]       Remove package from bundle and optionally uninstall"
     echo "    update [NAME] [BUNDLE]     Update packages (all packages by default)"
     echo "    list [BUNDLE]              List packages in bundle files (default)"
@@ -2154,7 +2181,7 @@ cmd_package_help() {
     echo ""
     
     echo -e "${BOLD}PARAMETERS:${RESET}"
-    echo "    NAME                       Package name (required for add/remove, optional for update)"
+    echo "    NAME                       Package name (one or more for add)"
     echo "    TYPE                       Package type: 'brew' or 'cask' (auto-detected if not specified)"
     echo "    BUNDLE                     Bundle file: 'base', 'work', or 'all' (default varies by command)"
     echo ""
@@ -2164,6 +2191,7 @@ cmd_package_help() {
     echo "    ${SCRIPT_NAME} package list base          # List base packages only"
     echo "    ${SCRIPT_NAME} package list work          # List work packages only"
     echo "    ${SCRIPT_NAME} package add git            # Add git formula to base bundle"
+    echo "    ${SCRIPT_NAME} package add git jq ripgrep # Add multiple formulas to base bundle"
     echo "    ${SCRIPT_NAME} package add docker cask    # Add docker cask to base bundle"
     echo "    ${SCRIPT_NAME} package add kubectl brew work  # Add kubectl to work bundle"
     echo "    ${SCRIPT_NAME} package remove git         # Remove git from any bundle"
