@@ -1,0 +1,31 @@
+.agents/skills/context7-mcp/SKILL.md
+  s_63c9679d057b82::t_25483e15c9366c 24,39-41,53-54
+.agents/.skill-lock.json
+  s_63c9679d057b82::t_ecae6e6bfd79a8 1427-1435
+.agents/skills/mobile-app-ui-design/.gitignore
+  s_63c9679d057b82::t_6bda52389b46f2 1-6
+.agents/skills/mobile-app-ui-design/INDEX.md
+  s_63c9679d057b82::t_cb4fc798f99a6f 1-131
+.agents/skills/mobile-app-ui-design/README.md
+  s_63c9679d057b82::t_c8a0453060cc3c 1-135
+.agents/skills/mobile-app-ui-design/SKILL.md
+  s_63c9679d057b82::t_da858a91bd19a7 1-149
+.agents/skills/mobile-app-ui-design/references/industry-conventions.md
+  s_63c9679d057b82::t_f47c93ca4afc9a 1-151
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "94fa94149a83de61f7c4d6257eb09dca57b4de24",
+  "prompts": {},
+  "sessions": {
+    "s_63c9679d057b82": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019faa5d-e792-7423-b7fb-d1d773d73bdd",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
