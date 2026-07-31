@@ -1,0 +1,33 @@
+.config/aerospace-swipe/config.json
+  s_08070aa8532376::t_443aa8cf0f0fb5 6
+  s_08070aa8532376::t_6ed85d1c904ae2 1-5,7
+.config/aerospace/aerospace.toml
+  s_08070aa8532376::t_0ebfd84b0299be 6-10
+  s_08070aa8532376::t_1f9aa4fd3268c7 14-16,77-81,102,104-105,107-111
+.config/opencode/opencode.json
+  s_9dd6a64ae5544c::t_356aa718eecbd4 180-184
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "e748bc1e3ec6aca15413acb1ee1f4b37b3651737",
+  "prompts": {},
+  "sessions": {
+    "s_08070aa8532376": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fba24-7261-7591-8fea-8fc9c5cd5d31",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    },
+    "s_9dd6a64ae5544c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fb27f-efc8-73c1-ab49-537d03a42b27",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
