@@ -933,13 +933,13 @@
       "updatedAt": "2026-06-10T10:59:54.806Z"
     },
     "design-taste-frontend": {
-      "source": "Leonxlnx/taste-skill",
+      "source": "leonxlnx/taste-skill",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/Leonxlnx/taste-skill.git",
+      "sourceUrl": "https://github.com/leonxlnx/taste-skill.git",
       "skillPath": "skills/taste-skill/SKILL.md",
       "skillFolderHash": "a6d128e53b4ec0238baee751dde33bf707adb5ec",
       "installedAt": "2026-06-10T10:59:54.807Z",
-      "updatedAt": "2026-06-10T10:59:54.807Z"
+      "updatedAt": "2026-07-29T21:15:41.161Z"
     },
     "design-taste-frontend-v1": {
       "source": "Leonxlnx/taste-skill",
@@ -1433,6 +1433,69 @@
       "skillFolderHash": "4c67a0e71727b6afaaafbcbb1b11c7660de5fac9",
       "installedAt": "2026-07-29T07:44:47.611Z",
       "updatedAt": "2026-07-29T07:44:47.611Z"
+    },
+    "awwwards-animations": {
+      "source": "devmartinese/awwwards-animations-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/devmartinese/awwwards-animations-skill.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "c92d00b1e09a510120f6d61957ab7cb10d82c14f",
+      "installedAt": "2026-07-29T17:28:29.004Z",
+      "updatedAt": "2026-07-29T17:28:29.004Z"
+    },
+    "color-theory": {
+      "source": "omer-metin/skills-for-antigravity",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/omer-metin/skills-for-antigravity.git",
+      "skillPath": "skills/color-theory/SKILL.md",
+      "skillFolderHash": "2f0e39917943628860fc810b2c8a79993eb72efa",
+      "installedAt": "2026-07-29T21:01:42.911Z",
+      "updatedAt": "2026-07-29T21:01:42.911Z"
+    },
+    "color-theory-palette-harmony-expert": {
+      "source": "erichowens/some_claude_skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/erichowens/some_claude_skills.git",
+      "skillPath": ".claude/skills/color-theory-palette-harmony-expert/SKILL.md",
+      "skillFolderHash": "efaafccca3c5c6f10360f3a04576a0095ccd6a82",
+      "installedAt": "2026-07-29T21:03:35.965Z",
+      "updatedAt": "2026-07-29T21:03:35.965Z"
+    },
+    "font-pairing-suggester": {
+      "source": "onewave-ai/claude-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/onewave-ai/claude-skills.git",
+      "skillPath": "font-pairing-suggester/SKILL.md",
+      "skillFolderHash": "f0210554ba0f1141e7896553ee7ed8acc930a7a8",
+      "installedAt": "2026-07-29T21:07:58.447Z",
+      "updatedAt": "2026-07-29T21:10:57.866Z"
+    },
+    "better-typography": {
+      "source": "jakubkrehel/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/jakubkrehel/skills.git",
+      "skillPath": "skills/better-typography/SKILL.md",
+      "skillFolderHash": "a175046f0135de4056196a8d69e856f1583a9b6e",
+      "installedAt": "2026-07-29T21:08:25.284Z",
+      "updatedAt": "2026-07-29T21:11:00.693Z"
+    },
+    "typography-expert": {
+      "source": "erichowens/some_claude_skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/erichowens/some_claude_skills.git",
+      "skillPath": ".claude/skills/typography-expert/SKILL.md",
+      "skillFolderHash": "5192feeecfa53fcf04ef5262eb48be91c5510f9f",
+      "installedAt": "2026-07-29T21:08:59.347Z",
+      "updatedAt": "2026-07-29T21:11:30.762Z"
+    },
+    "apple-design": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/apple-design/SKILL.md",
+      "skillFolderHash": "e9f5b472dfb28d8cf29f64001b6c01ef94b8168b",
+      "installedAt": "2026-07-29T21:23:51.147Z",
+      "updatedAt": "2026-07-29T21:23:51.147Z"
     }
   },
   "dismissed": {

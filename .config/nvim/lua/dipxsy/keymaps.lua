@@ -182,13 +182,24 @@ vim.keymap.set({ "n", "i" }, "<M-s>", function()
 	if vim.fn.mode() == "i" then
 		vim.cmd("stopinsert")
 	end
+
+	if
+		vim.tbl_contains({ "javascript", "javascriptreact", "typescript", "typescriptreact" }, vim.bo.filetype)
+		and vim.fn.exists(":TSToolsSortImports") == 2
+	then
+		local sorted, sort_error = pcall(vim.cmd, "TSToolsSortImports sync")
+		if not sorted then
+			vim.notify("Could not sort imports before saving: " .. sort_error, vim.log.levels.WARN)
+		end
+	end
+
 	vim.cmd("write")
 	require("conform").format({
 		async = true,
 		timeout_ms = 500,
 		lsp_format = "fallback",
 	})
-end, { desc = "Save and format buffer" })
+end, { desc = "Save, sort imports, and format buffer" })
 
 -- MacOS-style shortcuts
 vim.keymap.set({ "n", "i" }, "<M-a>", "ggVG", { desc = "Select all" })
