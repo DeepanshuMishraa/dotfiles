@@ -1,0 +1,36 @@
+.config/nvim/lua/plugins/lsp.lua
+  s_9db00f3e044563::t_a32ae34d04b59c 55
+.config/nvim/lua/plugins/ipynb.lua
+  s_9db00f3e044563::t_065dbd4c72646e 1-12
+.config/nvim/lua/plugins/oil.lua
+  s_9db00f3e044563::t_08e21753edcf60 8-38,59
+.config/starship.toml
+  s_359c5fb7cfc514::t_1db1e27644a7ec 7,64-65
+  s_359c5fb7cfc514::t_1c45ac51fc8a82 66
+.config/nvim/lazy-lock.json
+  s_9db00f3e044563::t_f6f2351534b40d 13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "557a2b7379fdac8268dcdd6e7cd8897d191076a7",
+  "prompts": {},
+  "sessions": {
+    "s_359c5fb7cfc514": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fba39-fad7-7a30-b63d-8314d538e67a",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    },
+    "s_9db00f3e044563": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fba48-f558-7372-8d80-751963be9ae0",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
