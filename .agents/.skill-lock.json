@@ -1496,6 +1496,15 @@
       "skillFolderHash": "e9f5b472dfb28d8cf29f64001b6c01ef94b8168b",
       "installedAt": "2026-07-29T21:23:51.147Z",
       "updatedAt": "2026-07-29T21:23:51.147Z"
+    },
+    "aerospace-macos-setup": {
+      "source": "arthurzakirov/agentdesk",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/arthurzakirov/agentdesk.git",
+      "skillPath": "skills/aerospace-macos-setup/SKILL.md",
+      "skillFolderHash": "eaf533d02431cfb925f5ab60369fee6f8063da65",
+      "installedAt": "2026-07-31T21:40:59.065Z",
+      "updatedAt": "2026-07-31T21:40:59.065Z"
     }
   },
   "dismissed": {

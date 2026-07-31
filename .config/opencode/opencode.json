@@ -177,5 +177,8 @@
     "herdr": "https://github.com/ogulcancelik/herdr.git",
     "opencode": "https://github.com/anomalyco/opencode"
   },
-  "theme": "vesper"
+  "theme": "vesper",
+  "provider": {
+    "copilot": {}
+  }
 }

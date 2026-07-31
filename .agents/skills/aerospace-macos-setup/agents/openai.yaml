@@ -1,0 +1,4 @@
+interface:
+  display_name: "AeroSpace macOS Setup"
+  short_description: "Configure and debug AeroSpace on macOS"
+  default_prompt: "Use $aerospace-macos-setup to install or debug AeroSpace on macOS, configure monitor hotkeys, and automate binding tests."
