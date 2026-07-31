@@ -177,22 +177,48 @@ vim.keymap.set("n", "<leader>cc", ":cclose<cr>zz", { desc = "Close quickfix list
 vim.keymap.set("n", "<leader>m", ":MaximizerToggle<cr>", { desc = "Toggle window maximization" })
 vim.keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equalize split window sizes" })
 
+local import_sort_filetypes = {
+	javascript = true,
+	javascriptreact = true,
+	typescript = true,
+	typescriptreact = true,
+}
+
+local function sort_imports()
+	if not import_sort_filetypes[vim.bo.filetype] then
+		return
+	end
+
+	local client_attached = vim.wait(2000, function()
+		return #vim.lsp.get_clients({ bufnr = 0, name = "typescript-tools" }) > 0
+	end, 50)
+
+	if not client_attached or vim.fn.exists(":TSToolsSortImports") ~= 2 then
+		vim.notify(
+			"Imports were not sorted because TypeScript Tools is not attached. The file will still be saved.",
+			vim.log.levels.WARN
+		)
+		return
+	end
+
+	local sorted, sort_error = pcall(vim.cmd, "TSToolsSortImports sync")
+	if not sorted then
+		vim.notify(
+			"Imports were not sorted because TypeScript Tools failed: "
+				.. sort_error
+				.. ". The file will still be saved.",
+			vim.log.levels.WARN
+		)
+	end
+end
+
 -- Save + format buffer
 vim.keymap.set({ "n", "i" }, "<M-s>", function()
 	if vim.fn.mode() == "i" then
 		vim.cmd("stopinsert")
 	end
 
-	if
-		vim.tbl_contains({ "javascript", "javascriptreact", "typescript", "typescriptreact" }, vim.bo.filetype)
-		and vim.fn.exists(":TSToolsSortImports") == 2
-	then
-		local sorted, sort_error = pcall(vim.cmd, "TSToolsSortImports sync")
-		if not sorted then
-			vim.notify("Could not sort imports before saving: " .. sort_error, vim.log.levels.WARN)
-		end
-	end
-
+	sort_imports()
 	vim.cmd("write")
 	require("conform").format({
 		async = true,
