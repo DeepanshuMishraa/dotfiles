@@ -1,0 +1,20 @@
+.config/nvim/lua/dipxsy/keymaps.lua
+  s_7da2adba21be14::t_3f6bbdf0cd81ce 185-189,194-195,202
+  s_7da2adba21be14::t_1ed2e4716f3a0f 190-193
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "9dd51c7932e9e93d86167807ce0b9cc53f3eca8d",
+  "prompts": {},
+  "sessions": {
+    "s_7da2adba21be14": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fb685-0121-7200-954d-1e551b474d99",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
