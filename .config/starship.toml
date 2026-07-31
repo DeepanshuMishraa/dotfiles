@@ -4,7 +4,7 @@
 # avoid probing Node in repos that merely contain JS/TS files.
 command_timeout = 2000
 
-format = "$directory$git_branch\n$character"
+format = "$directory$git_branch$python\n$character"
 
 [buf]
 disabled = true
@@ -61,3 +61,6 @@ detect_folders = ["node_modules"]
 
 [package]
 disabled = true
+
+[python]
+format = "( [ $virtualenv](bold yellow))"

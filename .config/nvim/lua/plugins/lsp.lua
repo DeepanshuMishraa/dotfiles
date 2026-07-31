@@ -52,6 +52,7 @@ return {
 				oxlint = {
 					root_markers = { ".oxlintrc.json" },
 				},
+				pyright = {},
 				ocamllsp = {
 					manual_install = true,
 					cmd = { "dune", "exec", "ocamllsp" },
