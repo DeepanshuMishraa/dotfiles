@@ -1,0 +1,19 @@
+.config/aerospace/aerospace.toml
+  s_08070aa8532376::t_b59be117ea7309 17-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "3b6db03b2661efb5eea5e9ca9143e74b266bae25",
+  "prompts": {},
+  "sessions": {
+    "s_08070aa8532376": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fba24-7261-7591-8fea-8fc9c5cd5d31",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
