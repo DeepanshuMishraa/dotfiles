@@ -4,6 +4,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
+			require("hued-live").watch()
 			require("catppuccin").setup({
 				-- float = {
 				-- 	-- transparent = true,

@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "Hued for Web",
+  "description": "Applies the active Hued palette to websites.",
+  "version": "0.2.0",
+  "permissions": [
+    "alarms",
+    "nativeMessaging",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_title": "Hued for Web",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["styles/generic.css"],
+      "js": ["theme-engine.js", "content-script.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://github.com/*"],
+      "css": ["styles/github.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://www.notion.so/*", "https://*.notion.site/*"],
+      "css": ["styles/notion.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://www.linkedin.com/*"],
+      "css": ["styles/linkedin.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://x.com/*", "https://twitter.com/*"],
+      "css": ["styles/x.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://www.youtube.com/*", "https://m.youtube.com/*"],
+      "css": ["styles/youtube.css"],
+      "run_at": "document_start"
+    }
+  ]
+}

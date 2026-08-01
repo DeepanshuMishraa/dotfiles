@@ -1,0 +1,62 @@
+html[data-hued],
+html[data-hued] ytd-app {
+  --yt-spec-base-background: var(--hued-bg) !important;
+  --yt-spec-raised-background: var(--hued-surface-0) !important;
+  --yt-spec-menu-background: var(--hued-surface-0) !important;
+  --yt-spec-inverted-background: var(--hued-text) !important;
+  --yt-spec-additive-background: var(--hued-surface-1) !important;
+  --yt-spec-outline: var(--hued-border) !important;
+  --yt-spec-outline-inverse: var(--hued-muted) !important;
+  --yt-spec-text-primary: var(--hued-text) !important;
+  --yt-spec-text-secondary: var(--hued-muted) !important;
+  --yt-spec-text-disabled: var(--hued-border) !important;
+  --yt-spec-call-to-action: var(--hued-accent) !important;
+  --yt-spec-brand-button-background: var(--hued-accent) !important;
+  --yt-spec-badge-chip-background: var(--hued-surface-1) !important;
+  --yt-spec-10-percent-layer: color-mix(in srgb, var(--hued-text) 10%, transparent) !important;
+}
+
+html[data-hued] :where(
+  body,
+  ytd-app,
+  ytd-page-manager,
+  ytd-watch-flexy,
+  ytd-browse,
+  ytd-two-column-browse-results-renderer,
+  #content.ytd-app
+) {
+  background-color: var(--hued-bg) !important;
+}
+
+html[data-hued] :where(
+  ytd-masthead,
+  #background.ytd-masthead,
+  ytd-mini-guide-renderer,
+  ytd-guide-renderer,
+  tp-yt-paper-dialog,
+  tp-yt-iron-dropdown,
+  ytd-menu-popup-renderer,
+  ytd-multi-page-menu-renderer
+) {
+  background-color: var(--hued-surface-0) !important;
+  border-color: var(--hued-border) !important;
+}
+
+html[data-hued] :where(
+  yt-chip-cloud-chip-renderer,
+  yt-chip-cloud-chip-renderer[chip-style="STYLE_HOME_FILTER"],
+  #search-form.ytd-searchbox,
+  ytd-comment-simplebox-renderer
+) {
+  background-color: var(--hued-surface-1) !important;
+  border-color: var(--hued-border) !important;
+  color: var(--hued-text) !important;
+}
+
+html[data-hued] :where(#video-title, #channel-name, #text.ytd-channel-name, yt-formatted-string) {
+  color: var(--hued-text) !important;
+}
+
+html[data-hued] :where(#metadata-line, #description, #info, #owner-sub-count) {
+  color: var(--hued-muted) !important;
+}

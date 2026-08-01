@@ -1,0 +1,33 @@
+{
+  "name": "gruvbox-light",
+  "palette": {
+    "accent": "#076678",
+    "panel_bg": "#fbf1c7",
+    "surface0": "#ebdbb2",
+    "active_space_bg": "#f2e5bc",
+    "surface1": "#d5c4a1",
+    "surface_dim": "#f2e5bc",
+    "separator": "#f2e5bc",
+    "overlay0": "#928374",
+    "overlay1": "#7c6f64",
+    "text": "#3c3836",
+    "subtext0": "#504945",
+    "mauve": "#8f3f71",
+    "green": "#79740e",
+    "yellow": "#b57614",
+    "red": "#9d0006",
+    "blue": "#076678",
+    "teal": "#427b58",
+    "peach": "#af3a03"
+  },
+  "targets": {
+    "herdr": "gruvbox-light",
+    "pi": "gruvbox-light",
+    "zed": "Gruvbox Light",
+    "tmux_flavour": null,
+    "ghostty_background": "#fbf1c7",
+    "opencode": "gruvbox-light",
+    "hacktui": "flexoki"
+  },
+  "appearance": "light"
+}

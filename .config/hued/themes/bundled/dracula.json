@@ -1,0 +1,33 @@
+{
+  "name": "dracula",
+  "palette": {
+    "accent": "#bd93f9",
+    "panel_bg": "#282a36",
+    "surface0": "#44475a",
+    "active_space_bg": "#282a36",
+    "surface1": "#6272a4",
+    "surface_dim": "#282a36",
+    "separator": "#44475a",
+    "overlay0": "#6272a4",
+    "overlay1": "#828cb4",
+    "text": "#f8f8f2",
+    "subtext0": "#d2d2dc",
+    "mauve": "#ff79c6",
+    "green": "#50fa7b",
+    "yellow": "#f1fa8c",
+    "red": "#ff5555",
+    "blue": "#8be9fd",
+    "teal": "#8be9fd",
+    "peach": "#ffb86c"
+  },
+  "targets": {
+    "herdr": "dracula",
+    "pi": "dracula",
+    "zed": "Dracula",
+    "tmux_flavour": null,
+    "ghostty_background": "#282a36",
+    "opencode": "dracula",
+    "hacktui": "dracula"
+  },
+  "appearance": "dark"
+}

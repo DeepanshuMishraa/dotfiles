@@ -1,0 +1,72 @@
+html[data-hued] {
+  --color-background-canvas: var(--hued-bg) !important;
+  --color-background-container: var(--hued-surface-0) !important;
+  --color-background-container-tint: var(--hued-surface-1) !important;
+  --color-background-container-tint-2: var(--hued-surface-1) !important;
+  --color-background-scrim: color-mix(in srgb, var(--hued-bg) 82%, transparent) !important;
+  --color-text: var(--hued-text) !important;
+  --color-text-low-emphasis: var(--hued-muted) !important;
+  --color-text-low-emphasis-shift: var(--hued-border) !important;
+  --color-action: var(--hued-accent) !important;
+  --color-action-active: var(--hued-accent) !important;
+  --color-action-hover: color-mix(in srgb, var(--hued-accent) 82%, var(--hued-text)) !important;
+  --color-border: var(--hued-border) !important;
+  --voyager-color-background-container-tint-2: var(--hued-surface-1) !important;
+  --voyager-color-background-input-search: var(--hued-surface-0) !important;
+  --voyager-color-action: var(--hued-accent) !important;
+}
+
+html[data-hued] :where(
+  body,
+  .application-outlet,
+  .scaffold-layout,
+  .scaffold-layout-container,
+  .scaffold-layout__main,
+  .scaffold-layout__aside,
+  .authentication-outlet
+) {
+  background-color: var(--hued-bg) !important;
+}
+
+html[data-hued] :where(
+  .global-nav,
+  .global-nav__content,
+  .artdeco-card,
+  .feed-shared-update-v2,
+  .share-box-feed-entry,
+  .comments-container,
+  .artdeco-modal,
+  .artdeco-dropdown__content,
+  .msg-overlay-list-bubble,
+  .msg-overlay-conversation-bubble,
+  [role="dialog"],
+  [role="menu"]
+) {
+  background-color: var(--hued-surface-0) !important;
+  border-color: var(--hued-border) !important;
+}
+
+html[data-hued] :where(
+  input,
+  textarea,
+  .search-global-typeahead__input,
+  .artdeco-button--tertiary,
+  .comments-comment-box__form
+) {
+  background-color: var(--hued-surface-1) !important;
+  color: var(--hued-text) !important;
+}
+
+html[data-hued] :where(.artdeco-button--primary, .artdeco-button--pro) {
+  background-color: var(--hued-accent) !important;
+  border-color: var(--hued-accent) !important;
+  color: var(--hued-bg) !important;
+}
+
+html[data-hued] :where(.t-black, .t-black--light, .text-body-medium, .text-body-small) {
+  color: var(--hued-text) !important;
+}
+
+html[data-hued] :where(.t-black--light, .t-14, time) {
+  color: var(--hued-muted) !important;
+}

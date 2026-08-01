@@ -1,0 +1,33 @@
+{
+  "name": "one-light",
+  "palette": {
+    "accent": "#4078f2",
+    "panel_bg": "#fafafa",
+    "surface0": "#f0f0f1",
+    "active_space_bg": "#f5f5f6",
+    "surface1": "#e5e5e6",
+    "surface_dim": "#f5f5f6",
+    "separator": "#f5f5f6",
+    "overlay0": "#a0a1a7",
+    "overlay1": "#686b77",
+    "text": "#383a42",
+    "subtext0": "#686b77",
+    "mauve": "#a626a4",
+    "green": "#50a14f",
+    "yellow": "#c18401",
+    "red": "#e45649",
+    "blue": "#4078f2",
+    "teal": "#0184bc",
+    "peach": "#986801"
+  },
+  "targets": {
+    "herdr": "one-light",
+    "pi": "one-light",
+    "zed": "One Light",
+    "tmux_flavour": null,
+    "ghostty_background": "#fafafa",
+    "opencode": "one-light",
+    "hacktui": "github"
+  },
+  "appearance": "light"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "one-dark",
+  "palette": {
+    "accent": "#61afef",
+    "panel_bg": "#282c34",
+    "surface0": "#2c313a",
+    "active_space_bg": "#282c34",
+    "surface1": "#3e4451",
+    "surface_dim": "#282c34",
+    "separator": "#2c313a",
+    "overlay0": "#5c6370",
+    "overlay1": "#737a87",
+    "text": "#abb2bf",
+    "subtext0": "#969ca8",
+    "mauve": "#c678dd",
+    "green": "#98c379",
+    "yellow": "#e5c07b",
+    "red": "#e06c75",
+    "blue": "#61afef",
+    "teal": "#56b6c2",
+    "peach": "#d19a66"
+  },
+  "targets": {
+    "herdr": "one-dark",
+    "pi": "one-dark",
+    "zed": "One Dark",
+    "tmux_flavour": null,
+    "ghostty_background": "#282c34",
+    "opencode": "one-dark",
+    "hacktui": "one-dark"
+  },
+  "appearance": "dark"
+}

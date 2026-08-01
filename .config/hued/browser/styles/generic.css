@@ -1,0 +1,69 @@
+html[data-hued] {
+  accent-color: var(--hued-accent) !important;
+  color: var(--hued-text) !important;
+  background-color: var(--hued-bg) !important;
+  scrollbar-color: var(--hued-surface-1) var(--hued-bg) !important;
+}
+
+html[data-hued] body {
+  color: var(--hued-text) !important;
+  background-color: var(--hued-bg) !important;
+}
+
+html[data-hued] :where(a:any-link) {
+  color: var(--hued-accent);
+}
+
+html[data-hued] :where(pre, code, blockquote) {
+  border-color: var(--hued-border);
+}
+
+html[data-hued]::selection,
+html[data-hued] *::selection {
+  color: var(--hued-text) !important;
+  background: var(--hued-surface-1) !important;
+}
+
+html[data-hued] :where(input, textarea, select, button) {
+  accent-color: var(--hued-accent) !important;
+}
+
+html[data-hued] :where(:focus-visible) {
+  outline-color: var(--hued-accent) !important;
+}
+
+html[data-hued] [data-hued-surface="base"] {
+  background-color: var(--hued-bg) !important;
+}
+
+html[data-hued] [data-hued-surface="surface-0"] {
+  background-color: var(--hued-surface-0) !important;
+}
+
+html[data-hued] [data-hued-surface="surface-1"] {
+  background-color: var(--hued-surface-1) !important;
+}
+
+html[data-hued] [data-hued-surface="overlay"] {
+  background-color: color-mix(in srgb, var(--hued-surface-1) 72%, var(--hued-bg)) !important;
+}
+
+html[data-hued] [data-hued-surface="raised"] {
+  background-color: color-mix(in srgb, var(--hued-surface-1) 82%, var(--hued-text)) !important;
+}
+
+html[data-hued] [data-hued-ink="primary"] {
+  color: var(--hued-text) !important;
+}
+
+html[data-hued] [data-hued-ink="muted"] {
+  color: var(--hued-muted) !important;
+}
+
+html[data-hued] [data-hued-ink="faint"] {
+  color: var(--hued-border) !important;
+}
+
+html[data-hued] [data-hued-border] {
+  border-color: var(--hued-border) !important;
+}

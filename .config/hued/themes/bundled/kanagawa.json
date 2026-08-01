@@ -1,0 +1,33 @@
+{
+  "name": "kanagawa",
+  "palette": {
+    "accent": "#7e9cd8",
+    "panel_bg": "#1f1f28",
+    "surface0": "#2a2a37",
+    "active_space_bg": "#1f1f28",
+    "surface1": "#363646",
+    "surface_dim": "#1f1f28",
+    "separator": "#2a2a37",
+    "overlay0": "#727169",
+    "overlay1": "#87867d",
+    "text": "#dcd7ba",
+    "subtext0": "#c8c3aa",
+    "mauve": "#957fb8",
+    "green": "#76946a",
+    "yellow": "#c0a36e",
+    "red": "#c34043",
+    "blue": "#7e9cd8",
+    "teal": "#7fb4ca",
+    "peach": "#ffa066"
+  },
+  "targets": {
+    "herdr": "kanagawa",
+    "pi": "kanagawa",
+    "zed": "Kanagawa",
+    "tmux_flavour": null,
+    "ghostty_background": "#1f1f28",
+    "opencode": "kanagawa",
+    "hacktui": "kanagawa"
+  },
+  "appearance": "dark"
+}

@@ -1,0 +1,9 @@
+html[data-hued] body,
+html[data-hued] #notion-app {
+  --theme--background_primary: var(--hued-bg);
+  --theme--background_secondary: var(--hued-surface-0);
+  --theme--background_tertiary: var(--hued-surface-1);
+  --theme--text_primary: var(--hued-text);
+  --theme--text_secondary: var(--hued-muted);
+  --theme--border_primary: var(--hued-border);
+}

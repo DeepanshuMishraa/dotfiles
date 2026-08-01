@@ -1,0 +1,53 @@
+html[data-hued] {
+  --hued-x-base: var(--hued-bg);
+  --hued-x-card: var(--hued-surface-0);
+  --hued-x-hover: var(--hued-surface-1);
+}
+
+html[data-hued] :where(body, #react-root, main, header[role="banner"] > div) {
+  background-color: var(--hued-x-base) !important;
+  color: var(--hued-text) !important;
+}
+
+html[data-hued] :where(
+  [data-testid="primaryColumn"],
+  [data-testid="sidebarColumn"],
+  [data-testid="cellInnerDiv"] > div,
+  [data-testid="DMDrawer"],
+  [role="dialog"],
+  [role="menu"],
+  [role="listbox"]
+) {
+  background-color: var(--hued-x-card) !important;
+  border-color: var(--hued-border) !important;
+}
+
+html[data-hued] :where(
+  [data-testid="primaryColumn"] > div,
+  [data-testid="sidebarColumn"] > div,
+  [data-testid="tweetTextarea_0RichTextInputContainer"],
+  [data-testid="SearchBox_Search_Input"]
+) {
+  border-color: var(--hued-border) !important;
+}
+
+html[data-hued] :where(
+  [data-testid="tweetButton"],
+  [data-testid="tweetButtonInline"],
+  [data-testid="SideNav_NewTweet_Button"]
+) {
+  background-color: var(--hued-accent) !important;
+  color: var(--hued-bg) !important;
+}
+
+html[data-hued] :where(a[role="link"], [data-testid="UserCell"] a, [data-testid="card.wrapper"] a) {
+  --hued-link-color: var(--hued-accent);
+}
+
+html[data-hued] :where([data-testid="app-bar-close"], [data-testid="Dropdown"], [data-testid="caret"]) {
+  color: var(--hued-muted) !important;
+}
+
+html[data-hued] :where([data-testid="cellInnerDiv"]:hover, [role="menuitem"]:hover) {
+  background-color: var(--hued-x-hover) !important;
+}

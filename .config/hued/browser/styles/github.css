@@ -1,0 +1,55 @@
+html[data-hued],
+html[data-hued] body {
+  --bgColor-default: var(--hued-bg) !important;
+  --bgColor-muted: var(--hued-surface-0) !important;
+  --bgColor-inset: var(--hued-surface-1) !important;
+  --bgColor-emphasis: var(--hued-surface-1) !important;
+  --bgColor-neutral-muted: color-mix(in srgb, var(--hued-surface-1) 72%, transparent) !important;
+  --bgColor-accent-muted: color-mix(in srgb, var(--hued-accent) 18%, transparent) !important;
+  --bgColor-accent-emphasis: var(--hued-accent) !important;
+  --fgColor-default: var(--hued-text) !important;
+  --fgColor-muted: var(--hued-muted) !important;
+  --fgColor-onEmphasis: var(--hued-bg) !important;
+  --fgColor-accent: var(--hued-accent) !important;
+  --borderColor-default: var(--hued-border) !important;
+  --borderColor-muted: var(--hued-surface-0) !important;
+  --borderColor-accent-emphasis: var(--hued-accent) !important;
+  --button-default-bgColor-rest: var(--hued-surface-0) !important;
+  --button-default-bgColor-hover: var(--hued-surface-1) !important;
+  --button-default-borderColor-rest: var(--hued-border) !important;
+  --button-primary-bgColor-rest: var(--hued-green) !important;
+  --button-primary-bgColor-hover: color-mix(in srgb, var(--hued-green) 82%, var(--hued-text)) !important;
+  --button-primary-fgColor-rest: var(--hued-bg) !important;
+  --control-bgColor-rest: var(--hued-surface-0) !important;
+  --control-bgColor-hover: var(--hued-surface-1) !important;
+  --control-borderColor-rest: var(--hued-border) !important;
+  --focus-outlineColor: var(--hued-accent) !important;
+
+  --color-canvas-default: var(--hued-bg) !important;
+  --color-canvas-subtle: var(--hued-surface-0) !important;
+  --color-canvas-inset: var(--hued-surface-1) !important;
+  --color-fg-default: var(--hued-text) !important;
+  --color-fg-muted: var(--hued-muted) !important;
+  --color-fg-subtle: var(--hued-border) !important;
+  --color-border-default: var(--hued-border) !important;
+  --color-border-muted: var(--hued-surface-0) !important;
+  --color-accent-fg: var(--hued-accent) !important;
+  --color-accent-emphasis: var(--hued-accent) !important;
+  --color-accent-muted: color-mix(in srgb, var(--hued-accent) 18%, transparent) !important;
+  --color-neutral-muted: color-mix(in srgb, var(--hued-surface-1) 72%, transparent) !important;
+  --color-btn-bg: var(--hued-surface-0) !important;
+  --color-btn-hover-bg: var(--hued-surface-1) !important;
+  --color-btn-border: var(--hued-border) !important;
+  --color-btn-primary-bg: var(--hued-green) !important;
+  --color-btn-primary-hover-bg: color-mix(in srgb, var(--hued-green) 82%, var(--hued-text)) !important;
+}
+
+html[data-hued] :where(body, .application-main, [data-turbo-body], .AppHeader, .Header) {
+  background-color: var(--hued-bg) !important;
+  color: var(--hued-text) !important;
+}
+
+html[data-hued] :where(.Box, .Popover, .Overlay, .SelectMenu-modal, .dropdown-menu, .feed-item-content) {
+  background-color: var(--hued-surface-0) !important;
+  border-color: var(--hued-border) !important;
+}

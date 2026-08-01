@@ -1,6 +1,6 @@
 # Main settings
 # Current color scheme name
-theme = herdr
+theme = hued
 # Use a single theme or switch with system appearance
 theme_mode = manual
 # Theme applied when system appearance is light
@@ -155,22 +155,22 @@ keybind = ctrl-shift-tab=unbind
 # task.dev_server.command = cargo run
 
 [colors]
-foreground = #dcd7ba
-background = #1f1f28
-cursor = #dcd7ba
-black = #1f1f28
-red = #c34043
-green = #76946a
-yellow = #c0a36e
-blue = #7e9cd8
-magenta = #957fb8
-cyan = #7fb4ca
-white = #dcd7ba
-bright_black = #2a2a37
-bright_red = #c34043
-bright_green = #76946a
-bright_yellow = #c0a36e
-bright_blue = #7e9cd8
-bright_magenta = #957fb8
-bright_cyan = #7fb4ca
-bright_white = #c8c3aa
+foreground = #cdd6f4
+background = #181825
+cursor = #cdd6f4
+black = #1e1e2e
+red = #f38ba8
+green = #a6e3a1
+yellow = #f9e2af
+blue = #89b4fa
+magenta = #cba6f7
+cyan = #94e2d5
+white = #cdd6f4
+bright_black = #313244
+bright_red = #f38ba8
+bright_green = #a6e3a1
+bright_yellow = #f9e2af
+bright_blue = #89b4fa
+bright_magenta = #cba6f7
+bright_cyan = #94e2d5
+bright_white = #a6adc8

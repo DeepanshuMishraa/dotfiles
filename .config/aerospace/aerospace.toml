@@ -3,7 +3,7 @@
 
 config-version = 2
 
-# Highlight the focused window with JankyBorders
+# Highlight the focused windo with JankyBorders
 after-startup-command = [
   'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
 ]
@@ -29,6 +29,7 @@ on-window-detected = [
 # Normalizations keep the tree clean and sane
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
+enable-normalization-bsp-shape = true
 
 # Layout: tiles = grid-like side-by-side
 # Orientation: auto = wide monitors get horizontal, tall get vertical
@@ -45,7 +46,6 @@ automatically-unhide-macos-hidden-apps = true
 
 # Only keep workspaces 1-4 alive
 persistent-workspaces = ["1", "2", "3", "4"]
-
 # Gaps
 [gaps]
 inner.horizontal = 8

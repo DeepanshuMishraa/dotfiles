@@ -1,0 +1,33 @@
+{
+  "name": "catppuccin-latte",
+  "palette": {
+    "accent": "#1e66f5",
+    "panel_bg": "#eff1f5",
+    "surface0": "#ccd0da",
+    "active_space_bg": "#e6e9ef",
+    "surface1": "#bcc0cc",
+    "surface_dim": "#e6e9ef",
+    "separator": "#e6e9ef",
+    "overlay0": "#9ca0b0",
+    "overlay1": "#8c8fa1",
+    "text": "#4c4f69",
+    "subtext0": "#6c6f85",
+    "mauve": "#8839ef",
+    "green": "#40a02b",
+    "yellow": "#df8e1d",
+    "red": "#d20f39",
+    "blue": "#1e66f5",
+    "teal": "#179299",
+    "peach": "#fe640b"
+  },
+  "targets": {
+    "herdr": "catppuccin-latte",
+    "pi": "catppuccin-latte",
+    "zed": "Catppuccin Latte",
+    "tmux_flavour": "latte",
+    "ghostty_background": "#eff1f5",
+    "opencode": "catppuccin-latte",
+    "hacktui": "catppuccin-frappe"
+  },
+  "appearance": "light"
+}

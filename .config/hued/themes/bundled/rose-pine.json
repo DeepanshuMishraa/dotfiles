@@ -1,0 +1,33 @@
+{
+  "name": "rose-pine",
+  "palette": {
+    "accent": "#c4a7e7",
+    "panel_bg": "#191724",
+    "surface0": "#1f1d2e",
+    "active_space_bg": "#191724",
+    "surface1": "#26233a",
+    "surface_dim": "#191724",
+    "separator": "#1f1d2e",
+    "overlay0": "#6e6a86",
+    "overlay1": "#908caa",
+    "text": "#e0def4",
+    "subtext0": "#c8c5dc",
+    "mauve": "#c4a7e7",
+    "green": "#31748f",
+    "yellow": "#f6c177",
+    "red": "#eb6f92",
+    "blue": "#31748f",
+    "teal": "#9ccfd8",
+    "peach": "#ea9a97"
+  },
+  "targets": {
+    "herdr": "rose-pine",
+    "pi": "rose-pine",
+    "zed": "Rosé Pine",
+    "tmux_flavour": null,
+    "ghostty_background": "#191724",
+    "opencode": "rose-pine",
+    "hacktui": "rose-pine"
+  },
+  "appearance": "dark"
+}

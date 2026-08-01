@@ -179,8 +179,8 @@
   },
   "theme": {
     "mode": "system",
-    "light": "herdr light",
-    "dark": "herdr dark"
+    "light": "hued light",
+    "dark": "hued dark"
   },
   "ui_font_family": "Paper Mono",
   "ui_font_size": 17,

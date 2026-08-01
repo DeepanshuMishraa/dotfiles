@@ -1,0 +1,33 @@
+{
+  "name": "gruvbox",
+  "palette": {
+    "accent": "#d79921",
+    "panel_bg": "#282828",
+    "surface0": "#3c3836",
+    "active_space_bg": "#282828",
+    "surface1": "#504945",
+    "surface_dim": "#282828",
+    "separator": "#3c3836",
+    "overlay0": "#928374",
+    "overlay1": "#a89984",
+    "text": "#ebdbb2",
+    "subtext0": "#d5c4a1",
+    "mauve": "#d3869b",
+    "green": "#b8bb26",
+    "yellow": "#fabd2f",
+    "red": "#fb4934",
+    "blue": "#83a598",
+    "teal": "#8ec07c",
+    "peach": "#fe8019"
+  },
+  "targets": {
+    "herdr": "gruvbox",
+    "pi": "gruvbox",
+    "zed": "Gruvbox",
+    "tmux_flavour": null,
+    "ghostty_background": "#282828",
+    "opencode": "gruvbox",
+    "hacktui": "gruvbox"
+  },
+  "appearance": "dark"
+}

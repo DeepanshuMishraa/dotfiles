@@ -10,7 +10,7 @@ font-style-bold-italic = Bold Italic
 font-size = 18
 
 # Background fallback; `theme set` also regenerates the full Ghostty palette.
-background = #1f1f28
+background = #1e1e2e
 
 # Show working directory in subtitle area
 window-subtitle = working-directory
