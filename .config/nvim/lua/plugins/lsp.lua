@@ -90,6 +90,7 @@ return {
 
 			local formatters = {
 				prettierd = {},
+				ruff = {},
 				stylua = {},
 			}
 

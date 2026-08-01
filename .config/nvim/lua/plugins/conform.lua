@@ -42,6 +42,7 @@ return {
 			formatters_by_ft = {
 				astro = { "oxfmt", "biome", "prettierd", stop_after_first = true },
 				javascript = { "oxfmt", "biome", "prettierd", stop_after_first = true },
+				python = { "ruff_format" },
 				typescript = { "oxfmt", "biome", "prettierd", stop_after_first = true },
 				typescriptreact = { "oxfmt", "biome", "prettierd", stop_after_first = true },
 				svelte = { "oxfmt", "prettierd", stop_after_first = true },
@@ -78,6 +79,15 @@ return {
 							"prettier.config.cjs",
 							"prettier.config.mjs",
 						}, {
+							path = ctx.filename,
+							upward = true,
+							stop = vim.uv.os_homedir(),
+						})[1] ~= nil
+					end,
+				},
+				ruff_format = {
+					condition = function(_, ctx)
+						return vim.fs.find({ "pyproject.toml", "ruff.toml", ".ruff.toml" }, {
 							path = ctx.filename,
 							upward = true,
 							stop = vim.uv.os_homedir(),
