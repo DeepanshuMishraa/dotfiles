@@ -1,0 +1,23 @@
+.config/nvim/lua/plugins/lsp.lua
+  s_d2171940ec312e::t_c912081183491e 93
+.config/nvim/lua/plugins/conform.lua
+  s_d2171940ec312e::t_c912081183491e 45,88-90
+  s_d2171940ec312e::t_6515329aada5e3 91-93
+  s_d2171940ec312e::t_71eb0c074b092f 94-96
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "2cede5137c835195238b82733ddd4559d8c76e6b",
+  "prompts": {},
+  "sessions": {
+    "s_d2171940ec312e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fbbed-d805-7a71-91fb-554d2884d6fc",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
