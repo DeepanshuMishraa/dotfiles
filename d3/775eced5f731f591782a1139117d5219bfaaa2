@@ -1,0 +1,262 @@
+.config/hued/docs/web-theming-and-raycast.md
+  s_6430bca88b29ef::t_37e5a4d4831665 1-21
+.config/hued/internal/browser/setup_test.go
+  s_6430bca88b29ef::t_2e233feae2c7d0 1-30,36-38,41-48
+  s_6430bca88b29ef::t_d780ef67e9c77f 31-34
+  s_6430bca88b29ef::t_b3ec64b4880b5a 35,39-40
+.config/hued/internal/adapter/herdr.go
+  s_6430bca88b29ef::t_daa0d8195c16a6 1-41,45-48,50-76
+  s_6430bca88b29ef::t_b08e0adf39f71e 42-44,49
+.config/hued/browser/styles/generic.css
+  s_6430bca88b29ef::t_a5a4e82628bcfe 3-4,6-18
+  s_6430bca88b29ef::t_b1769eb7266830 34-69
+  s_6430bca88b29ef::t_499dd06c753ff8 1-2,5,19-33
+.config/hued/browser/site-adapters.test.js
+  s_6430bca88b29ef::t_fdd1b7e339c962 1-41
+.config/hued/internal/adapter/ghostty_test.go
+  s_6430bca88b29ef::t_9ed041cd3db5c7 1-35,37-73
+  s_6430bca88b29ef::t_4c3acc86921475 36
+.config/hued/browser/styles/github.css
+  s_6430bca88b29ef::t_499dd06c753ff8 55
+  s_6430bca88b29ef::t_7bc0f6e8a4cffe 1-54
+.config/hued/browser/popup.js
+  s_6430bca88b29ef::t_499dd06c753ff8 1-22
+.config/hued/internal/adapter/ghostty.go
+  s_6430bca88b29ef::t_8f8170a3af8fe2 123,147
+  s_6430bca88b29ef::t_4c3acc86921475 48,53-55
+  s_6430bca88b29ef::t_67d4c846703a27 1-47,49-52,56-122,124-146,148-169
+.config/hued/browser/popup.html
+  s_6430bca88b29ef::t_499dd06c753ff8 1-16,18-19
+  s_6430bca88b29ef::t_9ed041cd3db5c7 17
+.config/hued/browser/content-script.js
+  s_6430bca88b29ef::t_f2f6527c906bf0 1-4,51
+  s_6430bca88b29ef::t_499dd06c753ff8 5-33,35-50
+  s_6430bca88b29ef::t_b1769eb7266830 34
+.config/hued/internal/adapter/opencode.go
+  s_6430bca88b29ef::t_daa0d8195c16a6 1-59
+.config/hued/browser/popup.css
+  s_6430bca88b29ef::t_499dd06c753ff8 1-34
+.config/hued/internal/adapter/json.go
+  s_6430bca88b29ef::t_daa0d8195c16a6 1-37
+.config/hued/internal/nativehost/host_test.go
+  s_6430bca88b29ef::t_9ed041cd3db5c7 1-50
+.config/spicetify/config-xpui.ini
+  s_f4e782de0cbaa9::t_218d94400da2af 24
+  s_f4e782de0cbaa9::t_a2ee35bb01b654 21-23
+  s_f4e782de0cbaa9::t_f42f0e8586178a 25-27
+.config/hued/browser/styles/youtube.css
+  s_6430bca88b29ef::t_7bc0f6e8a4cffe 1-62
+.config/hued/go.mod
+  s_6430bca88b29ef::t_c7255fe70bb497 1-3
+.config/spicetify/Extensions/marketplace-shortcut.js
+  s_f4e782de0cbaa9::t_92e53ab6493965 1-24
+.config/hued/internal/adapter/browser.go
+  s_6430bca88b29ef::t_8f8170a3af8fe2 34
+  s_6430bca88b29ef::t_aee408ddb769f9 1-33,35-45
+.config/hued/internal/repository/themes_test.go
+  s_6430bca88b29ef::t_9ed041cd3db5c7 1-3,5-43,53-55,60,63-64
+  s_6430bca88b29ef::t_d91ce918a1a7dd 4,44-52,56-59,61-62
+.config/hued/themes/embed.go
+  s_6430bca88b29ef::t_5480de3158d37d 1-8
+.config/fish/completions/hued.fish
+  s_6430bca88b29ef::t_ca0bf90c534f02 1-19
+.config/hued/internal/adapter/neovim.go
+  s_6430bca88b29ef::t_9bf3fc66c58d12 1-73
+.config/hued/README.md
+  s_6430bca88b29ef::t_d0c49b24519159 1-23,25-32,36-43,45-53,55-61,69-76
+  s_6430bca88b29ef::t_1cdb31147e40dd 24
+  s_6430bca88b29ef::t_e8e50f470b392e 54,65-68
+  s_6430bca88b29ef::t_d780ef67e9c77f 62-63
+  s_6430bca88b29ef::t_b08e0adf39f71e 33,64
+  s_6430bca88b29ef::t_41e5227572b81b 34
+  s_6430bca88b29ef::t_4c3acc86921475 44
+  s_6430bca88b29ef::t_5e7a5326f95cf2 35
+.config/hued/internal/adapter/macos.go
+  s_6430bca88b29ef::t_1cdb31147e40dd 12,14-16,18,38
+  s_6430bca88b29ef::t_48ed4b5d94da72 7,21,23-26,28-30,32,34-37,39-40,42-43,45
+  s_6430bca88b29ef::t_af9b15360683e7 22,31,33,41,44,46-90
+  s_6430bca88b29ef::t_67d4c846703a27 1-6,8-11,13,17,19-20,27,91
+.config/hued/internal/nativehost/host.go
+  s_6430bca88b29ef::t_96ce612afdcb20 1-127
+.config/hued/internal/state/state.go
+  s_6430bca88b29ef::t_aee408ddb769f9 1-44
+.config/nvim/lua/plugins/color-scheme.lua
+  s_6430bca88b29ef::t_9bf3fc66c58d12 7,84
+.config/hued/browser/manifest.json
+  s_6430bca88b29ef::t_499dd06c753ff8 1-4,6,8,10-26,28-37,53-56
+  s_6430bca88b29ef::t_f2f6527c906bf0 9
+  s_6430bca88b29ef::t_af9b15360683e7 7
+  s_6430bca88b29ef::t_b1769eb7266830 5,27,38-52
+.config/hued/browser/README.md
+  s_6430bca88b29ef::t_e8e50f470b392e 3
+  s_6430bca88b29ef::t_b08e0adf39f71e 11
+  s_6430bca88b29ef::t_499dd06c753ff8 1-2,4-10,13-14
+  s_6430bca88b29ef::t_e08b1cbbab27a3 12
+  s_6430bca88b29ef::t_d780ef67e9c77f 15-16
+.config/hued/internal/adapter/raycast.go
+  s_6430bca88b29ef::t_5e7a5326f95cf2 1-28
+.config/hued/internal/domain/result.go
+  s_6430bca88b29ef::t_c7255fe70bb497 1-5,12-18
+  s_6430bca88b29ef::t_0a7c073e6f1530 6-11
+.config/hued/browser/theme-engine.test.js
+  s_6430bca88b29ef::t_fdd1b7e339c962 1-23,25-26
+  s_6430bca88b29ef::t_52bb988c7a8c1e 24
+.config/hued/internal/adapter/termy.go
+  s_6430bca88b29ef::t_9bf3fc66c58d12 1-116
+.config/hued/browser/theme-engine.js
+  s_6430bca88b29ef::t_b1769eb7266830 1-187
+.config/hued/browser/service-worker.js
+  s_6430bca88b29ef::t_499dd06c753ff8 1,3-5,7-17,20-22,45,51-77,84-86,97-98,100-117
+  s_6430bca88b29ef::t_a5a4e82628bcfe 18
+  s_6430bca88b29ef::t_f2f6527c906bf0 23-29,33,35-44,92-95
+  s_6430bca88b29ef::t_af9b15360683e7 2,6,19,46-50,78-83,87-91,96,99
+  s_6430bca88b29ef::t_b1769eb7266830 30-32,34
+  s_6430bca88b29ef::t_136944bf5df1c3 118
+.config/hued/cmd/hued/main.go
+  s_6430bca88b29ef::t_5e7a5326f95cf2 85
+  s_6430bca88b29ef::t_dbf4d980313988 84
+  s_6430bca88b29ef::t_b3ec64b4880b5a 25,40-48
+  s_6430bca88b29ef::t_96ce612afdcb20 1-24,36-39,49-73,80,86-104,106-167,169-172,174-178,183,189-229,231-239,241-244,246-288,290-293
+  s_6430bca88b29ef::t_5ec4f8fbb76248 75,77-79,81-82
+  s_6430bca88b29ef::t_1cdb31147e40dd 74
+  s_6430bca88b29ef::t_0ea1c7fc7d83cd 76,83
+  s_6430bca88b29ef::t_499dd06c753ff8 26-35,105,230,240
+  s_6430bca88b29ef::t_e08b1cbbab27a3 173,245
+  s_6430bca88b29ef::t_20255768bbfc76 168,179-182,184-188,289
+.config/hued/internal/adapter/zed.go
+  s_6430bca88b29ef::t_c3841bd3d6d317 29-31
+  s_6430bca88b29ef::t_9bf3fc66c58d12 1-28,32-99
+.config/hued/internal/adapter/obsidian_test.go
+  s_6430bca88b29ef::t_af9b15360683e7 1-19
+.config/hued/internal/orchestrator/orchestrator.go
+  s_6430bca88b29ef::t_20255768bbfc76 7-8,19-47
+  s_6430bca88b29ef::t_fcec49ee19bcb7 84,86
+  s_6430bca88b29ef::t_67d4c846703a27 1-6,9-18,48-83,85,87-110
+.config/hued/internal/adapter/macos_test.go
+  s_6430bca88b29ef::t_48ed4b5d94da72 1-6,22-23
+  s_6430bca88b29ef::t_af9b15360683e7 7-21
+.config/hued/browser/styles/linkedin.css
+  s_6430bca88b29ef::t_7bc0f6e8a4cffe 1-72
+.config/hued/internal/domain/theme_test.go
+  s_6430bca88b29ef::t_9ed041cd3db5c7 1-30
+.config/hued/internal/adapter/common.go
+  s_6430bca88b29ef::t_daa0d8195c16a6 1-23
+.config/hued/internal/paths/paths.go
+  s_6430bca88b29ef::t_c7255fe70bb497 1-38
+.config/hued/internal/adapter/spotify.go
+  s_6430bca88b29ef::t_dbf4d980313988 1-22,25-26,28-33,45,53,55-61,63-71,73-74,102,104-105
+  s_6430bca88b29ef::t_41e5227572b81b 27,34-44,46-52,54,62,72,75-101,103
+  s_6430bca88b29ef::t_097e5af08b7395 23-24
+.config/hued/internal/adapter/pi.go
+  s_6430bca88b29ef::t_0ea1c7fc7d83cd 1-81
+.config/hued/internal/repository/themes.go
+  s_6430bca88b29ef::t_5480de3158d37d 14,30,44
+  s_6430bca88b29ef::t_aee408ddb769f9 1-13,15-29,31-43,45-118
+.config/hued/internal/adapter/obsidian.go
+  s_6430bca88b29ef::t_0ea1c7fc7d83cd 1-132,134,136-139
+  s_6430bca88b29ef::t_af9b15360683e7 133,135
+.config/hued/internal/adapter/adapter.go
+  s_6430bca88b29ef::t_aee408ddb769f9 1-19
+.config/hued/internal/adapter/tmux.go
+  s_6430bca88b29ef::t_9bf3fc66c58d12 1-49
+.config/hued/internal/orchestrator/orchestrator_test.go
+  s_6430bca88b29ef::t_fcec49ee19bcb7 1-14,17-27,31-46
+  s_6430bca88b29ef::t_c135593204c4ff 15-16,28-30
+.config/hued/internal/domain/theme.go
+  s_6430bca88b29ef::t_0a7c073e6f1530 40-46
+  s_6430bca88b29ef::t_c7255fe70bb497 1-39,47-82,84-90,125
+  s_6430bca88b29ef::t_8f8170a3af8fe2 83,91-124
+.config/hued/browser/styles/x.css
+  s_6430bca88b29ef::t_7bc0f6e8a4cffe 1-53
+.config/hued/internal/files/atomic.go
+  s_6430bca88b29ef::t_c7255fe70bb497 1-39
+.config/hued/internal/browser/setup.go
+  s_6430bca88b29ef::t_b3ec64b4880b5a 23,37
+  s_6430bca88b29ef::t_d780ef67e9c77f 54-56
+  s_6430bca88b29ef::t_96ce612afdcb20 1-22,24-36,38-53,57-64
+.config/hued/internal/adapter/text.go
+  s_6430bca88b29ef::t_aee408ddb769f9 1-17
+.config/hued/internal/adapter/spotify_test.go
+  s_6430bca88b29ef::t_dbf4d980313988 1-8,11,13,28-29
+  s_6430bca88b29ef::t_41e5227572b81b 9-10,12,14-27
+.config/nvim/lua/hued-live.lua
+  s_6430bca88b29ef::t_9bf3fc66c58d12 1,4-5,7-10,13-16,20-31,33-35
+  s_6430bca88b29ef::t_9f3605c9ee7109 11,18-19
+  s_6430bca88b29ef::t_ae830039306737 2-3,6,12,17,32
+.config/hued/browser/styles/notion.css
+  s_6430bca88b29ef::t_499dd06c753ff8 1-9
+.config/hued/themes/bundled/catppuccin-latte.json
+  s_6430bca88b29ef::t_05b152cd40f0f1 1-33
+.config/hued/themes/bundled/catppuccin-macchiato.json
+  s_6430bca88b29ef::t_ae27485825ed00 1-33
+.config/hued/themes/bundled/catppuccin-mocha.json
+  s_6430bca88b29ef::t_3c365213407ed7 1-33
+.config/hued/themes/bundled/catppuccin.json
+  s_6430bca88b29ef::t_7840a65b42a678 1-33
+.config/hued/themes/bundled/dracula.json
+  s_6430bca88b29ef::t_d77a901497b42c 1-33
+.config/hued/themes/bundled/gruvbox-light.json
+  s_6430bca88b29ef::t_336118a3acc02c 1-33
+.config/hued/themes/bundled/gruvbox.json
+  s_6430bca88b29ef::t_2204e38a2147ac 1-33
+.config/hued/themes/bundled/kanagawa-lotus.json
+  s_6430bca88b29ef::t_bd065b54ab46d0 1-33
+.config/hued/themes/bundled/kanagawa.json
+  s_6430bca88b29ef::t_7c0dd8ee083b8d 1-33
+.config/hued/themes/bundled/nord.json
+  s_6430bca88b29ef::t_76cc9b138b0a39 1-33
+.config/hued/themes/bundled/one-dark.json
+  s_6430bca88b29ef::t_94ea5ea2411839 1-33
+.config/hued/themes/bundled/one-light.json
+  s_6430bca88b29ef::t_0ae48269580a34 1-33
+.config/hued/themes/bundled/rose-pine-dawn.json
+  s_6430bca88b29ef::t_7b99c673e2fdc0 1-33
+.config/hued/themes/bundled/rose-pine.json
+  s_6430bca88b29ef::t_7bb0d45fbe6477 1-33
+.config/hued/themes/bundled/solarized-light.json
+  s_6430bca88b29ef::t_e5df6ce22ad02a 1-33
+.config/hued/themes/bundled/solarized.json
+  s_6430bca88b29ef::t_ae9e409eee1003 1-33
+.config/hued/themes/bundled/terminal.json
+  s_6430bca88b29ef::t_71502ac0df7bd8 1-33
+.config/hued/themes/bundled/tokyo-night-day.json
+  s_6430bca88b29ef::t_1670f20b33f874 1-33
+.config/hued/themes/bundled/tokyo-night.json
+  s_6430bca88b29ef::t_6ebbe725367f84 1-33
+.config/hued/themes/bundled/vesper.json
+  s_6430bca88b29ef::t_20858f2a528437 1-33
+.config/spicetify/CustomApps/marketplace/README.md
+  s_6430bca88b29ef::t_8ddc8a5e0fc509 1-35
+.config/spicetify/CustomApps/marketplace/extension.js
+  s_6430bca88b29ef::t_d6a84d0df5dc41 1-10
+.config/spicetify/CustomApps/marketplace/index.js
+  s_6430bca88b29ef::t_9be77baa4c32ec 1-180
+.config/spicetify/CustomApps/marketplace/manifest.json
+  s_6430bca88b29ef::t_1a9326a21c04df 1-12
+.config/spicetify/CustomApps/marketplace/style.css
+  s_6430bca88b29ef::t_d48588e586935f 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "d3775eced5f731f591782a1139117d5219bfaaa2",
+  "prompts": {},
+  "sessions": {
+    "s_6430bca88b29ef": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fbcdd-a548-7e33-82d2-aae347766d94",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    },
+    "s_f4e782de0cbaa9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fbcae-f587-7f63-a1be-11fd90af1869",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
