@@ -14,6 +14,16 @@ start-at-login = true
 # Apply future config edits immediately
 auto-reload-config = true
 
+# Keep utility and capture apps out of the tiling tree
+on-window-detected = [
+  { if = 'test %{app-bundle-id} = com.objective-see.lulu.app', run = 'layout floating' },
+  { if = 'test %{app-bundle-id} = com.timpler.screenstudio', run = 'layout floating' },
+  { if = 'test %{app-bundle-id} = cc.ffitch.shottr', run = 'layout floating' },
+  { if = 'test %{app-bundle-id} = com.apple.calculator', run = 'layout floating' },
+  { if = 'test %{app-bundle-id} = co.meldstudio.MeldStudio', run = 'layout floating' },
+  { if = 'test %{app-bundle-id} = com.apple.finder', run = 'layout floating' },
+]
+
 # Normalizations keep the tree clean and sane
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
