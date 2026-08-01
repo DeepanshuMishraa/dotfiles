@@ -22,6 +22,8 @@ on-window-detected = [
   { if = 'test %{app-bundle-id} = com.apple.calculator', run = 'layout floating' },
   { if = 'test %{app-bundle-id} = co.meldstudio.MeldStudio', run = 'layout floating' },
   { if = 'test %{app-bundle-id} = com.apple.finder', run = 'layout floating' },
+  { if = 'test %{app-bundle-id} = ru.keepcoder.Telegram', run = 'layout floating' },
+
 ]
 
 # Normalizations keep the tree clean and sane
