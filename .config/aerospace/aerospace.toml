@@ -44,8 +44,21 @@ on-focused-monitor-changed = []
 # Disable macOS "Hide application" (cmd-h) since it's useless with a tiling WM
 automatically-unhide-macos-hidden-apps = true
 
-# Only keep workspaces 1-4 alive
-persistent-workspaces = ["1", "2", "3", "4"]
+# Keep numbered workspaces available even when empty
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8"]
+
+# Reserve workspace 1 for the built-in display and use the external display
+# for the remaining workspaces whenever it is connected.
+[workspace-to-monitor-force-assignment]
+1 = 'Built-in Retina Display'
+2 = 'EK221Q E3'
+3 = 'EK221Q E3'
+4 = 'EK221Q E3'
+5 = 'EK221Q E3'
+6 = 'EK221Q E3'
+7 = 'EK221Q E3'
+8 = 'EK221Q E3'
+
 # Gaps
 [gaps]
 inner.horizontal = 8
@@ -85,12 +98,20 @@ alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
 alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
 
 # Move window to workspace (same hand position as workspace switching)
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
 alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
 
 # Disable macOS "Hide" shortcuts (useless with a tiling WM)
 cmd-h = []

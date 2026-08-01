@@ -1,0 +1,90 @@
+# This is a demo config to showcase some of the most important commands.
+# It is meant to be changed and configured, as it is intentionally kept sparse.
+# For a (much) more advanced configuration example see my dotfiles:
+# https://github.com/FelixKratz/dotfiles
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+
+##### Bar Appearance #####
+# https://felixkratz.github.io/SketchyBar/config/bar
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
+sketchybar --bar position=top \
+           display=all \
+           show_in_fullscreen=on \
+           margin=4 \
+           y_offset=4 \
+           corner_radius=6 \
+           height=24 \
+           color=0x40000000
+
+##### Defaults #####
+# https://felixkratz.github.io/SketchyBar/config/items
+
+default=(
+  padding_left=0
+  padding_right=4
+  icon.font="Hack Nerd Font:Bold:14.0"
+  label.font="Hack Nerd Font:Bold:10.0"
+  icon.color=0xffffffff
+  label.color=0xffffffff
+  icon.padding_left=0
+  icon.padding_right=0
+  label.padding_left=4
+  label.padding_right=5
+)
+sketchybar --default "${default[@]}"
+
+
+
+# LEFT: AEROSPACE STUFF
+sketchybar --add event aerospace_workspace_change
+
+for sid in $(aerospace list-workspaces --all); do
+    sketchybar --add item space.$sid left \
+        --subscribe space.$sid aerospace_workspace_change \
+        --set space.$sid \
+        background.color=0x33ffffff \
+        background.corner_radius=4 \
+        background.height=20 \
+        background.drawing=off \
+        label="$sid" \
+        click_script="aerospace workspace $sid" \
+        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+done
+
+sketchybar --add item front_app left \
+           --subscribe front_app front_app_switched \
+           --set front_app icon.drawing=off \
+                           script="$PLUGIN_DIR/front_app.sh"
+
+
+# CENTER:
+#sketchybar --add item clock center \
+#           --set clock update_freq=10  script="$PLUGIN_DIR/clock.sh"
+
+
+# RIGHT:
+# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
+# https://felixkratz.github.io/SketchyBar/config/events
+
+sketchybar --add item wifi right \
+           --subscribe wifi wifi_change system_woke \
+           --set wifi update_freq=30 \
+                      script="$PLUGIN_DIR/wifi.sh" \
+           --add item volume right \
+           --subscribe volume volume_change \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+           --add item battery right \
+           --subscribe battery power_source_change system_woke \
+           --set battery update_freq=120 \
+                         script="$PLUGIN_DIR/battery.sh" \
+           --add item clock right \
+           --set clock update_freq=10 \
+                       icon="" \
+                       script="$PLUGIN_DIR/clock.sh"
+
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update
