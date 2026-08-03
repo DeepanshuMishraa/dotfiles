@@ -3,6 +3,14 @@
 # The volume_change event supplies a $INFO variable in which the current volume
 # percentage is passed to the script.
 
+CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}"
+
+if [ "$SENDER" = "mouse.exited.global" ]; then
+  sketchybar --set "$NAME" popup.drawing=off
+  "$CONFIG_DIR/plugins/popup_dismiss.sh" stop "$NAME"
+  exit 0
+fi
+
 if [ "$SENDER" = "volume_change" ] && [ -n "$INFO" ]; then
   VOLUME="$INFO"
 else

@@ -113,7 +113,65 @@ sketchybar --add item clock right \
                        label.font="$FONT:Bold:10.0" \
                        label.padding_right=1 \
                        update_freq=1 \
-                       script="$PLUGIN_DIR/clock.sh"
+                       script="$PLUGIN_DIR/clock.sh" \
+                       click_script="$PLUGIN_DIR/calendar_popup.sh toggle" \
+                       popup.align=right \
+                       popup.height=22 \
+                       popup.y_offset=4 \
+                       popup.background.color=0xf0${BG_BASE:2} \
+                       popup.background.corner_radius=10 \
+                       popup.background.border_width=1 \
+                       popup.background.border_color=0x40${FG_DIM:2} \
+                       popup.background.shadow.drawing=off \
+           --subscribe clock mouse.exited.global
+
+calendar_popup_items=(
+  "calendar.title:󰃭"
+  "calendar.weekdays:"
+  "calendar.week.1:"
+  "calendar.week.2:"
+  "calendar.week.3:"
+  "calendar.week.4:"
+  "calendar.week.5:"
+  "calendar.week.6:"
+  "calendar.open:󰒓"
+)
+for item in "${calendar_popup_items[@]}"; do
+  IFS=: read -r name icon <<< "$item"
+  sketchybar --add item "$name" popup.clock \
+             --set "$name" icon="$icon" \
+                           icon.font="$ICON_FONT:Regular:11.0" \
+                           icon.color=0xff${ACCENT:2} \
+                           icon.padding_left=8 \
+                           icon.padding_right=5 \
+                           label.font="$FONT:Regular:10.0" \
+                           label.color=0xff${FG_PRIMARY:2} \
+                           label.width=174 \
+                           label.align=center \
+                           label.padding_left=0 \
+                           label.padding_right=0 \
+                           width=190 \
+                           padding_left=0 \
+                           padding_right=0 \
+                           background.drawing=off \
+                           background.shadow.drawing=off
+done
+sketchybar --set calendar.title label.font="$FONT:Bold:10.0" \
+                                      label.padding_left=0 \
+                                      background.drawing=on \
+                                      background.color=0x40${BG_SURFACE:2} \
+                                      background.corner_radius=6 \
+                                      background.height=20 \
+           --set calendar.weekdays label.color=0xff${FG_SECONDARY:2} \
+                                        label.font="$FONT:Bold:10.0" \
+           --set calendar.open label="Open Calendar…" \
+                                     label.align=left \
+                                     label.width=154 \
+                                     background.drawing=on \
+                                     background.color=0x40${BG_SURFACE:2} \
+                                     background.corner_radius=6 \
+                                     background.height=20 \
+                                     click_script="$PLUGIN_DIR/calendar_popup.sh open"
 
 sketchybar --add item sep.right1 right \
            --set sep.right1 icon= \
@@ -133,7 +191,43 @@ sketchybar --add item battery right \
                          label.padding_right=1 \
                          update_freq=60 \
                          script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery system_woke power_source_change
+                         click_script="$PLUGIN_DIR/battery_popup.sh toggle" \
+                         popup.align=right \
+                         popup.height=24 \
+                         popup.y_offset=4 \
+                         popup.background.color=0xf0${BG_BASE:2} \
+                         popup.background.corner_radius=10 \
+                         popup.background.border_width=1 \
+                         popup.background.border_color=0x40${FG_DIM:2} \
+                         popup.background.shadow.drawing=off \
+           --subscribe battery system_woke power_source_change mouse.exited.global
+
+battery_popup_items=(
+  "battery.charge:󰁹:Charge"
+  "battery.source:󰚥:Power Source"
+  "battery.health:󰄬:Battery Health"
+  "battery.cycles:󰑓:Cycle Count"
+  "battery.settings:󰒓:Battery Settings…"
+)
+for item in "${battery_popup_items[@]}"; do
+  IFS=: read -r name icon label <<< "$item"
+  sketchybar --add item "$name" popup.battery \
+             --set "$name" icon="$icon" \
+                           icon.font="$ICON_FONT:Regular:11.0" \
+                           icon.color=0xff${ACCENT:2} \
+                           icon.padding_left=8 \
+                           icon.padding_right=5 \
+                           label="$label" \
+                           label.font="$FONT:Regular:10.0" \
+                           label.color=0xff${FG_PRIMARY:2} \
+                           label.padding_left=0 \
+                           label.padding_right=9 \
+                           background.color=0x40${BG_SURFACE:2} \
+                           background.corner_radius=6 \
+                           background.height=20 \
+                           background.shadow.drawing=off
+done
+sketchybar --set battery.settings click_script="$PLUGIN_DIR/battery_popup.sh settings"
 
 sketchybar --add item wifi right \
            --set wifi icon=󰖩 \
@@ -145,7 +239,44 @@ sketchybar --add item wifi right \
                       label.padding_right=1 \
                       update_freq=30 \
                       script="$PLUGIN_DIR/wifi.sh" \
-           --subscribe wifi wifi_change system_woke
+                      click_script="$PLUGIN_DIR/wifi_popup.sh toggle" \
+                      popup.align=right \
+                      popup.height=24 \
+                      popup.y_offset=4 \
+                      popup.background.color=0xf0${BG_BASE:2} \
+                      popup.background.corner_radius=10 \
+                      popup.background.border_width=1 \
+                      popup.background.border_color=0x40${FG_DIM:2} \
+                      popup.background.shadow.drawing=off \
+           --subscribe wifi wifi_change system_woke mouse.exited.global
+
+wifi_popup_items=(
+  "wifi.connection:󰖩:Wi-Fi"
+  "wifi.signal:󰤨:Signal"
+  "wifi.address:󰩟:IP Address"
+  "wifi.toggle:󰐥:Toggle Wi-Fi"
+  "wifi.settings:󰒓:Network Settings…"
+)
+for item in "${wifi_popup_items[@]}"; do
+  IFS=: read -r name icon label <<< "$item"
+  sketchybar --add item "$name" popup.wifi \
+             --set "$name" icon="$icon" \
+                           icon.font="$ICON_FONT:Regular:11.0" \
+                           icon.color=0xff${ACCENT:2} \
+                           icon.padding_left=8 \
+                           icon.padding_right=5 \
+                           label="$label" \
+                           label.font="$FONT:Regular:10.0" \
+                           label.color=0xff${FG_PRIMARY:2} \
+                           label.padding_left=0 \
+                           label.padding_right=9 \
+                           background.color=0x40${BG_SURFACE:2} \
+                           background.corner_radius=6 \
+                           background.height=20 \
+                           background.shadow.drawing=off
+done
+sketchybar --set wifi.toggle click_script="$PLUGIN_DIR/wifi_popup.sh power" \
+           --set wifi.settings click_script="$PLUGIN_DIR/wifi_popup.sh settings"
 
 sketchybar --add item sep.right2 right \
            --set sep.right2 icon= \
@@ -164,7 +295,59 @@ sketchybar --add item volume right \
                         label.font="$FONT:Regular:10.0" \
                         label.padding_right=1 \
                         script="$PLUGIN_DIR/volume.sh" \
-           --subscribe volume volume_change
+                        click_script="$PLUGIN_DIR/volume_popup.sh toggle" \
+                        popup.align=right \
+                        popup.height=24 \
+                        popup.y_offset=4 \
+                        popup.background.color=0xf0${BG_BASE:2} \
+                        popup.background.corner_radius=10 \
+                        popup.background.border_width=1 \
+                        popup.background.border_color=0x40${FG_DIM:2} \
+                        popup.background.shadow.drawing=off \
+           --subscribe volume volume_change mouse.exited.global
+
+sketchybar --add slider volume.slider popup.volume 130 \
+           --set volume.slider slider.percentage=50 \
+                               slider.highlight_color=0xff${ACCENT:2} \
+                               slider.background.color=0x50${FG_DIM:2} \
+                               slider.background.height=4 \
+                               slider.knob=● \
+                               slider.knob.font="$FONT:Bold:10.0" \
+                               slider.knob.color=0xff${FG_PRIMARY:2} \
+                               padding_left=10 \
+                               padding_right=10 \
+                               background.color=0x40${BG_SURFACE:2} \
+                               background.corner_radius=6 \
+                               background.height=20 \
+                               script="$PLUGIN_DIR/volume_popup.sh" \
+           --subscribe volume.slider mouse.clicked volume_change
+
+volume_popup_items=(
+  "volume.output:󰓃:Output"
+  "volume.mute:󰖁:Mute"
+  "volume.settings:󰒓:Sound Settings…"
+)
+for item in "${volume_popup_items[@]}"; do
+  IFS=: read -r name icon label <<< "$item"
+  sketchybar --add item "$name" popup.volume \
+             --set "$name" icon="$icon" \
+                           icon.font="$ICON_FONT:Regular:11.0" \
+                           icon.color=0xff${ACCENT:2} \
+                           icon.padding_left=8 \
+                           icon.padding_right=5 \
+                           label="$label" \
+                           label.font="$FONT:Regular:10.0" \
+                           label.color=0xff${FG_PRIMARY:2} \
+                           label.padding_left=0 \
+                           label.padding_right=9 \
+                           background.color=0x40${BG_SURFACE:2} \
+                           background.corner_radius=6 \
+                           background.height=20 \
+                           background.shadow.drawing=off
+done
+sketchybar --set volume.output click_script="$PLUGIN_DIR/volume_popup.sh output" \
+           --set volume.mute click_script="$PLUGIN_DIR/volume_popup.sh mute" \
+           --set volume.settings click_script="$PLUGIN_DIR/volume_popup.sh settings"
 
 MUSIC_EVENT="com.apple.Music.playerInfo"
 sketchybar --add event music_change "$MUSIC_EVENT"
@@ -174,7 +357,7 @@ sketchybar --add item music right \
                        icon.color=0x80${FG_DIM:2} \
                        label.drawing=off \
                        script="$PLUGIN_DIR/music.sh" \
-                       click_script="sketchybar --set music popup.drawing=toggle" \
+                       click_script="$PLUGIN_DIR/music_popup.sh toggle" \
                        popup.horizontal=on \
                        popup.align=center \
                        popup.background.color=0xf0${BG_BASE:2} \
@@ -182,7 +365,7 @@ sketchybar --add item music right \
                        popup.background.border_width=1 \
                        popup.background.border_color=0x40${FG_DIM:2} \
                        popup.background.shadow.drawing=off \
-           --subscribe music music_change mouse.clicked
+           --subscribe music music_change mouse.clicked mouse.exited.global
 
 sketchybar --add item music.track popup.music \
            --set music.track icon.drawing=off \

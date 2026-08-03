@@ -12,7 +12,17 @@ if [ -r "$CONFIG_DIR/colors.sh" ]; then
   . "$CONFIG_DIR/colors.sh"
 fi
 
-WIFI="$(ipconfig getsummary en0 | awk -F ' SSID : ' '/ SSID : / {print $2}')"
+if [ "$SENDER" = "mouse.exited.global" ]; then
+  sketchybar --set "$NAME" popup.drawing=off
+  "$CONFIG_DIR/plugins/popup_dismiss.sh" stop "$NAME"
+  exit 0
+fi
+
+WIFI="$("$CONFIG_DIR/plugins/wifi_ssid.sh" 2>/dev/null)"
+if [ -z "$WIFI" ]; then
+  WIFI="$(ipconfig getsummary en0 | awk -F ' SSID : ' '/ SSID : / {print $2}')"
+fi
+[ "$WIFI" = "<redacted>" ] && WIFI=""
 
 if [ -n "$WIFI" ]; then
   RSSI="${SKETCHYBAR_WIFI_RSSI:-$(osascript -l JavaScript \

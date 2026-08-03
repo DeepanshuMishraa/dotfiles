@@ -1,5 +1,7 @@
 #!/bin/sh
 
+CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}"
+
 update() {
   RUNNING="$(osascript -e 'application "Music" is running')"
   if [ "$RUNNING" = "false" ]; then
@@ -54,7 +56,10 @@ shuffle() {
   update
 }
 
-if [ "$SENDER" = "mouse.clicked" ]; then
+if [ "$SENDER" = "mouse.exited.global" ]; then
+  sketchybar --set music popup.drawing=off
+  "$CONFIG_DIR/plugins/popup_dismiss.sh" stop music
+elif [ "$SENDER" = "mouse.clicked" ]; then
   case "$NAME" in
     music.next) next ;;
     music.back) back ;;
@@ -62,6 +67,9 @@ if [ "$SENDER" = "mouse.clicked" ]; then
     music.shuffle) shuffle ;;
     music.repeat) repeat ;;
   esac
+  sleep 0.1
+  sketchybar --set music popup.drawing=on
+  "$CONFIG_DIR/plugins/popup_dismiss.sh" start music >/dev/null 2>&1 &
 else
   update
 fi
