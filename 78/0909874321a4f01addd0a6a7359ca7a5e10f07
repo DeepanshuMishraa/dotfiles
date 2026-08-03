@@ -1,0 +1,76 @@
+.config/sketchybar/plugins/wifi_ssid.sh
+  s_128a50b25803bb::t_c7fcbfc416f92e 1-20
+.config/sketchybar/helpers/WiFiSSID-Info.plist
+  s_128a50b25803bb::t_c7fcbfc416f92e 1-18
+.config/sketchybar/sketchybarrc
+  s_128a50b25803bb::t_c7fcbfc416f92e 116-148,157-160,165-167,174,298-350
+  s_128a50b25803bb::t_6268147d21956b 149,153,169
+  s_128a50b25803bb::t_c9d6aa92690296 360,368
+  s_128a50b25803bb::t_c9bfe7ad1ce92c 194-230,242-279
+  s_128a50b25803bb::t_67c99a80175f48 150-152,154-156,161-164,168,170-173
+.config/sketchybar/plugins/wifi.sh
+  s_128a50b25803bb::t_c9d6aa92690296 17
+  s_128a50b25803bb::t_c7fcbfc416f92e 21-25
+  s_128a50b25803bb::t_c9bfe7ad1ce92c 15-16,18-20
+.config/sketchybar/plugins/popup_dismiss.sh
+  s_128a50b25803bb::t_67c99a80175f48 1-28,32-40,42-45
+  s_128a50b25803bb::t_6768f76ca04403 41
+  s_128a50b25803bb::t_c9d6aa92690296 29-31
+.config/sketchybar/helpers/WiFiSSID.swift
+  s_128a50b25803bb::t_c7fcbfc416f92e 1-50
+.config/sketchybar/plugins/battery_popup.sh
+  s_128a50b25803bb::t_c9bfe7ad1ce92c 1-2,5-32,45-47,50-51
+  s_128a50b25803bb::t_c9d6aa92690296 3-4,37-44,48
+  s_128a50b25803bb::t_44bf5a78c6a8db 49
+  s_128a50b25803bb::t_99e9e86b7e3840 33-36
+.config/sketchybar/plugins/clock.sh
+  s_128a50b25803bb::t_c7fcbfc416f92e 9-10,12-14
+  s_128a50b25803bb::t_f7609ffb5260f9 7-8
+  s_128a50b25803bb::t_67c99a80175f48 11
+.config/sketchybar/helpers/PopupDismiss.swift
+  s_128a50b25803bb::t_67c99a80175f48 2-10,12-20,29-30
+  s_128a50b25803bb::t_f7609ffb5260f9 25-26
+  s_128a50b25803bb::t_6268147d21956b 1,11,21-24,27-28,31-36
+.config/sketchybar/plugins/music.sh
+  s_128a50b25803bb::t_c9d6aa92690296 3-4,59-62,70-72
+.config/sketchybar/plugins/battery.sh
+  s_128a50b25803bb::t_c9bfe7ad1ce92c 5-6,8-10,30
+  s_128a50b25803bb::t_c9d6aa92690296 3-4,7
+.config/sketchybar/plugins/wifi_popup.sh
+  s_128a50b25803bb::t_c9d6aa92690296 67-74,85,90
+  s_128a50b25803bb::t_99e9e86b7e3840 63-66
+  s_128a50b25803bb::t_c7fcbfc416f92e 13-17
+  s_128a50b25803bb::t_c9bfe7ad1ce92c 1-12,18,23-62,75-84,86-89,91-93
+  s_128a50b25803bb::t_a5ae1c1c8740f6 19-22
+.config/sketchybar/plugins/volume.sh
+  s_128a50b25803bb::t_c9d6aa92690296 6-7,10
+  s_128a50b25803bb::t_c7fcbfc416f92e 8-9,11-13
+.config/sketchybar/plugins/volume_popup.sh
+  s_128a50b25803bb::t_c9d6aa92690296 28-35,40-42,54-56,62-64,68
+  s_128a50b25803bb::t_99e9e86b7e3840 3-4
+  s_128a50b25803bb::t_c7fcbfc416f92e 1-2,5-27,36-39,43-53,57-61,65-67,69-71
+.config/sketchybar/plugins/calendar_popup.sh
+  s_128a50b25803bb::t_67c99a80175f48 3-4,39-42,53-60,64
+  s_128a50b25803bb::t_c7fcbfc416f92e 1-2,5-6,8,16-17,43-52,61-63,65-67
+  s_128a50b25803bb::t_6268147d21956b 7,9-15,18-38
+.config/sketchybar/plugins/music_popup.sh
+  s_128a50b25803bb::t_c9d6aa92690296 1-19
+.config/herdr/release-notes.json
+  s_128a50b25803bb::t_478f9146a1eb69 2-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "780909874321a4f01addd0a6a7359ca7a5e10f07",
+  "prompts": {},
+  "sessions": {
+    "s_128a50b25803bb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fc8a5-827c-7a90-8e79-efc8782a70dd",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Deepanshu Mishra <d4deepanshu723@gmail.com>"
+    }
+  }
+}
