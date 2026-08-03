@@ -72,6 +72,8 @@ func run(arguments []string) error {
 	configHome := filepath.Dir(resolved.ConfigDir)
 	targets := []adapter.Adapter{
 		adapter.NewMacOS(),
+		adapter.NewJankyBorders(configHome),
+		adapter.NewSketchyBar(configHome),
 		adapter.NewHerdr(configHome),
 		adapter.NewPi(home),
 		adapter.NewNeovim(configHome),

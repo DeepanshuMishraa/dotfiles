@@ -28,6 +28,8 @@
 /.config/openclicky/secrets.env
 /.config/fish/conf.d/secrets.fish
 /.config/solana/id.json
+# Keep Codeburn's machine-specific sharing identity and private key local.
+/.config/codeburn/sharing/
 # Keep all environment files local, even when they contain only non-secret values.
 **/*.env
 

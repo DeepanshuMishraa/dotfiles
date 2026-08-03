@@ -1505,6 +1505,115 @@
       "skillFolderHash": "eaf533d02431cfb925f5ab60369fee6f8063da65",
       "installedAt": "2026-07-31T21:40:59.065Z",
       "updatedAt": "2026-07-31T21:40:59.065Z"
+    },
+    "onboarding-ux": {
+      "source": "jezweb/claude-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/jezweb/claude-skills.git",
+      "skillPath": "plugins/dev-tools/skills/onboarding-ux/SKILL.md",
+      "skillFolderHash": "b951276f1333fcf426d09e1a1a0ce24ea41ec22c",
+      "installedAt": "2026-08-01T18:35:09.143Z",
+      "updatedAt": "2026-08-01T18:35:09.143Z"
+    },
+    "swift-ai-sdk": {
+      "source": "zaidmukaddam/swift-ai-sdk",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zaidmukaddam/swift-ai-sdk.git",
+      "skillPath": "skills/swift-ai-sdk/SKILL.md",
+      "skillFolderHash": "98e8a30b90d9d05260fb3c6c5d8778fd666d295e",
+      "installedAt": "2026-08-01T18:38:29.241Z",
+      "updatedAt": "2026-08-01T18:38:29.241Z"
+    },
+    "blume": {
+      "source": "haydenbleasel/blume",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/haydenbleasel/blume.git",
+      "skillPath": "skills/blume/SKILL.md",
+      "skillFolderHash": "73868524ef612c0d3dc0b3b12acf50de17042ff1",
+      "installedAt": "2026-08-02T22:06:34.202Z",
+      "updatedAt": "2026-08-02T22:06:34.202Z"
+    },
+    "blume-migrate": {
+      "source": "haydenbleasel/blume",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/haydenbleasel/blume.git",
+      "skillPath": "skills/blume-migrate/SKILL.md",
+      "skillFolderHash": "34929052e2067e5af11fb791c1aed59703b36776",
+      "installedAt": "2026-08-02T22:06:34.205Z",
+      "updatedAt": "2026-08-02T22:06:34.205Z"
+    },
+    "blume-update-docs": {
+      "source": "haydenbleasel/blume",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/haydenbleasel/blume.git",
+      "skillPath": "skills/blume-update-docs/SKILL.md",
+      "skillFolderHash": "cd89e3a3cecd361d1cf4debab3c1cd403b0833ed",
+      "installedAt": "2026-08-02T22:06:34.207Z",
+      "updatedAt": "2026-08-02T22:06:34.207Z"
+    },
+    "accessibility-testing": {
+      "source": "petrkindlmann/qa-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/petrkindlmann/qa-skills.git",
+      "skillPath": "skills/accessibility-testing/SKILL.md",
+      "skillFolderHash": "6d17487af5848b1209cf26e0cf61c531921ea90e",
+      "installedAt": "2026-08-03T14:25:29.205Z",
+      "updatedAt": "2026-08-03T14:25:29.205Z"
+    },
+    "check-npm": {
+      "source": "grafana/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/grafana/skills.git",
+      "skillPath": "skills/grafana-plugins/check-npm/SKILL.md",
+      "skillFolderHash": "389b9bfaf32c6cfdd7161d8f6d08474e4e32ebe6",
+      "pluginName": "grafana-plugins",
+      "installedAt": "2026-08-03T14:25:33.557Z",
+      "updatedAt": "2026-08-03T14:25:33.557Z"
+    },
+    "security-auditor": {
+      "source": "dralgorhythm/claude-agentic-framework",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dralgorhythm/claude-agentic-framework.git",
+      "skillPath": ".claude/skills/security-auditor/SKILL.md",
+      "skillFolderHash": "79ecf3094ed2d729092e70560de68b9faa4c0542",
+      "installedAt": "2026-08-03T14:25:52.740Z",
+      "updatedAt": "2026-08-03T14:25:52.740Z"
+    },
+    "threat-modeling": {
+      "source": "dralgorhythm/claude-agentic-framework",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dralgorhythm/claude-agentic-framework.git",
+      "skillPath": ".claude/skills/security/threat-modeling/SKILL.md",
+      "skillFolderHash": "6979021844f03ad4156b9e180e4b9a07b5ca5fec",
+      "installedAt": "2026-08-03T14:25:56.616Z",
+      "updatedAt": "2026-08-03T14:25:56.616Z"
+    },
+    "wycheproof": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/trailofbits/skills.git",
+      "skillPath": "plugins/testing-handbook-skills/skills/wycheproof/SKILL.md",
+      "skillFolderHash": "9d7c8c25c1939779676ffa921f5e63f58701c95a",
+      "installedAt": "2026-08-03T14:53:27.550Z",
+      "updatedAt": "2026-08-03T14:53:27.550Z"
+    },
+    "crypto-audit": {
+      "source": "briiirussell/cybersecurity-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/briiirussell/cybersecurity-skills.git",
+      "skillPath": "skills/crypto-audit/SKILL.md",
+      "skillFolderHash": "1cedccdfc53d80bc6f73dd45d91e45c418519245",
+      "installedAt": "2026-08-03T14:53:32.965Z",
+      "updatedAt": "2026-08-03T14:53:32.965Z"
+    },
+    "security-audit": {
+      "source": "rshade/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/rshade/agent-skills.git",
+      "skillPath": "skills/security-audit/SKILL.md",
+      "skillFolderHash": "623ed6844ca5b174889f41cf119921424aa96b0a",
+      "installedAt": "2026-08-03T14:53:38.095Z",
+      "updatedAt": "2026-08-03T14:53:38.095Z"
     }
   },
   "dismissed": {

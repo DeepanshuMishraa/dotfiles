@@ -3,9 +3,15 @@
 
 config-version = 2
 
-# Highlight the focused windo with JankyBorders
+# Highlight the focused window with Hued-themed JankyBorders
 after-startup-command = [
-  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+  'exec-and-forget /bin/bash -c "$HOME/.config/aerospace/borders.sh"',
+  'exec-and-forget /opt/homebrew/bin/sketchybar'
+]
+
+# Keep SketchyBar's workspace state in sync with AeroSpace.
+exec-on-workspace-change = ['/bin/bash', '-c',
+  '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE="$AEROSPACE_FOCUSED_WORKSPACE"'
 ]
 
 # Start AeroSpace automatically on login
@@ -50,14 +56,14 @@ persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8"]
 # Reserve workspace 1 for the built-in display and use the external display
 # for the remaining workspaces whenever it is connected.
 [workspace-to-monitor-force-assignment]
-1 = 'Built-in Retina Display'
-2 = 'EK221Q E3'
-3 = 'EK221Q E3'
-4 = 'EK221Q E3'
-5 = 'EK221Q E3'
-6 = 'EK221Q E3'
-7 = 'EK221Q E3'
-8 = 'EK221Q E3'
+1 = ['Built-in Retina Display', 'main']
+2 = ['EK221Q E3', 'secondary', 'main']
+3 = ['EK221Q E3', 'secondary', 'main']
+4 = ['EK221Q E3', 'secondary', 'main']
+5 = ['EK221Q E3', 'secondary', 'main']
+6 = ['EK221Q E3', 'secondary', 'main']
+7 = ['EK221Q E3', 'secondary', 'main']
+8 = ['EK221Q E3', 'secondary', 'main']
 
 # Gaps
 [gaps]
@@ -65,7 +71,7 @@ inner.horizontal = 8
 inner.vertical =   8
 outer.left =       8
 outer.bottom =     8
-outer.top =        8
+outer.top =        36
 outer.right =      8
 
 # Key mapping
