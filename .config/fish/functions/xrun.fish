@@ -241,7 +241,8 @@ function xrun --description "Build and run the current Swift or Xcode project"
 
     while true
         echo "Building '$scheme' for $destination…"
-        command xcodebuild $container_args -scheme $scheme -configuration Debug -destination $destination build
+        command xcodebuild $container_args -scheme $scheme -configuration Debug \
+            -destination $destination -skipPackagePluginValidation build
         set -l build_status $status
 
         if test $build_status -eq 130

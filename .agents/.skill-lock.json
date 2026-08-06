@@ -1614,6 +1614,42 @@
       "skillFolderHash": "623ed6844ca5b174889f41cf119921424aa96b0a",
       "installedAt": "2026-08-03T14:53:38.095Z",
       "updatedAt": "2026-08-03T14:53:38.095Z"
+    },
+    "prompt-engineer": {
+      "source": "davila7/claude-code-templates",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/davila7/claude-code-templates.git",
+      "skillPath": "cli-tool/components/skills/ai-research/prompt-engineer/SKILL.md",
+      "skillFolderHash": "f1d0321e0d52ffb29698be0c2c4f1faecf08c5e4",
+      "installedAt": "2026-08-06T05:45:01.238Z",
+      "updatedAt": "2026-08-06T05:45:01.238Z"
+    },
+    "swiftui-performance-audit": {
+      "source": "steipete/agent-scripts",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/steipete/agent-scripts.git",
+      "skillPath": "skills/swiftui-performance-audit/SKILL.md",
+      "skillFolderHash": "c36543f5f5357ec2ab22b9e81e9370c291a5516a",
+      "installedAt": "2026-08-06T05:58:23.385Z",
+      "updatedAt": "2026-08-06T05:58:23.385Z"
+    },
+    "instruments-profiling": {
+      "source": "steipete/agent-scripts",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/steipete/agent-scripts.git",
+      "skillPath": "skills/instruments-profiling/SKILL.md",
+      "skillFolderHash": "2e025cc434aa97f6e13588b71d5c97c4cc95662e",
+      "installedAt": "2026-08-06T05:58:23.404Z",
+      "updatedAt": "2026-08-06T05:58:23.404Z"
+    },
+    "swiftui-design": {
+      "source": "nexu-io/open-design",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nexu-io/open-design.git",
+      "skillPath": "skills/swiftui-design/SKILL.md",
+      "skillFolderHash": "6ffd6a8d7d35dfd7e2c063ea5ad19ca10212595b",
+      "installedAt": "2026-08-06T06:40:02.394Z",
+      "updatedAt": "2026-08-06T06:40:02.394Z"
     }
   },
   "dismissed": {
