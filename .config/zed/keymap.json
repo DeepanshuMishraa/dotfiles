@@ -1,0 +1,17 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      //"shift shift": "file_finder::Toggle",
+      "alt-space": "workspace::ToggleBottomDock",   // toggle terminal
+      "cmd-b": "project_panel::Toggle",          // toggle file viewer (left dock)
+      "cmd-shift-f": "workspace::NewSearch"          // search across codebase
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    },
+  },
+]

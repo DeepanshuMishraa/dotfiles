@@ -95,6 +95,14 @@
       "enabled": true,
       "type": "local"
     },
+    "shottr": {
+      "command": [
+        "/opt/homebrew/bin/node",
+        "/Users/dipxsy/Code/projects/shottr-mcp/dist/main.js"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
     "townlake": {
       "enabled": false,
       "type": "remote",

@@ -1,6 +1,13 @@
 {
+  "status_bar": {
+    "experimental.show": false
+  },
+  "debugger": {
+    "button": false
+  },
   "cli_default_open_behavior": "existing_window",
   "agent": {
+    "button": false,
     "default_model": {
       "effort": "high",
       "enable_thinking": false,
@@ -24,7 +31,7 @@
     }
   },
   "base_keymap": "VSCode",
-  "buffer_font_family": "Paper Mono",
+  "buffer_font_family": "MonoLisa",
   "buffer_font_size": 18,
   "centered_layout": {
     "left_padding": 0.15,
@@ -34,6 +41,7 @@
     "dock": "left"
   },
   "collaboration_panel": {
+    "button": false,
     "dock": "left"
   },
   "edit_predictions": {
@@ -79,9 +87,9 @@
     "dock": "right"
   },
   "icon_theme": {
-    "dark": "Catppuccin Mocha",
-    "light": "Catppuccin Mocha",
-    "mode": "light"
+    "dark": "Flow Deep",
+    "light": "Catppuccin Macchiato",
+    "mode": "dark"
   },
   "indent_guides": {
     "coloring": "indent_aware",
@@ -118,6 +126,19 @@
     }
   },
   "lsp": {
+    "rust-analyzer": {
+          "initialization_options": {
+            "inlayHints": {
+              "maxLength": null,
+              "lifetimeElisionHints": {
+                "enable": "skip_trivial",
+                "useParameterNames": true
+              },
+              "closureReturnTypeHints": {
+                "enable": "always"
+              }
+            }
+          }},
     "tailwindcss-language-server": {
       "settings": {
         "classAttributes": [
@@ -148,13 +169,22 @@
     "dock": "left"
   },
   "outline_panel": {
+    "button": false,
     "dock": "right"
   },
   "project_panel": {
     "button": true,
-    "dock": "left",
+    "dock": "right",
     "git_status": true
   },
+  "toolbar":{
+    "breadcrumbs": false,
+    "quick_actions": false,
+     "selections_menu": false,
+     "agent_review": false,
+     "code_actions": false
+  },
+  "buffer_font_fallbacks": ["Hack Nerd Font Mono"],
   "relative_line_numbers": "enabled",
   "scrollbar": {
     "show": "never"
@@ -172,18 +202,18 @@
     "metrics": false
   },
   "terminal": {
-    "dock": "right",
+    "dock": "bottom",
     "env": {
       "EDITOR": "zed --wait"
     },
-    "font_family": "Maple Mono NF"
+    "font_family": "MonoLisa",
   },
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "hued light",
-    "dark": "hued dark"
+    "dark": "Rosé Pine"
   },
-  "ui_font_family": "Paper Mono",
+  "ui_font_family": "MonoLisa",
   "ui_font_size": 17,
   "vim": {
     "enable_vim_sneak": true

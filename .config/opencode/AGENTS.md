@@ -115,6 +115,17 @@
 - Never bypass safeguards with destructive shortcuts unless explicitly requested
 - Do not revert or overwrite user changes you did not make unless explicitly requested
 
+## Screenshot Requests
+
+- When the user asks for a screenshot, use the Shottr MCP and prefer `shottr_capture`
+- For a vague screenshot request, omit the target so only the active window is captured
+- For a named app or window, target that window regardless of which display contains it
+- Use `currentDisplay`, `externalDisplay`, or `builtInDisplay` only when the user explicitly asks for that display scope
+- Never focus an app, switch browser tabs, move windows, or expose a Shottr overlay to perform a capture
+- If multiple windows or displays genuinely match, list the candidates and ask the user to choose
+- Ask for beautification choices before applying them unless the user explicitly delegates those choices
+- Use the returned PNG and clipboard result directly; use another screenshot tool only if Shottr MCP is unavailable, and explain the fallback
+
 ## Post Process 
 - Check if the project is a git repository and if its a git repository , proceed to next steps.
 - Once you are done with all the implementation of the build and code ask questions about the feedback weather the build is what user needed.

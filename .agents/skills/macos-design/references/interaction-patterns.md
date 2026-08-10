@@ -288,6 +288,17 @@ When viewing content in a detail/preview panel, provide a floating action bar fo
 - Icons only (with tooltip on hover) or icon + short label
 - Common actions: Copy, Share, Find Similar, Delete
 
+```
+┌─────────────────────────────────┐
+│         [Preview Image]          │
+│                                  │
+│                                  │
+│    ┌───────────────────────┐     │
+│    │ 📋  🔗  🔍  🗑️       │     │
+│    └───────────────────────┘     │
+└─────────────────────────────────┘
+```
+
 **CSS pattern:**
 ```css
 .floating-action-bar {

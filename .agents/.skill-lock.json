@@ -347,13 +347,13 @@
       "updatedAt": "2026-04-14T16:27:16.002Z"
     },
     "macos-design": {
-      "source": "davepoon/buildwithclaude",
+      "source": "ceorkm/macos-design-skill",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/davepoon/buildwithclaude.git",
-      "skillPath": "plugins/all-skills/skills/macos-design/SKILL.md",
-      "skillFolderHash": "19c54ef2de198062a1f1a7227a2f4ebd8a2e428d",
+      "sourceUrl": "https://github.com/ceorkm/macos-design-skill.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "8f528a2364f996cd42f02a10b1b27198a74ca2a3",
       "installedAt": "2026-04-14T16:27:37.653Z",
-      "updatedAt": "2026-04-14T16:27:37.653Z"
+      "updatedAt": "2026-08-07T22:34:01.926Z"
     },
     "swiftui-performance": {
       "source": "dpearson2699/swift-ios-skills",
@@ -1650,6 +1650,24 @@
       "skillFolderHash": "6ffd6a8d7d35dfd7e2c063ea5ad19ca10212595b",
       "installedAt": "2026-08-06T06:40:02.394Z",
       "updatedAt": "2026-08-06T06:40:02.394Z"
+    },
+    "ownfold-integration": {
+      "source": "git@github.com:DeepanshuMishraa/ownfold.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:DeepanshuMishraa/ownfold.git",
+      "skillPath": "skills/ownfold-integration/SKILL.md",
+      "skillFolderHash": "7dd8633f163ad8da886cc4138bea834cad7dc619148f307407799d160d6d66fa",
+      "installedAt": "2026-08-06T18:56:41.496Z",
+      "updatedAt": "2026-08-06T18:56:41.496Z"
+    },
+    "zed-config": {
+      "source": "wcygan/dotfiles",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/wcygan/dotfiles.git",
+      "skillPath": ".agents/skills/zed-config/SKILL.md",
+      "skillFolderHash": "4740f0bc7089b83876ee4427cab0d81afb2d2459",
+      "installedAt": "2026-08-10T19:39:46.935Z",
+      "updatedAt": "2026-08-10T19:39:46.935Z"
     }
   },
   "dismissed": {
