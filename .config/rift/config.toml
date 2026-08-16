@@ -19,6 +19,7 @@ mouse_hides_on_focus = false
 auto_focus_blacklist = [
   "com.apple.Spotlight",
   "cc.ffitch.shottr",
+  "com.shotbase.app",
 ]
 
 run_on_start = []
@@ -138,6 +139,7 @@ app_rules = [
   { app_id = "com.objective-see.lulu.app", floating = true },
   { app_id = "com.timpler.screenstudio", floating = true },
   { app_id = "cc.ffitch.shottr", floating = true },
+  { app_id = "com.shotbase.app", floating = true },
   { app_id = "com.apple.calculator", floating = true },
   { app_id = "co.meldstudio.MeldStudio", floating = true },
   { app_id = "com.apple.finder", floating = true },
