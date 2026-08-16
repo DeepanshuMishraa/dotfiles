@@ -1668,6 +1668,15 @@
       "skillFolderHash": "4740f0bc7089b83876ee4427cab0d81afb2d2459",
       "installedAt": "2026-08-10T19:39:46.935Z",
       "updatedAt": "2026-08-10T19:39:46.935Z"
+    },
+    "generate-startup-ideas": {
+      "source": "Kappaemme-git/startup-idea-machine",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Kappaemme-git/startup-idea-machine.git",
+      "skillPath": "generate-startup-ideas/SKILL.md",
+      "skillFolderHash": "9c13c7639a2c0551a65f5846aa4510c521d38591",
+      "installedAt": "2026-08-11T17:26:17.842Z",
+      "updatedAt": "2026-08-11T17:26:17.842Z"
     }
   },
   "dismissed": {

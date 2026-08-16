@@ -7,17 +7,24 @@ import { homedir } from "node:os";
 export const WatchMyMac = async () => {
   const blocked = new Set();
   const sequence = new Map();
-  const report = async (sessionID, status) => {
-    if (!sessionID) return;
+  const pending = new Map();
+  const writeReport = async (sessionID, status) => {
     const dir = join(homedir(), "Library", "Application Support", "Hold My Lid", "Sessions");
     await mkdir(dir, { recursive: true });
     const id = `opencode-${sessionID}`;
     const file = join(dir, `${id}.json`);
-    const temp = `${file}.${process.pid}.tmp`;
     const next = (sequence.get(id) ?? Date.now() * 1000) + 1;
     sequence.set(id, next);
+    const temp = `${file}.${process.pid}.${next}.tmp`;
     await writeFile(temp, JSON.stringify({ id, agent: "OpenCode", title: "OpenCode", status, lastUpdated: new Date().toISOString(), pid: process.pid, source: "opencode-adapter", sequence: next }));
     await rename(temp, file);
+  };
+  const report = (sessionID, status) => {
+    if (!sessionID) return;
+    const prev = pending.get(sessionID) ?? Promise.resolve();
+    const next = prev.then(() => writeReport(sessionID, status));
+    pending.set(sessionID, next.catch(() => {}));
+    return next;
   };
 
   return {

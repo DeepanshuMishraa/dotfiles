@@ -11,3 +11,6 @@ set -gx MANPAGER 'nvim +Man!'
 fish_add_path -g "/Users/dipxsy/.git-ai/bin"
 
 fish_add_path /Users/dipxsy/.spicetify
+
+# opencode
+fish_add_path /Users/dipxsy/.opencode/bin

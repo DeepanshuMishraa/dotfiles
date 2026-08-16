@@ -1,0 +1,225 @@
+# rift config
+# Ported from the previous AeroSpace setup: traditional tiling, 8 workspaces,
+# Alt-based keys, same gaps and floating apps.
+
+[settings]
+animate = true
+animation_duration = 0.25
+animation_fps = 120.0
+
+# Spaces are managed by default; toggle individual ones with Alt+Z
+default_disable = false
+
+# Keep the AeroSpace behavior: no mouse warping or hover-focus
+focus_follows_mouse = false
+mouse_follows_focus = false
+mouse_hides_on_focus = false
+
+# Apps that should not steal focus or trigger workspace switches
+auto_focus_blacklist = [
+  "com.apple.Spotlight",
+  "cc.ffitch.shottr",
+]
+
+run_on_start = []
+# JankyBorders is managed by launchd (com.dipxsy.jankyborders), see
+# ~/.config/janky/borders.sh
+# Sketchybar integration (rework of the old aerospace_workspace_change trigger):
+# run_on_start = [
+#   "rift-cli subscribe cli --event workspace_changed --command sketchybar --args --trigger rift_workspace_changed --args RIFT_WORKSPACE_NAME=\"$RIFT_WORKSPACE_NAME\" --args RIFT_WORKSPACE_ID=\"$RIFT_WORKSPACE_ID\"",
+#   "rift-cli subscribe cli --event windows_changed --command sketchybar --args --trigger rift_windows_changed --args RIFT_WORKSPACE_NAME=\"$RIFT_WORKSPACE_NAME\" --args RIFT_WINDOW_COUNT=\"$RIFT_WINDOW_COUNT\"",
+# ]
+
+hot_reload = true
+
+[settings.layout]
+mode = "bsp"
+window_insertion_point = "next_to_selection"
+
+[settings.layout.traditional]
+equalize_nodes = true
+
+[settings.layout.master_stack]
+master_ratio = 0.6
+master_count = 1
+master_side = "left"
+new_window_placement = "master"
+
+[settings.layout.scrolling]
+column_width_ratio = 0.7
+min_column_width_ratio = 0.3
+max_column_width_ratio = 0.9
+alignment = "center"
+focus_navigation_style = "niri"
+
+[settings.layout.scrolling.gestures]
+enabled = false
+invert_horizontal = false
+fingers = 3
+propagate_to_workspace_swipe = false
+
+[settings.layout.stack]
+stack_offset = 40.0
+default_orientation = "perpendicular"
+
+[settings.layout.gaps]
+# Sketchybar reserve removed; macOS menu bar is excluded automatically
+[settings.layout.gaps.outer]
+top = 0
+left = 8
+bottom = 8
+right = 8
+
+[settings.layout.gaps.inner]
+horizontal = 8
+vertical = 8
+
+[settings.ui.menu_bar]
+# Sketchybar already renders workspace indicators
+enabled = false
+show_empty = false
+mode = "all"
+active_label = "index"
+display_style = "layout"
+layout_folder = "~/.config/rift/layouts"
+
+[settings.ui.stack_line]
+enabled = false
+hover = "hover"
+horiz_placement = "top"
+vert_placement = "left"
+thickness = 20.0
+spacing = 1.0
+
+[settings.ui.mission_control]
+enabled = false
+fade_enabled = false
+fade_duration_ms = 180.0
+
+[settings.gestures]
+enabled = false
+consume_dock_swipe = true
+invert_horizontal_swipe = false
+swipe_vertical_tolerance = 0.4
+skip_empty = true
+fingers = 3
+distance_pct = 0.08
+haptics_enabled = true
+haptic_pattern = "level_change"
+
+[settings.window_snapping]
+drag_swap_fraction = 0.3
+
+[virtual_workspaces]
+enabled = true
+default_workspace_count = 8
+auto_assign_windows = true
+preserve_focus_per_workspace = true
+workspace_auto_back_and_forth = false
+prevent_wrapping = false
+reapply_app_rules_on_title_change = false
+
+workspace_rules = []
+
+# Numbering matches the old AeroSpace workspaces 1-8
+workspace_names = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+]
+
+# Keep utility and capture apps out of the tiling tree (ported from AeroSpace)
+app_rules = [
+  { app_id = "com.objective-see.lulu.app", floating = true },
+  { app_id = "com.timpler.screenstudio", floating = true },
+  { app_id = "cc.ffitch.shottr", floating = true },
+  { app_id = "com.apple.calculator", floating = true },
+  { app_id = "co.meldstudio.MeldStudio", floating = true },
+  { app_id = "com.apple.finder", floating = true },
+  { app_id = "ru.keepcoder.Telegram", floating = true },
+]
+
+[modifier_combinations]
+comb1 = "Alt + Shift"
+
+[keys]
+"Alt + Z" = "toggle_space_activated"
+
+# Focus (same as AeroSpace alt-h/j/k/l)
+"Alt + H" = { move_focus = "left" }
+"Alt + J" = { move_focus = "down" }
+"Alt + K" = { move_focus = "up" }
+"Alt + L" = { move_focus = "right" }
+
+# Move window within the tree (same as AeroSpace alt-shift-h/j/k/l)
+"comb1 + H" = { move_node = "left" }
+"comb1 + J" = { move_node = "down" }
+"comb1 + K" = { move_node = "up" }
+"comb1 + L" = { move_node = "right" }
+
+# Focus display (same as AeroSpace alt-ctrl-h/j/k/l)
+"Alt + Ctrl + H" = { focus_display = "left" }
+"Alt + Ctrl + J" = { focus_display = "down" }
+"Alt + Ctrl + K" = { focus_display = "up" }
+"Alt + Ctrl + L" = { focus_display = "right" }
+
+# Move window to display (same as AeroSpace ctrl-alt-shift-h/j/k/l)
+"comb1 + Ctrl + H" = { move_window_to_display = { selector = "left" } }
+"comb1 + Ctrl + J" = { move_window_to_display = { selector = "down" } }
+"comb1 + Ctrl + K" = { move_window_to_display = { selector = "up" } }
+"comb1 + Ctrl + L" = { move_window_to_display = { selector = "right" } }
+
+# Workspaces (0-based here, so Alt+1 -> workspace index 0)
+"Alt + 1" = { switch_to_workspace = 0 }
+"Alt + 2" = { switch_to_workspace = 1 }
+"Alt + 3" = { switch_to_workspace = 2 }
+"Alt + 4" = { switch_to_workspace = 3 }
+"Alt + 5" = { switch_to_workspace = 4 }
+"Alt + 6" = { switch_to_workspace = 5 }
+"Alt + 7" = { switch_to_workspace = 6 }
+"Alt + 8" = { switch_to_workspace = 7 }
+
+# Move window to workspace (same hand position as workspace switching)
+"comb1 + 1" = { move_window_to_workspace = 0 }
+"comb1 + 2" = { move_window_to_workspace = 1 }
+"comb1 + 3" = { move_window_to_workspace = 2 }
+"comb1 + 4" = { move_window_to_workspace = 3 }
+"comb1 + 5" = { move_window_to_workspace = 4 }
+"comb1 + 6" = { move_window_to_workspace = 5 }
+"comb1 + 7" = { move_window_to_workspace = 6 }
+"comb1 + 8" = { move_window_to_workspace = 7 }
+
+# Back-and-forth (replaces AeroSpace alt-backtick)
+"Alt + Tab" = "switch_to_last_workspace"
+
+# Toggle floating (AeroSpace alt-f)
+"Alt + F" = "toggle_window_floating"
+# Fullscreen (AeroSpace alt-shift-f)
+"Alt + Shift + F" = "toggle_fullscreen"
+"comb1 + Ctrl + Space" = "toggle_focus_floating"
+
+# Toggle stack / orientation (AeroSpace alt-comma / alt-slash)
+"Alt + Comma" = "toggle_stack"
+"Alt + Slash" = "toggle_orientation"
+"Alt + Ctrl + E" = "unjoin_windows"
+
+"Alt + Shift + Left" = { join_window = "left" }
+"Alt + Shift + Right" = { join_window = "right" }
+"Alt + Shift + Up" = { join_window = "up" }
+"Alt + Shift + Down" = { join_window = "down" }
+
+# Resize (AeroSpace alt-minus / alt-equal)
+"Alt + Minus" = "resize_window_shrink"
+"Alt + Equal" = "resize_window_grow"
+
+# Terminal (Ghostty)
+"Alt + Enter" = { "exec" = ["/bin/bash", "-c", "open -a Ghostty"] }
+
+"Alt + Shift + D" = "debug"
+"Alt + Ctrl + S" = "serialize"
+"Alt + Ctrl + R" = "reload_config"

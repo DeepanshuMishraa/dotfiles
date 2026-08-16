@@ -6,6 +6,7 @@ tap "kamillobinski/thock"
 tap "rjyo/moshi"
 tap "steipete/tap"
 
+brew "acsandmann/tap/rift"
 brew "agent-browser"
 brew "aria2"
 brew "ast-grep"
