@@ -187,6 +187,7 @@
   },
   "theme": "vesper",
   "provider": {
-    "copilot": {}
+    "copilot": {},
+    "opencode-go": {}
   }
 }

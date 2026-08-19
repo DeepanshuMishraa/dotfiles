@@ -4,4 +4,4 @@ borders_bin="$(command -v borders 2>/dev/null || true)"
 if [ -z "$borders_bin" ] && [ -x /opt/homebrew/bin/borders ]; then borders_bin=/opt/homebrew/bin/borders; fi
 if [ -z "$borders_bin" ] && [ -x /usr/local/bin/borders ]; then borders_bin=/usr/local/bin/borders; fi
 if [ -z "$borders_bin" ]; then echo "JankyBorders executable not found; install it and rerun hued set" >&2; exit 1; fi
-exec "$borders_bin" active_color=0xff89b4fa inactive_color=0xff45475a width=5.0
+exec "$borders_bin" active_color=0xff89b4fa inactive_color=0xff45475a width=5.0 blacklist="Simulator"

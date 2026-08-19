@@ -1677,6 +1677,15 @@
       "skillFolderHash": "9c13c7639a2c0551a65f5846aa4510c521d38591",
       "installedAt": "2026-08-11T17:26:17.842Z",
       "updatedAt": "2026-08-11T17:26:17.842Z"
+    },
+    "no-use-effect": {
+      "source": "factory-ai/factory-plugins",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/factory-ai/factory-plugins.git",
+      "skillPath": "plugins/typescript/skills/no-use-effect/SKILL.md",
+      "skillFolderHash": "a63e65cf7b06b90aa13b76bc1c968e268859b77e",
+      "installedAt": "2026-08-19T17:10:38.652Z",
+      "updatedAt": "2026-08-19T17:10:38.652Z"
     }
   },
   "dismissed": {

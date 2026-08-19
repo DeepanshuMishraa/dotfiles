@@ -104,6 +104,41 @@ vim.keymap.set("n", "U", "<C-r>", { desc = "Redo last change" })
 -- Turn off highlighted search results
 vim.keymap.set("n", "<leader>no", "<cmd>noh<cr>", { desc = "Toggle search highlighting" })
 
+-- Toggle one persistent floating terminal. Keep its cwd stable so Snacks
+-- reuses the same process even when the current editor buffer changes.
+local terminal_cwd = nil
+
+local function toggle_terminal()
+	terminal_cwd = terminal_cwd or vim.fn.getcwd()
+	Snacks.terminal.toggle(vim.o.shell, {
+		cwd = terminal_cwd,
+		interactive = true,
+		win = {
+			position = "float",
+			width = 0.9,
+			height = 0.6,
+			border = "rounded",
+			backdrop = false,
+			wo = {
+				cursorline = false,
+				number = false,
+				relativenumber = false,
+				signcolumn = "no",
+				statuscolumn = "",
+				wrap = false,
+			},
+		},
+	})
+end
+
+vim.keymap.set("n", "<leader>t", function()
+	toggle_terminal()
+end, { desc = "Toggle [T]erminal" })
+
+vim.keymap.set("t", "<leader>t", function()
+	toggle_terminal()
+end, { desc = "Toggle [T]erminal" })
+
 vim.keymap.set("n", "<leader>ts", function()
 	if twoslash.config.is_enabled then
 		vim.cmd("TwoslashQueriesDisable")

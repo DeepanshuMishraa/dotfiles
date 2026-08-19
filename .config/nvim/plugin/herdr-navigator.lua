@@ -135,7 +135,9 @@ function M.setup(opts)
           M.navigate(direction)
         end, { silent = true, desc = "Herdr navigate " .. direction })
         vim.keymap.set("t", key, function()
-          return vim.bo.filetype == "fzf" and key
+          -- Terminal input must reach the shell. In particular, <BS> and
+          -- <C-H> are editing keys, not pane navigation keys.
+          return (vim.bo.filetype == "fzf" or vim.bo.buftype == "terminal") and key
             or [[<C-\><C-n><cmd>]] .. spec.command .. [[<CR>]]
         end, { expr = true, silent = true, desc = "Herdr navigate " .. direction })
       end

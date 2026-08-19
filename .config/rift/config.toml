@@ -76,8 +76,8 @@ horizontal = 8
 vertical = 8
 
 [settings.ui.menu_bar]
-# Sketchybar already renders workspace indicators
-enabled = false
+# Shows active workspace indicators in the menu bar
+enabled = true
 show_empty = false
 mode = "all"
 active_label = "index"
