@@ -77,7 +77,7 @@ vertical = 8
 
 [settings.ui.menu_bar]
 # Shows active workspace indicators in the menu bar
-enabled = true
+enabled = false
 show_empty = false
 mode = "all"
 active_label = "index"

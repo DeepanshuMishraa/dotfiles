@@ -724,7 +724,7 @@ cmd_update() {
     # Update pi and its configured packages.
     if __command_exists pi; then
         __print_info "Updating pi and configured packages..."
-        if (cd "$DOTFILES_DIR" && pi update); then
+        if (cd "$DOTFILES_DIR" && pi update && pi update --extensions); then
             __print_success "pi and configured packages updated"
         else
             __print_error "Failed to update pi and configured packages"
