@@ -45,37 +45,3 @@ func TestSketchyBarApplyWritesSemanticPalette(t *testing.T) {
 		}
 	}
 }
-
-func TestJankyBordersApplyWritesExecutableThemeScript(t *testing.T) {
-	configDir := t.TempDir()
-	configPath := filepath.Join(configDir, "aerospace", "aerospace.toml")
-	if err := os.MkdirAll(filepath.Dir(configPath), 0o755); err != nil {
-		t.Fatal(err)
-	}
-	if err := os.WriteFile(configPath, []byte("config-version = 2\n"), 0o644); err != nil {
-		t.Fatal(err)
-	}
-
-	target := NewJankyBorders(configDir)
-	result := target.Apply(testTheme())
-	if result.Status != domain.ResultApplied {
-		t.Fatalf("expected applied, got %#v", result)
-	}
-	path := filepath.Join(configDir, "aerospace", "borders.sh")
-	content, err := os.ReadFile(path)
-	if err != nil {
-		t.Fatal(err)
-	}
-	for _, expected := range []string{"active_color=0xffc4a7e7", "inactive_color=0xff26233a", "width=5.0"} {
-		if !strings.Contains(string(content), expected) {
-			t.Fatalf("generated border script is missing %q:\n%s", expected, content)
-		}
-	}
-	info, err := os.Stat(path)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if info.Mode().Perm() != 0o755 {
-		t.Fatalf("border script mode = %o, want 755", info.Mode().Perm())
-	}
-}

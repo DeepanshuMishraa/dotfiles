@@ -50,4 +50,16 @@ final class GeometryTests: XCTestCase {
             CGRect(x: 9.5, y: 9.5, width: 101, height: 81)
         )
     }
+
+    func testTopLevelSelectionRejectsContainedSameOwnerWindow() {
+        let browser = WindowFrameCandidate(id: 1, ownerName: "Helium",
+                                           frame: CGRect(x: 0, y: 0, width: 1200, height: 800))
+        let suggestions = WindowFrameCandidate(id: 2, ownerName: "Helium",
+                                               frame: CGRect(x: 300, y: -12, width: 500, height: 312))
+        let otherWindow = WindowFrameCandidate(id: 3, ownerName: "Helium",
+                                               frame: CGRect(x: 1300, y: 0, width: 900, height: 700))
+
+        XCTAssertEqual(WindowSelection.topLevel([browser, suggestions, otherWindow]),
+                       [browser, otherWindow])
+    }
 }

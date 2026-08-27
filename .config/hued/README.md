@@ -22,7 +22,7 @@ Bundled themes are installed at `~/.config/hued/themes/bundled`. Put personal ma
 | Target | Live mechanism |
 | --- | --- |
 | macOS | System Events changes appearance and the nearest supported named highlight color; wallpaper is always preserved |
-| JankyBorders | Generated AeroSpace startup script plus live IPC reconfiguration |
+| Rift Borders | Dedicated background service watches Hued's active theme color |
 | SketchyBar | Generated semantic color palette plus live config reload |
 | Ghostty | Atomic theme/config writes, then the proven delayed `SIGUSR1` (`killall -31 ghostty`) sequence |
 | Neovim | Directory watcher reloads generated highlights after every atomic replacement |

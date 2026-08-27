@@ -53,6 +53,7 @@ private struct PSN { var high: UInt32 = 0; var low: UInt32 = 0 }
 private struct TrackedWindow: Equatable {
     let id: UInt32
     let pid: pid_t
+    let ownerName: String
     let appName: String
     let bundleIdentifier: String?
     let frame: CGRect
@@ -436,9 +437,11 @@ private final class BorderDaemon {
         guard let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] else { return [] }
         let focusedPID = frontmostPID()
         let candidates = list.compactMap { window(from: $0, focused: false) }
-        let focusedID = candidates.first(where: { $0.pid == focusedPID })?.id
-        return candidates.map { item in
-            TrackedWindow(id: item.id, pid: item.pid, appName: item.appName,
+        let topLevelIDs = topLevelIDs(for: candidates)
+        let topLevelCandidates = candidates.filter { topLevelIDs.contains($0.id) }
+        let focusedID = topLevelCandidates.first(where: { $0.pid == focusedPID })?.id
+        return topLevelCandidates.map { item in
+            TrackedWindow(id: item.id, pid: item.pid, ownerName: item.ownerName, appName: item.appName,
                           bundleIdentifier: item.bundleIdentifier, frame: item.frame,
                           role: item.role, focused: item.id == focusedID)
         }
@@ -455,11 +458,13 @@ private final class BorderDaemon {
               let frame = bounds(info[kCGWindowBounds as String]),
               frame.width > 60, frame.height > 60,
               visibleFraction(frame) >= 0.7 else { return nil }
+        let ownerName = info[kCGWindowOwnerName as String] as? String ?? "Unknown"
         let app = NSRunningApplication(processIdentifier: pid)
         let name = cleanName(app?.localizedName ?? "Unknown")
-        guard !name.isEmpty else { return nil }
-        let role = info[kCGWindowOwnerName as String] as? String == "Window Server" ? "system" : nil
-        return TrackedWindow(id: id, pid: pid, appName: name,
+        let appName = name.isEmpty || name == "Unknown" ? ownerName : name
+        guard !appName.isEmpty else { return nil }
+        let role = ownerName == "Window Server" ? "system" : nil
+        return TrackedWindow(id: id, pid: pid, ownerName: ownerName, appName: appName,
                              bundleIdentifier: app?.bundleIdentifier, frame: frame,
                              role: role, focused: focused)
     }
@@ -470,15 +475,26 @@ private final class BorderDaemon {
             return
         }
         guard !isSuppressed(windowID),
-              let list = CGWindowListCopyWindowInfo(.optionIncludingWindow, CGWindowID(windowID)) as? [[String: Any]],
-              let window = window(from: list.first ?? [:], focused: lastWindows[windowID]?.focused ?? false) else {
+              let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]],
+              let info = list.first(where: { number($0[kCGWindowNumber as String]).map({ UInt32($0) }) == windowID }),
+              let candidate = window(from: info, focused: lastWindows[windowID]?.focused ?? false),
+              topLevelIDs(for: list.compactMap { window(from: $0, focused: false) }).contains(windowID),
+              candidate.id == windowID else {
             overlays[windowID]?.orderOut(nil)
             overlays.removeValue(forKey: windowID)
             lastWindows.removeValue(forKey: windowID)
             return
         }
-        _ = render(window, force: false)
-        lastWindows[windowID] = window
+        _ = render(candidate, force: false)
+        lastWindows[windowID] = candidate
+    }
+
+    private func topLevelIDs(for windows: [TrackedWindow]) -> Set<UInt32> {
+        Set(WindowSelection.topLevel(windows.map {
+            WindowFrameCandidate(id: $0.id,
+                                 ownerName: $0.ownerName,
+                                 frame: $0.frame)
+        }).map(\.id))
     }
 
     @discardableResult
