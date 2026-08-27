@@ -17,6 +17,14 @@ private func SLSRegisterNotifyProc(_ proc: NotifyProc, _ event: UInt32, _ contex
 private func SLSRequestNotificationsForWindows(_ cid: Int32, _ windows: UnsafePointer<UInt32>?, _ count: Int32) -> CGError
 @_silgen_name("SLSWindowIsOrderedIn")
 private func SLSWindowIsOrderedIn(_ cid: Int32, _ windowID: UInt32, _ shown: UnsafeMutablePointer<Bool>) -> CGError
+@_silgen_name("SLSGetWindowLevel")
+private func SLSGetWindowLevel(_ cid: Int32, _ windowID: UInt32, _ level: UnsafeMutablePointer<Int32>) -> CGError
+@_silgen_name("SLSGetWindowSubLevel")
+private func SLSGetWindowSubLevel(_ cid: Int32, _ windowID: UInt32) -> Int32
+@_silgen_name("SLSSetWindowLevel")
+private func SLSSetWindowLevel(_ cid: Int32, _ windowID: UInt32, _ level: Int32) -> CGError
+@_silgen_name("SLSSetWindowSubLevel")
+private func SLSSetWindowSubLevel(_ cid: Int32, _ windowID: UInt32, _ level: Int32) -> CGError
 @_silgen_name("SLSGetEventPort")
 private func SLSGetEventPort(_ cid: Int32, _ port: UnsafeMutablePointer<mach_port_t>) -> CGError
 @_silgen_name("SLEventCreateNextEvent")
@@ -153,14 +161,13 @@ private final class BorderOverlay: NSWindow {
         backgroundColor = .clear
         ignoresMouseEvents = true
         hasShadow = false
-        level = .floating
+        level = .normal
         collectionBehavior = [.stationary, .ignoresCycle, .fullScreenAuxiliary]
         animationBehavior = .none
         contentView = borderView
     }
 
     func display(frame: CGRect, radius: CGFloat, appearance: Appearance, shape: BorderShape, hidpi: Bool, order: BorderOrder, animated: Bool, duration: Double) {
-        level = order == .above ? .floating : .normal
         setFrame(frame, display: false)
         let scale = (screen?.backingScaleFactor ?? NSScreen.main?.backingScaleFactor ?? 2)
         let effectiveScale = hidpi ? scale : 1
@@ -168,7 +175,21 @@ private final class BorderOverlay: NSWindow {
         CATransaction.setDisableActions(true)
         borderView.update(size: frame.size, radius: radius, appearance: appearance, shape: shape, scale: effectiveScale, animated: animated, duration: duration)
         CATransaction.commit()
+        orderRelativeToTarget(order)
+    }
+
+    private func orderRelativeToTarget(_ order: BorderOrder) {
+        let cid = SLSMainConnectionID()
+        let borderID = UInt32(windowNumber)
+        var targetLevel: Int32 = 0
+        guard borderID != 0,
+              targetID != 0,
+              SLSGetWindowLevel(cid, targetID, &targetLevel) == .success else { return }
+
         if !isVisible { orderFrontRegardless() }
+        _ = SLSSetWindowLevel(cid, borderID, targetLevel)
+        _ = SLSSetWindowSubLevel(cid, borderID, SLSGetWindowSubLevel(cid, targetID))
+        self.order(order == .above ? .above : .below, relativeTo: Int(targetID))
     }
 }
 
@@ -421,7 +442,8 @@ private final class BorderDaemon {
     }
 
     private func pruneHiddenOverlays() {
-        for (id, overlay) in overlays where isSuppressed(id) || !targetIsVisible(id) {
+        for (id, overlay) in overlays where isSuppressed(id)
+            || !targetIsVisible(id) {
             if overlay.isVisible { overlay.orderOut(nil) }
         }
     }
@@ -437,7 +459,8 @@ private final class BorderDaemon {
         guard let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] else { return [] }
         let focusedPID = frontmostPID()
         let candidates = list.compactMap { window(from: $0, focused: false) }
-        let topLevelIDs = topLevelIDs(for: candidates)
+        let fullscreenFrames = candidates.filter { isFullscreenWindow($0) }.map(\.frame)
+        let topLevelIDs = topLevelIDs(for: candidates, fullscreenFrames: fullscreenFrames)
         let topLevelCandidates = candidates.filter { topLevelIDs.contains($0.id) }
         let focusedID = topLevelCandidates.first(where: { $0.pid == focusedPID })?.id
         return topLevelCandidates.map { item in
@@ -478,7 +501,10 @@ private final class BorderDaemon {
               let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]],
               let info = list.first(where: { number($0[kCGWindowNumber as String]).map({ UInt32($0) }) == windowID }),
               let candidate = window(from: info, focused: lastWindows[windowID]?.focused ?? false),
-              topLevelIDs(for: list.compactMap { window(from: $0, focused: false) }).contains(windowID),
+              let refreshCandidates = Optional(list.compactMap { window(from: $0, focused: false) }),
+              topLevelIDs(for: refreshCandidates,
+                          fullscreenFrames: refreshCandidates.filter { isFullscreenWindow($0) }.map(\.frame))
+                .contains(windowID),
               candidate.id == windowID else {
             overlays[windowID]?.orderOut(nil)
             overlays.removeValue(forKey: windowID)
@@ -489,12 +515,16 @@ private final class BorderDaemon {
         lastWindows[windowID] = candidate
     }
 
-    private func topLevelIDs(for windows: [TrackedWindow]) -> Set<UInt32> {
+    private func topLevelIDs(for windows: [TrackedWindow], fullscreenFrames: [CGRect] = []) -> Set<UInt32> {
         Set(WindowSelection.topLevel(windows.map {
             WindowFrameCandidate(id: $0.id,
                                  ownerName: $0.ownerName,
                                  frame: $0.frame)
-        }).map(\.id))
+        }, fullscreenFrames: fullscreenFrames).map(\.id))
+    }
+
+    private func isFullscreenWindow(_ window: TrackedWindow) -> Bool {
+        fullscreenScreen(for: window.frame) != nil
     }
 
     @discardableResult
@@ -503,7 +533,7 @@ private final class BorderDaemon {
             overlays[window.id]?.orderOut(nil)
             return true
         }
-        if fullscreenScreen(for: window.frame) != nil {
+        if isFullscreenWindow(window) {
             overlays[window.id]?.orderOut(nil)
             return false
         }
@@ -516,7 +546,11 @@ private final class BorderDaemon {
         }
         appearance.width = appearance.width ?? config.width
         let width = CGFloat(appearance.width!)
-        let overlayFrame = BorderGeometry.overlayFrame(windowFrame: cocoaFrame(for: window.frame), width: width, gap: CGFloat(config.gap))
+        // A negative configured gap is useful for tight single-window borders,
+        // but causes neighboring Rift panes to touch or visually overlap.
+        // Keep at least one border width of separation between adjacent panes.
+        let effectiveGap = max(CGFloat(config.gap), width)
+        let overlayFrame = BorderGeometry.overlayFrame(windowFrame: cocoaFrame(for: window.frame), width: width, gap: effectiveGap)
         let overlay = overlays[window.id] ?? {
             let created = BorderOverlay()
             created.targetID = window.id
@@ -524,7 +558,7 @@ private final class BorderDaemon {
             return created
         }()
         let baseRadius = config.rule(for: window.appName, bundleIdentifier: window.bundleIdentifier)?.radius ?? config.radius ?? 17.1
-        let radius = max(0, CGFloat(baseRadius + config.gap + width / 2))
+        let radius = max(0, CGFloat(baseRadius + effectiveGap + width / 2))
         let changedFocus = lastWindows[window.id]?.focused != window.focused
         let suppressFade = config.disableAnimationDuringDrag && Date() < draggingUntil
         overlay.display(frame: overlayFrame, radius: radius, appearance: appearance, shape: config.shape, hidpi: config.hidpi, order: config.order, animated: config.fadeEnabled && !force && changedFocus && !suppressFade, duration: config.fadeDurationMilliseconds / 1000)
@@ -629,7 +663,14 @@ private final class BorderDaemon {
         NSScreen.screens.first { screen in
             let displayID = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID ?? 0
             let display = CGDisplayBounds(displayID)
-            return DisplayGeometry(cocoaFrame: screen.frame, cgFrame: display).isFullscreen(frame)
+            let visible = screen.visibleFrame
+            let visibleCGFrame = CGRect(
+                x: display.minX + visible.minX - screen.frame.minX,
+                y: display.maxY - (visible.maxY - screen.frame.minY),
+                width: visible.width,
+                height: visible.height
+            )
+            return DisplayGeometry(cocoaFrame: screen.frame, cgFrame: visibleCGFrame).isFullscreen(frame)
         }
     }
 

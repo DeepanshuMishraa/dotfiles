@@ -44,13 +44,13 @@ final class GeometryTests: XCTestCase {
         XCTAssertEqual(display.cocoaRect(for: CGRect(x: 100, y: -980, width: 400, height: 300)), CGRect(x: 100, y: 1580, width: 400, height: 300))
     }
 
-    func testRecognizesFullscreenFrameWithSmallWindowServerInsets() {
+    func testRecognizesExactFullscreenFrameButNotRiftInsetPane() {
         let display = DisplayGeometry(
             cocoaFrame: CGRect(x: 0, y: 0, width: 1920, height: 1080),
             cgFrame: CGRect(x: 0, y: 0, width: 1920, height: 1080)
         )
-        XCTAssertTrue(display.isFullscreen(CGRect(x: 8, y: 10, width: 1904, height: 1060)))
-        XCTAssertFalse(display.isFullscreen(CGRect(x: 100, y: 50, width: 1720, height: 950)))
+        XCTAssertTrue(display.isFullscreen(CGRect(x: 0, y: 0, width: 1920, height: 1080)))
+        XCTAssertFalse(display.isFullscreen(CGRect(x: 8, y: 34, width: 1904, height: 1010)))
     }
 
     func testOverlayFrameHonorsWidthAndGap() {
@@ -70,5 +70,17 @@ final class GeometryTests: XCTestCase {
 
         XCTAssertEqual(WindowSelection.topLevel([browser, suggestions, otherWindow]),
                        [browser, otherWindow])
+    }
+
+    func testTopLevelSelectionRejectsHelperPopupInsideFullscreenWindow() {
+        let fullscreen = WindowFrameCandidate(id: 1, ownerName: "Helium",
+                                              frame: CGRect(x: 8, y: 34, width: 1454, height: 914))
+        let helperPopup = WindowFrameCandidate(id: 2, ownerName: "Helium Helper",
+                                               frame: CGRect(x: 480, y: 12, width: 1000, height: 210))
+
+        XCTAssertEqual(WindowSelection.topLevel(
+            [fullscreen, helperPopup],
+            fullscreenFrames: [fullscreen.frame]
+        ), [fullscreen])
     }
 }

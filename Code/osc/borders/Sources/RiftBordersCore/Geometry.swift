@@ -20,10 +20,10 @@ public struct DisplayGeometry: Equatable, Sendable {
         )
     }
 
-    public func isFullscreen(_ cgRect: CGRect, tolerance: CGFloat = 24) -> Bool {
+    public func isFullscreen(_ cgRect: CGRect, tolerance: CGFloat = 4) -> Bool {
         let intersection = cgFrame.intersection(cgRect)
         guard cgRect.area > 0, cgFrame.area > 0 else { return false }
-        let coversDisplay = intersection.area / cgFrame.area >= 0.95
+        let coversDisplay = intersection.area / cgFrame.area >= 0.98
         let reachesEdges = cgRect.minX <= cgFrame.minX + tolerance
             && cgRect.minY <= cgFrame.minY + tolerance
             && cgRect.maxX >= cgFrame.maxX - tolerance
@@ -45,9 +45,16 @@ public struct WindowFrameCandidate: Equatable, Sendable {
 }
 
 public enum WindowSelection {
-    public static func topLevel(_ candidates: [WindowFrameCandidate]) -> [WindowFrameCandidate] {
+    public static func topLevel(_ candidates: [WindowFrameCandidate],
+                                fullscreenFrames: [CGRect] = []) -> [WindowFrameCandidate] {
         candidates.filter { candidate in
-            !candidates.contains { container in
+            if fullscreenFrames.contains(where: { fullscreen in
+                fullscreen.area > candidate.frame.area
+                    && fullscreen.intersection(candidate.frame).area / candidate.frame.area >= 0.85
+            }) {
+                return false
+            }
+            return !candidates.contains { container in
                 guard container.id != candidate.id,
                       container.ownerName == candidate.ownerName,
                       container.frame.area > candidate.frame.area else { return false }
