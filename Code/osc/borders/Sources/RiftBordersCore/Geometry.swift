@@ -19,6 +19,17 @@ public struct DisplayGeometry: Equatable, Sendable {
             height: cgRect.height
         )
     }
+
+    public func isFullscreen(_ cgRect: CGRect, tolerance: CGFloat = 24) -> Bool {
+        let intersection = cgFrame.intersection(cgRect)
+        guard cgRect.area > 0, cgFrame.area > 0 else { return false }
+        let coversDisplay = intersection.area / cgFrame.area >= 0.95
+        let reachesEdges = cgRect.minX <= cgFrame.minX + tolerance
+            && cgRect.minY <= cgFrame.minY + tolerance
+            && cgRect.maxX >= cgFrame.maxX - tolerance
+            && cgRect.maxY >= cgFrame.maxY - tolerance
+        return coversDisplay && reachesEdges
+    }
 }
 
 public struct WindowFrameCandidate: Equatable, Sendable {

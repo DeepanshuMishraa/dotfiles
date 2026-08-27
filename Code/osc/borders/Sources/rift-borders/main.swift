@@ -503,7 +503,7 @@ private final class BorderDaemon {
             overlays[window.id]?.orderOut(nil)
             return true
         }
-        if config.hideInFullscreen, fullscreenScreen(for: window.frame) != nil {
+        if fullscreenScreen(for: window.frame) != nil {
             overlays[window.id]?.orderOut(nil)
             return false
         }
@@ -629,8 +629,7 @@ private final class BorderDaemon {
         NSScreen.screens.first { screen in
             let displayID = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID ?? 0
             let display = CGDisplayBounds(displayID)
-            let intersection = frame.intersection(display)
-            return intersection.area / max(frame.area, 1) > 0.95 && frame.height >= display.height - 12
+            return DisplayGeometry(cocoaFrame: screen.frame, cgFrame: display).isFullscreen(frame)
         }
     }
 
