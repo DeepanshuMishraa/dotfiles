@@ -1,0 +1,48 @@
+# Copy to ~/.config/rift-borders/config.toml
+
+enabled = true
+shape = "round"
+width = 2.0
+gap = -1.0
+radius = 17.1
+hidpi = true
+border_order = "above"
+excluded_bundle_identifiers = ["com.apple.Spotlight", "cc.ffitch.shottr", "com.shotbase.app"]
+hide_in_fullscreen = true
+cover_notch = false
+
+[active]
+paint = "glow"
+color = "#FFE1E3E4"
+end_color = "#FF8AB4F8"
+opacity = 1.0
+width = 2.0
+
+[inactive]
+paint = "solid"
+color = "#FF494D64"
+opacity = 0.30
+width = 1.0
+
+[theme]
+source = "hued"
+active_field = "accent"
+inactive_field = "surface1"
+active_end_field = "teal"
+
+[animation]
+enabled = true
+fade_duration_ms = 120
+disable_during_drag = true
+
+[apps."WhatsApp"]
+radius = 12.9
+inactive_opacity = 0.20
+
+[apps."Korren"]
+radius = 16.6
+
+# App rules may also use a bundle identifier as the section key:
+# [apps."com.example.App"]
+# bundle_identifier = "com.example.App"
+# excluded = true

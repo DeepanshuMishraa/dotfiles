@@ -112,6 +112,17 @@
       "enabled": false,
       "type": "remote",
       "url": "https://wiki.mcp.cfdata.org/mcp"
+    },
+    "pencil": {
+      "command": [
+        "/Applications/Pen.app/Contents/Resources/app.asar.unpacked/out/mcp-server-darwin-arm64",
+        "--app",
+        "desktop",
+        "--agent",
+        "openCodeCLI"
+      ],
+      "enabled": true,
+      "type": "local"
     }
   },
   "permission": {

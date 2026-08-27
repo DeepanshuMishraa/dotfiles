@@ -1,0 +1,44 @@
+# Rift Borders: focused and inactive window styling.
+# Reload with: rift-borders reload
+
+enabled = true
+shape = "round"
+width = 2.0
+gap = -1.0
+radius = 17.1
+hidpi = true
+border_order = "above"
+excluded_bundle_identifiers = ["com.apple.Spotlight", "cc.ffitch.shottr", "com.shotbase.app"]
+hide_in_fullscreen = true
+cover_notch = false
+
+[active]
+paint = "glow"
+color = "#FF89B4FA"
+end_color = "#FF74C7EC"
+opacity = 1.0
+width = 2.0
+
+[inactive]
+paint = "solid"
+color = "#FF45475A"
+opacity = 0.30
+width = 1.0
+
+[theme]
+source = "hued"
+active_field = "accent"
+inactive_field = "surface1"
+active_end_field = "teal"
+
+[animation]
+enabled = true
+fade_duration_ms = 120
+disable_during_drag = true
+
+[apps."WhatsApp"]
+radius = 12.9
+inactive_opacity = 0.20
+
+[apps."Korren"]
+radius = 16.6

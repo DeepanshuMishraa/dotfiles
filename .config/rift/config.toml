@@ -22,9 +22,8 @@ auto_focus_blacklist = [
   "com.shotbase.app",
 ]
 
-run_on_start = []
-# JankyBorders is managed by launchd (com.dipxsy.jankyborders), see
-# ~/.config/janky/borders.sh
+run_on_start = ["exec-and-forget rift-borders service start"]
+# Rift Borders replaces the former JankyBorders launchd service.
 # Sketchybar integration (rework of the old aerospace_workspace_change trigger):
 # run_on_start = [
 #   "rift-cli subscribe cli --event workspace_changed --command sketchybar --args --trigger rift_workspace_changed --args RIFT_WORKSPACE_NAME=\"$RIFT_WORKSPACE_NAME\" --args RIFT_WORKSPACE_ID=\"$RIFT_WORKSPACE_ID\"",
@@ -144,6 +143,7 @@ app_rules = [
   { app_id = "co.meldstudio.MeldStudio", floating = true },
   { app_id = "com.apple.finder", floating = true },
   { app_id = "ru.keepcoder.Telegram", floating = true },
+  { app_id = "com.wallps.app", floating = true },
 ]
 
 [modifier_combinations]

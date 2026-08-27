@@ -16,7 +16,7 @@ prompt_new_tab_name = true
 pane_gaps = false
 show_agent_labels_on_pane_borders = true
 sidebar_collapsed_mode = "hidden"
-agent_panel_sort = "spaces"
+agent_panel_sort = "priority"
 [experimental]
 pane_history = true
 switch_ascii_input_source_in_prefix = true

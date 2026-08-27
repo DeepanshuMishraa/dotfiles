@@ -13,6 +13,23 @@
 !/Scripts/
 !/Scripts/**
 
+# Track the Rift Borders source and its reproducible service definition.
+!/Code/
+/Code/*
+!/Code/osc/
+/Code/osc/*
+!/Code/osc/borders/
+!/Code/osc/borders/**
+/Code/osc/borders/.build/
+!/Library/
+/Library/*
+!/Library/LaunchAgents/
+/Library/LaunchAgents/*
+!/Library/LaunchAgents/com.dipxsy.rift-borders.plist
+
+# Runtime PID files are recreated by the service and must stay local.
+/.config/rift-borders/rift-borders.pid
+
 # Keep Raycast's generated configuration and extensions local.
 /.config/raycast/
 /.config/raycast-x/

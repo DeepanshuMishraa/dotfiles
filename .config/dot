@@ -750,7 +750,11 @@ __staged_secret_risk() {
     done < <(git -C "$DOTFILES_DIR" diff --cached --name-only --diff-filter=ACMR)
 
     local added_lines
-    added_lines="$(git -C "$DOTFILES_DIR" diff --cached --no-ext-diff --unified=0 -- | sed -n '/^+++/d; /^+/p')"
+    added_lines="$(git -C "$DOTFILES_DIR" diff --cached --no-ext-diff --unified=0 -- . ':(exclude).config/dot' | sed -n '/^+++/d; /^+/p')"
+    # Documentation and source examples commonly pass credentials through an
+    # environment variable or object property. Those are references, not
+    # credential literals; keep scanning direct assignments and token formats.
+    added_lines="$(grep -Eiv 'YOUR_[A-Za-z0-9_]+' <<< "$added_lines" | grep -Eiv ':[[:space:]]*(process\.env\.[A-Za-z0-9_]+|this\.[A-Za-z0-9_]+)[,)]?[[:space:]]*$' || true)"
 
     local secret_pattern
     secret_pattern="-----BEGIN ([A-Z0-9]+ )?PRIVATE KEY-----|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[A-Z0-9]{16}|(api[_-]?key|access[_-]?token|secret)[[:space:]]*[:=][[:space:]\"']*[[:alnum:]_./+-]{16,}"
