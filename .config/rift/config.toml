@@ -23,6 +23,13 @@ auto_focus_blacklist = [
 ]
 
 run_on_start = ["exec-and-forget rift-borders service start"]
+# Toggle Rift's global tiling pause while keeping virtual workspaces active.
+# The callback keeps the separate rift-borders overlay in sync with the mode.
+tiling_toggle_command = [
+  "/bin/zsh",
+  "-lc",
+  "if [ \"$RIFT_TILING_PAUSED\" = \"true\" ]; then rift-borders service stop; else rift-borders service start; fi",
+]
 # Rift Borders replaces the former JankyBorders launchd service.
 # Sketchybar integration (rework of the old aerospace_workspace_change trigger):
 # run_on_start = [
@@ -150,7 +157,7 @@ app_rules = [
 comb1 = "Alt + Shift"
 
 [keys]
-"Alt + Z" = "toggle_space_activated"
+"Alt + D" = "toggle_tiling"
 
 # Focus (same as AeroSpace alt-h/j/k/l)
 "Alt + H" = { move_focus = "left" }
@@ -200,7 +207,7 @@ comb1 = "Alt + Shift"
 "Alt + Tab" = "switch_to_last_workspace"
 
 # Toggle floating (AeroSpace alt-f)
-"Alt + F" = "toggle_window_floating"
+"Alt + F" = { toggle_window_floating = { center = true, size = "smart" } }
 # Fullscreen (AeroSpace alt-shift-f)
 "Alt + Shift + F" = "toggle_fullscreen"
 "comb1 + Ctrl + Space" = "toggle_focus_floating"
