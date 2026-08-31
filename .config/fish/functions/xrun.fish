@@ -85,7 +85,15 @@ function xrun --description "Build and run the current Swift or Xcode project"
         end
 
         if test -f $project_dir/Package.swift
-            command swift run $original_argv
+            # SwiftPM does not understand xrun's runner-only flags. A package
+            # executable already runs once, so strip them before forwarding.
+            set -l package_args
+            for argument in $original_argv
+                if not contains -- $argument --once --mac --ios
+                    set -a package_args $argument
+                end
+            end
+            command swift run $package_args
             return $status
         end
 

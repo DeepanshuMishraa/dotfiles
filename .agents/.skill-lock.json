@@ -1884,6 +1884,24 @@
       "skillFolderHash": "0207dbfc168dc317611dd6dc72c5663eddd3a8b2",
       "installedAt": "2026-08-24T12:36:44.059Z",
       "updatedAt": "2026-08-24T12:36:44.059Z"
+    },
+    "resume-ats-optimizer": {
+      "source": "paramchoudhary/resumeskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/paramchoudhary/resumeskills.git",
+      "skillPath": "skills/resume-ats-optimizer/SKILL.md",
+      "skillFolderHash": "bf17e4ed4337d2e15cfd7674537f4b7d345796fd",
+      "installedAt": "2026-08-30T09:08:32.487Z",
+      "updatedAt": "2026-08-30T09:08:32.487Z"
+    },
+    "resume-tailor": {
+      "source": "paramchoudhary/resumeskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/paramchoudhary/resumeskills.git",
+      "skillPath": "skills/resume-tailor/SKILL.md",
+      "skillFolderHash": "8aba47801e48b9227adacd3f4aa4775652dfd975",
+      "installedAt": "2026-08-30T09:08:38.614Z",
+      "updatedAt": "2026-08-30T09:08:38.614Z"
     }
   },
   "dismissed": {
