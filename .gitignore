@@ -13,6 +13,23 @@
 !/Scripts/
 !/Scripts/**
 
+# Track Pi configuration, themes, extensions, and package manifests.
+!/.pi/
+!/.pi/**
+# Keep Pi dependencies and generated runtime state local.
+/.pi/node_modules/
+/.pi/ephemeral/
+/.pi/context-mode/
+/.pi/agent/auth.json
+/.pi/agent/trust.json
+/.pi/agent/run-history.jsonl
+/.pi/agent/mcp-cache.json
+/.pi/.DS_Store
+/.pi/**/.DS_Store
+/.pi/agent/sessions
+/.pi/agent/missions/
+/.pi/agent/skills/
+
 # Track the Rift Borders source and its reproducible service definition.
 !/Code/
 /Code/*

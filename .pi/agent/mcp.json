@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "shottr": {
+      "command": "/opt/homebrew/bin/node",
+      "args": [
+        "/Users/dipxsy/Code/projects/shottr-mcp/dist/main.js"
+      ],
+      "lifecycle": "eager"
+    }
+  }
+}

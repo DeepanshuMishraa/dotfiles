@@ -1,0 +1,27 @@
+{
+  "compaction": {
+    "enabled": true
+  },
+  "defaultModel": "gpt-5.6-luna",
+  "defaultProvider": "openai-codex",
+  "defaultThinkingLevel": "medium",
+  "enableSkillCommands": true,
+  "hideThinkingBlock": false,
+  "lastChangelogVersion": "0.84.4",
+  "packages": [
+    "npm:pi-subagents",
+    "npm:pi-goal",
+    "npm:@plannotator/pi-extension",
+    "npm:pi-opencode-bridge",
+    "npm:@ff-labs/pi-fff",
+    "npm:pi-tidy-footer",
+    "npm:pi-status-anim",
+    "npm:pi-antigravity",
+    "npm:@mrclrchtr/supi-ask-user",
+    "npm:pi-plan"
+  ],
+  "theme": "dark",
+  "showCacheMissNotices": true,
+  "quietStartup": true,
+  "tuiMode": "regular"
+}

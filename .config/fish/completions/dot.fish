@@ -22,6 +22,9 @@ complete -c dot -n "__fish_use_subcommand" -a "unlink" -d "Uninstall global dot 
 complete -c dot -n "__fish_use_subcommand" -a "edit" -d "Open dotfiles in editor"
 complete -c dot -n "__fish_use_subcommand" -a "help" -d "Show help message"
 
+# Push command options
+complete -c dot -n "__fish_seen_subcommand_from push" -s "f" -l "force" -d "Force push the current branch"
+
 # Global and init options
 complete -c dot -n "__fish_seen_subcommand_from init" -l "skip-ssh" -d "Skip SSH key generation"
 complete -c dot -n "__fish_use_subcommand" -l "version" -d "Show version information"
