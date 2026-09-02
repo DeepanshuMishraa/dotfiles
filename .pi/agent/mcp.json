@@ -6,6 +6,15 @@
         "/Users/dipxsy/Code/projects/shottr-mcp/dist/main.js"
       ],
       "lifecycle": "eager"
+    },
+    "computer": {
+      "type": "local",
+      "command": "open-computer-use",
+      "args": [
+        "mcp"
+      ],
+      "enabled": true,
+      "timeout": 60000
     }
   }
 }
