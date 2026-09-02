@@ -22,6 +22,7 @@
 /.pi/context-mode/
 /.pi/agent/auth.json
 /.pi/agent/trust.json
+/.pi/agent/fff/*
 /.pi/agent/run-history.jsonl
 /.pi/agent/mcp-cache.json
 /.pi/.DS_Store
