@@ -21,6 +21,7 @@ readonly DOTFILES_DIR
 
 # Configuration
 readonly PACKAGES_DIR="${DOTFILES_DIR}/.config/dot-packages"
+readonly HERDR_PLUGIN_SOURCES_FILE="${DOTFILES_DIR}/.config/herdr/plugins.txt"
 readonly FISH_COMPLETIONS_DIR="${DOTFILES_DIR}/.config/fish/completions"
 readonly DOT_LINK_PATH="${HOME}/.local/bin/dot"
 GITHUB_EMAIL="$(git config --global user.email 2>/dev/null || true)"
@@ -202,6 +203,7 @@ TOOL_REGISTRY=(
     "Brewfile packages ;; -    ;; fn:__install_packages     ;; true  ;; -         ;; false"
     "Bun               ;; bun  ;; fn:__install_bun          ;; true  ;; -         ;; true"
     "Vite+             ;; vp   ;; fn:__install_vite_plus    ;; true  ;; -         ;; true"
+    "Herdr plugins     ;; -    ;; fn:__sync_herdr_plugins   ;; true  ;; -         ;; false"
     "pi                ;; pi   ;; fn:__install_pi           ;; true  ;; -         ;; true"
     "SSH key           ;; -    ;; fn:__generate_ssh_key     ;; false ;; SKIP_SSH  ;; false"
     "Fish shell        ;; -    ;; fn:__setup_fish_shell     ;; false ;; -         ;; false"
@@ -347,6 +349,46 @@ __install_vite_plus() {
         __print_error "Failed to install Vite+"
         return 1
     fi
+}
+
+__sync_herdr_plugins() {
+    if ! __command_exists herdr; then
+        __print_error "Herdr is not installed"
+        return 1
+    fi
+
+    if [[ ! -f "$HERDR_PLUGIN_SOURCES_FILE" ]]; then
+        __print_error "Herdr plugin source list not found: $HERDR_PLUGIN_SOURCES_FILE"
+        return 1
+    fi
+
+    local plugin_source
+    local failed_plugins=()
+
+    __print_info "Installing and updating Herdr plugins..."
+    while IFS= read -r plugin_source || [[ -n "$plugin_source" ]]; do
+        plugin_source="${plugin_source%%#*}"
+        plugin_source="${plugin_source//[[:space:]]/}"
+        [[ -z "$plugin_source" ]] && continue
+
+        __print_info "Syncing Herdr plugin: $plugin_source"
+        if herdr plugin install "$plugin_source" --yes; then
+            __print_success "Herdr plugin synced: $plugin_source"
+        else
+            failed_plugins+=("$plugin_source")
+        fi
+    done < "$HERDR_PLUGIN_SOURCES_FILE"
+
+    if [[ ${#failed_plugins[@]} -gt 0 ]]; then
+        __print_error "Failed to sync Herdr plugins: ${failed_plugins[*]}"
+        return 1
+    fi
+
+    if herdr status server >/dev/null 2>&1; then
+        herdr server reload-config >/dev/null
+    fi
+
+    __print_success "Herdr plugins are up to date"
 }
 
 __install_pi() {
@@ -721,13 +763,30 @@ cmd_update() {
         fi
     fi
 
+    # Install missing Herdr plugins and refresh existing managed checkouts.
+    __sync_herdr_plugins || return 1
+
     # Update pi and its configured packages.
     if __command_exists pi; then
+        local pi_update_failed=false
+
         __print_info "Updating pi and configured packages..."
-        if (cd "$DOTFILES_DIR" && pi update && pi update --extensions); then
+        if (cd "$DOTFILES_DIR" && pi update); then
             __print_success "pi and configured packages updated"
         else
             __print_error "Failed to update pi and configured packages"
+            pi_update_failed=true
+        fi
+
+        __print_info "Updating pi extensions..."
+        if (cd "$DOTFILES_DIR" && pi update --extensions); then
+            __print_success "pi extensions updated"
+        else
+            __print_error "Failed to update pi extensions"
+            pi_update_failed=true
+        fi
+
+        if [[ "$pi_update_failed" == true ]]; then
             return 1
         fi
     else
@@ -824,13 +883,15 @@ cmd_push() {
         fi
     fi
 
-    local push_args=()
     if [[ "$force_push" == true ]]; then
-        push_args+=(--force)
         __print_warning "Force pushing dotfiles to $upstream"
-    fi
-
-    if git -C "$DOTFILES_DIR" push "${push_args[@]}"; then
+        if git -C "$DOTFILES_DIR" push --force; then
+            __print_success "Dotfiles pushed to $upstream"
+        else
+            __print_error "Push failed; any new commit remains safely stored locally"
+            return 1
+        fi
+    elif git -C "$DOTFILES_DIR" push; then
         __print_success "Dotfiles pushed to $upstream"
     else
         __print_error "Push failed; any new commit remains safely stored locally"
