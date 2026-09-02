@@ -52,6 +52,12 @@
 /.config/raycast-x/
 /.config/nvim/.undodir
 
+# Keep Herdr's generated state local. Track only its config and plugin manifests.
+/.config/herdr/*
+!/.config/herdr/config.toml
+!/.config/herdr/plugins.json
+!/.config/herdr/plugins.txt
+
 # Keep local credentials and generated authentication state out of Git.
 /.config/dotfiles/secrets.env
 /.config/github-copilot/auth.db

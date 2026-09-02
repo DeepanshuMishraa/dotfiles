@@ -48,3 +48,36 @@ resize_mode = ""
 toggle_sidebar = "prefix+b"
 [ui.toast]
 delivery = "herdr"
+
+
+# Herdr Annotate: terminal comments, document review, and agent feedback.
+[[keys.command]]
+key = "prefix+a"
+type = "plugin_action"
+command = "annotate.capture"
+description = "Annotate selected terminal text"
+
+[[keys.command]]
+key = "prefix+shift+a"
+type = "plugin_action"
+command = "annotate.copy-context"
+description = "Copy annotations as agent context"
+
+# prefix+m remains pane zoom.
+[[keys.command]]
+key = "prefix+shift+m"
+type = "plugin_action"
+command = "annotate.manage"
+description = "Manage annotations"
+
+[[keys.command]]
+key = "prefix+c"
+type = "plugin_action"
+command = "annotate.open"
+description = "Review documents in the current folder"
+
+[[keys.command]]
+key = "prefix+shift+c"
+type = "plugin_action"
+command = "annotate.last"
+description = "Review the agent's last reply"
