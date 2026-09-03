@@ -18,7 +18,8 @@
     "npm:pi-status-anim",
     "npm:pi-antigravity",
     "npm:@mrclrchtr/supi-ask-user",
-    "npm:pi-plan"
+    "npm:pi-plan",
+    "npm:pi-web-access"
   ],
   "theme": "dark",
   "showCacheMissNotices": true,
