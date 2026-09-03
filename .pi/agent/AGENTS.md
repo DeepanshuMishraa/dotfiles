@@ -145,6 +145,9 @@ In general:
 
 - when asking sets of questions, always include numbers so it's easy for me to clearly answer
 
+## SKILL Instructions 
+Always looks for skills inside of ~/.agents/skill directory
+
 ## Commiting to git 
 After you've finished working on a task, always ask the user if they want you tocommit and push all the unstaged files. Always commit all the unstaged files unless told to not commit a  specific file(s). If told to commit and push always make sure to check the diff , understand what files changed and what changed inside ofit. once you've undestood that generate a commit message that actually explains about all those changes and try to infer the nature of changes for example "fix","feat", "chore" etc and add that to the commit message and then just push to the current branch unless specifically told to push to some another branch.
 
