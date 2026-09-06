@@ -3,23 +3,31 @@
 set -euo pipefail
 
 usage() {
-    echo "Usage: $(basename "$0") VIDEO AUDIO [OUTPUT]" >&2
-    echo "If OUTPUT is omitted, writes VIDEO_WITH_AUDIO next to VIDEO." >&2
+    echo "Usage: $(basename "$0") VIDEO AUDIO VOLUME [OUTPUT]" >&2
+    echo "VOLUME is a percentage from 0 to 100. If OUTPUT is omitted, writes VIDEO_WITH_AUDIO next to VIDEO." >&2
     exit 2
 }
 
-[[ $# -ge 2 && $# -le 3 ]] || usage
+[[ $# -ge 3 && $# -le 4 ]] || usage
 
 video=$1
 audio=$2
+volume_percent=$3
+
+if [[ ! "$volume_percent" =~ ^[0-9]+([.][0-9]+)?$ ]] || ! awk -v volume="$volume_percent" 'BEGIN { exit !(volume >= 0 && volume <= 100) }'; then
+    echo "VOLUME must be a number from 0 to 100: $volume_percent" >&2
+    exit 2
+fi
+
+volume_factor=$(awk -v volume="$volume_percent" 'BEGIN { printf "%.6f", volume / 100 }')
 
 [[ -f "$video" ]] || { echo "Video file not found: $video" >&2; exit 1; }
 [[ -f "$audio" ]] || { echo "Audio file not found: $audio" >&2; exit 1; }
 command -v ffmpeg >/dev/null 2>&1 || { echo "ffmpeg is required." >&2; exit 1; }
 command -v ffprobe >/dev/null 2>&1 || { echo "ffprobe is required." >&2; exit 1; }
 
-if [[ $# -eq 3 ]]; then
-    output=$3
+if [[ $# -eq 4 ]]; then
+    output=$4
 else
     video_dir=${video%/*}
     [[ "$video_dir" == "$video" ]] && video_dir=.
@@ -66,7 +74,7 @@ trap cleanup EXIT INT TERM
 ffmpeg -hide_banner -n \
     -i "$video" \
     -i "$audio" \
-    -filter_complex "[1:a:0]atrim=duration=${video_duration},asetpts=PTS-STARTPTS[audio]" \
+    -filter_complex "[1:a:0]atrim=duration=${video_duration},asetpts=PTS-STARTPTS,volume=${volume_factor}[audio]" \
     -map 0:v:0 \
     -map '[audio]' \
     -map_metadata 0 \

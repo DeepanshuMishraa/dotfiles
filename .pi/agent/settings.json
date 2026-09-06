@@ -7,7 +7,7 @@
   "defaultThinkingLevel": "medium",
   "enableSkillCommands": true,
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.84.4",
+  "lastChangelogVersion": "0.85.1",
   "packages": [
     "npm:pi-subagents",
     "npm:pi-goal",
