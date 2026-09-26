@@ -522,13 +522,13 @@
       "updatedAt": "2026-05-06T06:12:58.810Z"
     },
     "ux-designer": {
-      "source": "shubhamsaboo/awesome-llm-apps",
+      "source": "szilu/ux-designer-skill",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/shubhamsaboo/awesome-llm-apps.git",
-      "skillPath": "awesome_agent_skills/ux-designer/SKILL.md",
-      "skillFolderHash": "a219d84b6783f63dba608686f723ef9f75619296",
+      "sourceUrl": "https://github.com/szilu/ux-designer-skill.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "da9e9d050da71aec25f58cd079c997867ec47597",
       "installedAt": "2026-05-17T16:47:37.176Z",
-      "updatedAt": "2026-05-17T16:47:37.176Z"
+      "updatedAt": "2026-09-19T05:05:12.680Z"
     },
     "high-end-visual-design": {
       "source": "Leonxlnx/taste-skill",
@@ -1909,19 +1909,17 @@
   },
   "lastSelectedAgents": [
     "amp",
-    "antigravity",
-    "antigravity-cli",
     "cline",
     "codex",
     "cursor",
-    "deepagents",
+    "droid",
     "gemini-cli",
     "github-copilot",
+    "kilo",
     "kimi-code-cli",
     "opencode",
     "warp",
     "zed",
-    "kilo",
     "pi"
   ]
 }

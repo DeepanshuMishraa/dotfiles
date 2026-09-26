@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "entries": {
+    "[\"npx\",\"reicon-mcp\"]": {
+      "resolvedBin": "/Users/dipxsy/.npm/_npx/730cf70b6d15beff/node_modules/reicon-mcp/bin/run.cjs",
+      "resolvedAt": 1789843580779,
+      "packageVersion": "1.1.102",
+      "isJs": true
+    }
+  }
+}

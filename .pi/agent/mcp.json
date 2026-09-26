@@ -21,6 +21,27 @@
       "args": [
         "blender-mcp"
       ]
+    },
+    "reicon": {
+      "command": "npx",
+      "args": [
+        "reicon-mcp"
+      ]
+    },
+    "paper": {
+      "type": "http",
+      "url": "http://127.0.0.1:29979/mcp"
+    },
+    "figma": {
+      "type": "http",
+      "url": "http://127.0.0.1:3845/mcp"
+    },
+    "pencil": {
+      "command": "/Applications/Pen.app/Contents/Resources/app.asar.unpacked/out/mcp-server-darwin-arm64",
+      "args": [
+        "--app",
+        "desktop"
+      ]
     }
   }
 }

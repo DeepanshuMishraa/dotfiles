@@ -14,3 +14,7 @@ fish_add_path /Users/dipxsy/.spicetify
 
 # opencode
 fish_add_path /Users/dipxsy/.opencode/bin
+
+# >>> warm PATH >>>
+fish_add_path "/Users/dipxsy/.warm/bin"
+# <<< warm PATH <<<

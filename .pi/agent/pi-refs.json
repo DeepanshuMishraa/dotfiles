@@ -11,6 +11,10 @@
     "opencode": {
       "repository": "https://github.com/anomalyco/opencode",
       "description": "tui coding agent"
+    },
+    "search": {
+      "repository": "https://github.com/driceroland/Search",
+      "description": "A webkit based web browser"
     }
   }
 }

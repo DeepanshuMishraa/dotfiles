@@ -1,8 +1,8 @@
 /**
  * TPS Tracker Extension
  *
- * Tracks tokens per second during model generation and reports
- * final TPS statistics at the end of each agent run.
+ * Tracks tokens per second during model generation and keeps the
+ * final statistics in the status row without creating completion toasts.
  */
 
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
@@ -93,13 +93,9 @@ export default function (pi: ExtensionAPI) {
 		const tps = totalOutputTokens > 0 && elapsed > 0 ? Math.round(totalOutputTokens / elapsed) : 0;
 
 		const theme = ctx.ui.theme;
-		const icon = theme.fg("success", "✓");
 		const tpsLabel = tps > 0
 			? theme.fg("accent", `${tps} tok/s`)
 			: theme.fg("dim", "N/A");
-		const detail = theme.fg("dim", `${totalOutputTokens} tokens in ${elapsed.toFixed(1)}s streaming`);
-
-		ctx.ui.notify(`${icon} ${tpsLabel}  ${detail}`, "info");
 		ctx.ui.setStatus("tps", theme.fg("dim", `done — ${tpsLabel}`));
 	});
 }

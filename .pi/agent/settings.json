@@ -2,12 +2,12 @@
   "compaction": {
     "enabled": true
   },
-  "defaultModel": "gpt-5.6-luna",
+  "defaultModel": "gpt-6-luna",
   "defaultProvider": "openai-codex",
   "defaultThinkingLevel": "medium",
   "enableSkillCommands": true,
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "0.87.1",
   "packages": [
     "npm:pi-subagents",
     "npm:pi-goal",
@@ -19,7 +19,10 @@
     "npm:pi-antigravity",
     "npm:@mrclrchtr/supi-ask-user",
     "npm:pi-plan",
-    "npm:pi-web-access"
+    "npm:pi-web-access",
+    "git:github.com/DietrichGebert/ponytail",
+    "npm:@zigai/pi-tree",
+    "git:github.com/alexanderop/pi-references"
   ],
   "theme": "dark",
   "showCacheMissNotices": true,
